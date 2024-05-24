@@ -1,7 +1,10 @@
 <script>
     import { LightSwitch } from "@skeletonlabs/skeleton"
+
+	import Cursor from "../lib/Cursor.svelte";
 </script>
 
+<Cursor />
 
 <div class="p-8 space-y-8">
     <div class="flex justify-between items-center h-full mx-auto">
