@@ -1,15 +1,26 @@
 <script>
     import { LightSwitch } from "@skeletonlabs/skeleton"
+
+    import Icon from "./Icon.svelte";
+
+    $: stroke = "#111111";
+
+    const changeStroke = _ => {
+        console.log("STROKE CHANGED")
+        stroke = "#EDE5D1";
+    }
 </script>
 
 
 <div class="p-8 space-y-8">
     <div class="flex justify-between items-center h-full mx-auto">
-    <LightSwitch />
-
-    <!-- REMAKE AJ LOGO PROPERLY -->
-	<a href="/"><img src="../logo.svg" class="w-8" alt=""></a>
-
+    <LightSwitch on:click={changeStroke}/>
+    
+	<!-- <a href="/"><img src="../logo.svg" class="w-8" alt=""></a> -->
+    <a href="/" class="w-8">
+        <Icon {stroke}/>
+    </a>
+    
 	<a class="justify-end" href="/">&lt;- HOME</a>
 	</div>
 
