@@ -16,36 +16,36 @@
     <div class="flex justify-center items-center h-full flex-col mx-auto max-w-[90%]">
 		<!-- LANDING PAGE -->
 		<div>
-			<h1 class="h1 -translate-x-24 title">ARNAV</h1>
-			<h1 class="h1 translate-x-24 title">JAGETIA</h1>
+			<h1 class="h1 font-bold title -translate-x-24 title">ARNAV</h1>
+			<h1 class="h1 font-bold title translate-x-24 title">JAGETIA</h1>
 		</div>
 
 		<!-- ABOUT ME -->
 		<div>
-			<h1 class="h1">ABOUT ME</h1>
+			<h2 class="h2 font-bold">ABOUT ME</h2>
 			<p>Hi, I'm a recent Computer Systems Engineering graduate from QMUL. As a full-stack engineer, I craft sleek, powerful apps with Svelte, JavaScript, Node.js, and Tailwind. I also specialize in machine learning and data analysis using PyTorch, Hadoop, and Spark. Not to mention additional competencies in C, VHDL, and Java</p>
 			<p>I also excel in architecting resilient and scalable cloud-based solutions using AWS, backed by two AWS certifications: AWS Associate Developer and AWS Cloud Practitioner.</p>
 		</div>
 
 		<!-- SKILLS -->
 		<div>
-			<h1 class="h1">SKILLS</h1>
+			<h2 class="h2 font-bold">SKILLS</h2>
 			<!-- single row of logos of all languages/frameworks I am proficient in -->
 		</div>
 
 		<!-- PROJECTS -->
 		<div>
-			<h1 class="h1">PROJECTS</h1>
+			<h2 class="h2 font-bold">PROJECTS</h2>
 		</div>
 
 		<!-- EXPERIENCE -->
 		<div>
-			<h1 class="h1">EXPERIENCE</h1>
+			<h2 class="h2 font-bold">EXPERIENCE</h2>
 		</div>
 
 		<!-- CONTACT -->
 		<div>
-			<h1 class="h1">CONTACT ME</h1>
+			<h2 class="h2 font-bold">CONTACT ME</h2>
 		</div>
 
 		<!-- FOOTER -->
@@ -61,6 +61,11 @@
 
 <style>
 	.title  {
-		font-size: 15rem;
+		font-size: 10vw;
+	}
+
+	p {
+		font-size: 1.5vw;
+		line-height: normal;
 	}
 </style>

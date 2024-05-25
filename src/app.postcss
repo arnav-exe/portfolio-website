@@ -3,7 +3,20 @@
 @tailwind utilities;
 @tailwind variants;
 
+@font-face {
+    font-family: "Neue Montreal";
+    src: url("src/lib/fonts/NeueMontreal-Regular.otf");
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+
+:root [data-theme='minimalist'] {
+    --theme-font-family-heading: 'Cera Pro', sans-serif;
+    --theme-font-family-base: 'Neue Montreal', sans-serif;
+}
 
 body { @apply bg-primary-500 dark:bg-surface-500; }
 
-::selection { @apply bg-primary-600 dark:bg-primary-900 }
+::selection { @apply variant-ghost-surface dark:variant-ghost-primary }
