@@ -30,7 +30,10 @@
 		<!-- SKILLS -->
 		<div>
 			<h2 class="h2 font-bold">SKILLS</h2>
-			<!-- single row of logos of all languages/frameworks I am proficient in -->
+			<div class="flex justify-center items-center h-full flex-row">
+				<!-- single row of logos of all languages/frameworks HERE: -->
+				
+			</div>
 		</div>
 
 		<!-- PROJECTS -->
@@ -60,7 +63,7 @@
 </div>
 
 <style>
-	.title  {
+	.title {
 		font-size: 10vw;
 	}
 
