@@ -8,7 +8,13 @@ export default {
 	darkMode: 'class',
 	content: ['./src/**/*.{html,js,svelte,ts}', join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}')],
 	theme: {
-		extend: {},
+		extend: {
+			colors: {
+				logosurface: "#2f2f2f",
+				logoprimary: "#d4c9ae",
+				newred: "#ff0000",
+			},
+		},
 	},
 	plugins: [
 		forms,

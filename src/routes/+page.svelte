@@ -2,6 +2,7 @@
     import { LightSwitch } from "@skeletonlabs/skeleton"
 
 	import Cursor from "../lib/Cursor.svelte";
+	import Svelte from "../lib/icons/Svelte.svelte";
 </script>
 
 <Cursor />
@@ -23,16 +24,17 @@
 		<!-- ABOUT ME -->
 		<div>
 			<h2 class="h2 font-bold">ABOUT ME</h2>
-			<p>Hi, I'm a recent Computer Systems Engineering graduate from QMUL. As a full-stack engineer, I craft sleek, powerful apps with Svelte, JavaScript, Node.js, and Tailwind. I also specialize in machine learning and data analysis using PyTorch, Hadoop, and Spark. Not to mention additional competencies in C, VHDL, and Java</p>
+			<p class="newred">Hi, I'm a recent Computer Systems Engineering graduate from QMUL. As a full-stack engineer, I craft sleek, powerful apps with Svelte, JavaScript, Node.js, and Tailwind. I also specialize in machine learning and data analysis using PyTorch, Hadoop, and Spark. Not to mention additional competencies in C, VHDL, and Java</p>
 			<p>I also excel in architecting resilient and scalable cloud-based solutions using AWS, backed by two AWS certifications: AWS Associate Developer and AWS Cloud Practitioner.</p>
 		</div>
+
 
 		<!-- SKILLS -->
 		<div>
 			<h2 class="h2 font-bold">SKILLS</h2>
 			<div class="flex justify-center items-center h-full flex-row">
 				<!-- single row of logos of all languages/frameworks HERE: -->
-				
+				<Svelte />
 			</div>
 		</div>
 
@@ -67,8 +69,8 @@
 		font-size: 10vw;
 	}
 
-	p {
+	/* p {
 		font-size: 1.5vw;
 		line-height: normal;
-	}
+	} */
 </style>
