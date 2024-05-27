@@ -1,8 +1,8 @@
 <script>
-    import { LightSwitch } from "@skeletonlabs/skeleton"
+    import { LightSwitch, popup } from "@skeletonlabs/skeleton"
 
 	import Cursor from "../lib/Cursor.svelte";
-
+	
 	// skills logos
 	import Svelte from "../lib/icons/Svelte.svelte";
 	import Node from "../lib/icons/Node.svelte";
@@ -55,16 +55,21 @@
 			<!-- SKILLS -->
 			<div>
 				<h2 class="h2 font-bold">SKILLS</h2>
-				<div class="flex justify-center items-center h-full flex-row">
-					<!-- single row of logos of all languages/frameworks HERE: -->
+				<div class="flex justify-center items-center w-screen h-full flex-row">
+					<!-- single row of LOGOS of all languages/frameworks HERE: -->
 					{#each logos as [name, logo]}
-						<div class="w-20 m-10">
-							<svelte:component this={logo} />
-							<p>{name}</p>
+						<div class="w-[10%] mx-[2.5%]">
+							<!-- skill logo -->
+							<div use:popup={{ event: 'hover', target: 'popupHover-' + name, placement: 'bottom' }}>
+								<svelte:component this={logo} />
+							</div>
+						</div>
+						<!-- toolip -->
+						<div class="card p-4 variant-filled-secondary dark:variant-filled-tertiary" data-popup="popupHover-{name}">
+							<p class="text-center text-surface-500 dark:text-primary-500">{name}</p>
+							<div class="arrow variant-filled-secondary dark:variant-filled-tertiary" />
 						</div>
 					{/each}
-
-					
 				</div>
 			</div>
 

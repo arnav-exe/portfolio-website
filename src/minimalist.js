@@ -30,28 +30,28 @@ export const minimalist = {
 		"--color-primary-700": "178 172 157", // #b2ac9d
 		"--color-primary-800": "142 137 125", // #8e897d
 		"--color-primary-900": "116 112 102", // #747066
-		// secondary | #111111 
-		"--color-secondary-50": "219 219 219", // #dbdbdb
-		"--color-secondary-100": "207 207 207", // #cfcfcf
-		"--color-secondary-200": "196 196 196", // #c4c4c4
-		"--color-secondary-300": "160 160 160", // #a0a0a0
-		"--color-secondary-400": "88 88 88", // #585858
-		"--color-secondary-500": "17 17 17", // #111111
-		"--color-secondary-600": "15 15 15", // #0f0f0f
-		"--color-secondary-700": "13 13 13", // #0d0d0d
-		"--color-secondary-800": "10 10 10", // #0a0a0a
-		"--color-secondary-900": "8 8 8", // #080808
-		// tertiary | #00EAC1 
-		"--color-tertiary-50": "217 252 246", // #d9fcf6
-		"--color-tertiary-100": "204 251 243", // #ccfbf3
-		"--color-tertiary-200": "191 250 240", // #bffaf0
-		"--color-tertiary-300": "153 247 230", // #99f7e6
-		"--color-tertiary-400": "77 240 212", // #4df0d4
-		"--color-tertiary-500": "0 234 193", // #00EAC1
-		"--color-tertiary-600": "0 211 174", // #00d3ae
-		"--color-tertiary-700": "0 176 145", // #00b091
-		"--color-tertiary-800": "0 140 116", // #008c74
-		"--color-tertiary-900": "0 115 95", // #00735f
+		// secondary | #d4c9ae 
+		"--color-secondary-50": "249 247 243", // #f9f7f3
+		"--color-secondary-100": "246 244 239", // #f6f4ef
+		"--color-secondary-200": "244 242 235", // #f4f2eb
+		"--color-secondary-300": "238 233 223", // #eee9df
+		"--color-secondary-400": "225 217 198", // #e1d9c6
+		"--color-secondary-500": "212 201 174", // #d4c9ae
+		"--color-secondary-600": "191 181 157", // #bfb59d
+		"--color-secondary-700": "159 151 131", // #9f9783
+		"--color-secondary-800": "127 121 104", // #7f7968
+		"--color-secondary-900": "104 98 85", // #686255
+		// tertiary | #2f2f2f 
+		"--color-tertiary-50": "224 224 224", // #e0e0e0
+		"--color-tertiary-100": "213 213 213", // #d5d5d5
+		"--color-tertiary-200": "203 203 203", // #cbcbcb
+		"--color-tertiary-300": "172 172 172", // #acacac
+		"--color-tertiary-400": "109 109 109", // #6d6d6d
+		"--color-tertiary-500": "47 47 47", // #2f2f2f
+		"--color-tertiary-600": "42 42 42", // #2a2a2a
+		"--color-tertiary-700": "35 35 35", // #232323
+		"--color-tertiary-800": "28 28 28", // #1c1c1c
+		"--color-tertiary-900": "23 23 23", // #171717
 		// success | #22C55E 
 		"--color-success-50": "222 246 231", // #def6e7
 		"--color-success-100": "211 243 223", // #d3f3df
