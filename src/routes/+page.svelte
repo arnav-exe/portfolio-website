@@ -6,15 +6,25 @@
 	// skills logos
 	import Svelte from "../lib/icons/Svelte.svelte";
 	import Node from "../lib/icons/Node.svelte";
-	import JS from "../lib/icons/JS.Svelte";
+	import js from "../lib/icons/JS.Svelte";
 	import Tailwind from "../lib/icons/Tailwind.svelte";
 	import Python from "../lib/icons/Python.svelte";
 	import Pytorch from "../lib/icons/Pytorch.svelte";
 	import Pandas from "../lib/icons/Pandas.svelte";
-	import AWS from "../lib/icons/AWS.svelte";
+	import aws from "../lib/icons/AWS.svelte";
 	import Git from "../lib/icons/Git.svelte";
 
-	const logos = [Svelte, Node, JS, Tailwind, Python, Pytorch, Pandas, AWS, Git];
+	const logos = new Map([
+		["Svelte", Svelte],
+		["Node.js", Node],
+		["JavaScript", js],
+		["Tailwind CSS", Tailwind],
+		["Python", Python],
+		["PyTorch", Pytorch],
+		["Pandas", Pandas],
+		["AWS", aws],
+		["Git", Git]
+	]);
 </script>
 
 <Cursor />
@@ -47,12 +57,14 @@
 				<h2 class="h2 font-bold">SKILLS</h2>
 				<div class="flex justify-center items-center h-full flex-row">
 					<!-- single row of logos of all languages/frameworks HERE: -->
-					{#each logos as logo}
+					{#each logos as [name, logo]}
 						<div class="w-20 m-10">
 							<svelte:component this={logo} />
-							<p></p>
+							<p>{name}</p>
 						</div>
 					{/each}
+
+					
 				</div>
 			</div>
 
