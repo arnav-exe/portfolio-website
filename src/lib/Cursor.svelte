@@ -18,26 +18,26 @@
 	);
 
 	let size = spring(15);
+
+	function updateCoords(e) {
+		const x = e.clientX + window.scrollX;
+		const y = e.clientY + window.scrollY;
+		coords1.set({ x, y });
+		coords2.set({ x, y });
+	}
 </script>
 
 <svelte:window
-	on:mousemove={(e) => {
-		coords1.set({ x: e.clientX, y: e.clientY })
-		coords2.set({ x: e.clientX, y: e.clientY })
-	}}
-	on:mousedown={(e) => {
-		size.set(30);
-	}}
-	on:mouseup={(e) => {
-		size.set(15);
-	}}
+	on:mousemove={updateCoords}
+	on:mousedown={() => size.set(30)}
+	on:mouseup={() => size.set(15)}
 />
 
 <svg
-	class ="w-full h-full fill-surface-500 stroke-surface-500 dark:fill-primary-500 dark:stroke-primary-500"
+	class="w-full h-full fill-surface-500 stroke-surface-500 dark:fill-primary-500 dark:stroke-primary-500"
 >
 	<circle cx={$coords1.x} cy={$coords1.y} r={$size} stroke-width="1" fill-opacity="0"/>
-	<circle cx={$coords2.x} cy={$coords2.y} r={$size/4} />
+	<circle cx={$coords2.x} cy={$coords2.y} r={$size / 4} />
 </svg>
 
 <style>
@@ -46,9 +46,11 @@
 	}
 	
 	svg {
-		position: absolute;
+		position: fixed;
 		top: 0;
 		left: 0;
 		pointer-events: none;
+		width: 100vw;
+		height: 100vh;
 	}
 </style>
