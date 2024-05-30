@@ -12,6 +12,7 @@ export default {
 			colors: {
 				"logosurface": "#2f2f2f",
 				"logoprimary": "#d4c9ae",
+				"newred": "#ff0000"
 			},
 		},
 	},

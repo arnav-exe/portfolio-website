@@ -1,8 +1,9 @@
 <script>
-    import { LightSwitch, popup } from "@skeletonlabs/skeleton"
+    import { LightSwitch, popup } from "@skeletonlabs/skeleton";
 
 	import Cursor from "../lib/Cursor.svelte";
-	
+	import placeholder from "../lib/images/placeholder.png"
+
 	// skills logos
 	import Svelte from "../lib/icons/Svelte.svelte";
 	import Node from "../lib/icons/Node.svelte";
@@ -27,7 +28,8 @@
 	]);
 </script>
 
-<Cursor />
+<!-- CURSOR BROKEN -->
+<!-- <Cursor /> -->
 
 <div class="p-8 space-y-8">
     <div class="flex justify-between items-center h-full mx-auto">
@@ -76,6 +78,22 @@
 			<!-- PROJECTS -->
 			<div class="my-16">
 				<h2 class="h2 font-bold">PROJECTS</h2>
+				<!-- glass project cards -->
+				<div class="grid grid-cols-2 gap-8 m-8">
+					{#each {length: 5} as _, i}
+						<div class="card card-hover overflow-hidden max-w-2xl aspect-auto">
+							<button>
+								<span class="flex flex-row bg-glass-glass-primary dark:variant-glass-surface">
+									<img src="{placeholder}" class="w-6/12 aspect-[16/9] h-auto object-cover" alt="project {i + 1} card" />
+									<div>
+									<p class="mx-4"><strong>Project {i + 1} description</strong></p>
+									<p class="text-left mx-4">This section should be used to provide a brief overview of the project</p>
+									</div>
+								</span>
+							</button>
+						</div>
+					{/each}
+				</div>
 			</div>
 
 			<!-- EXPERIENCE -->
@@ -105,6 +123,7 @@
 		font-size: 10vw;
 	}
 
+	/* BIGGER font (idk if needed) */
 	/* p {
 		font-size: 1.5vw;
 		line-height: normal;

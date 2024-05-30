@@ -20,6 +20,7 @@
 	let size = spring(15);
 
 	function updateCoords(e) {
+		// TODO: cursor jumping on scroll
 		const x = e.clientX + window.scrollX;
 		const y = e.clientY + window.scrollY;
 		coords1.set({ x, y });
@@ -41,9 +42,9 @@
 </svg>
 
 <style>
-	:global(body) {
+	/* :global(body) {
 		cursor: none;
-	}
+	} */
 	
 	svg {
 		position: fixed;
