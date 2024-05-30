@@ -81,15 +81,26 @@
 				<!-- glass project cards -->
 				<div class="grid grid-cols-2 gap-8 m-8">
 					{#each {length: 5} as _, i}
-						<div class="card card-hover overflow-hidden max-w-2xl aspect-auto">
+						<!-- <div class="card card-hover overflow-hidden max-w-2xl aspect-auto bg-primary-500 dark:bg-logosurface">
 							<button>
-								<span class="flex flex-row bg-glass-glass-primary dark:variant-glass-surface">
+								<span class="flex flex-row bg-primary-500 dark:bg-logosurface">
 									<img src="{placeholder}" class="w-6/12 aspect-[16/9] h-auto object-cover" alt="project {i + 1} card" />
 									<div>
 									<p class="mx-4"><strong>Project {i + 1} description</strong></p>
 									<p class="text-left mx-4">This section should be used to provide a brief overview of the project</p>
 									</div>
 								</span>
+							</button>
+						</div> -->
+						<div class="block card card-hover p-4 max-w-[50%] aspect-auto">
+							<button>
+								<div class="flex flex-row">
+									<img src="{placeholder}" class="w-" alt="project {i + 1} card">
+									<div>
+										<p class="text-center font-bold">Project {i + 1} description</p>
+										<p>This section should be used to provide a brief overview of the project</p>
+									</div>
+								</div>
 							</button>
 						</div>
 					{/each}
