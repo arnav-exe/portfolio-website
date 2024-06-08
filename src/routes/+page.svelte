@@ -95,7 +95,7 @@
 						<div class="block card card-hover p-4 max-w-[50%] aspect-auto">
 							<button>
 								<div class="flex flex-row">
-									<img src="{placeholder}" class="w-" alt="project {i + 1} card">
+									<img src="{placeholder}" class="" alt="project {i + 1} card">
 									<div>
 										<p class="text-center font-bold">Project {i + 1} description</p>
 										<p>This section should be used to provide a brief overview of the project</p>

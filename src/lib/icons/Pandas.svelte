@@ -10,9 +10,7 @@
    id="Layer_1"
    data-name="Layer 1"
    viewBox="0 0 210.21 280.43"
-   version="1.1"
-   sodipodi:docname="pandas.svg"
-   inkscape:version="0.92.4 (unknown)">
+   version="1.1">
    <rect
       x="74.51"
       y="43.03"
