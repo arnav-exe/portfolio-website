@@ -26,6 +26,8 @@
 		["AWS", aws],
 		["Git", Git]
 	]);
+
+	const projectTitles = ["Project 1", "Project 2", "Project 3", "Project 4", "Project 5"]
 </script>
 
 <!-- CURSOR BROKEN -->
@@ -79,8 +81,8 @@
 			<div class="my-16">
 				<h2 class="h2 font-bold">PROJECTS</h2>
 				<!-- glass project cards -->
-				<div class="grid grid-cols-2 gap-8 m-8">
-					{#each {length: 5} as _, i}
+				<div class="grid grid-cols-2 gap-8 m-8 justify-items-center items-center">
+					{#each projectTitles as project}
 						<!-- <div class="card card-hover overflow-hidden max-w-2xl aspect-auto bg-primary-500 dark:bg-logosurface">
 							<button>
 								<span class="flex flex-row bg-primary-500 dark:bg-logosurface">
@@ -92,15 +94,13 @@
 								</span>
 							</button>
 						</div> -->
-						<div class="block card card-hover p-4 max-w-[50%] aspect-auto">
-							<button>
-								<div class="flex flex-row">
-									<img src="{placeholder}" class="" alt="project {i + 1} card">
-									<div>
-										<p class="text-center font-bold">Project {i + 1} description</p>
-										<p>This section should be used to provide a brief overview of the project</p>
+						<div class="block card card-hover p-4 max-w-[50%]">
+							<button class="">
+									<img src="{placeholder}" class="max-w-[100%]" alt="project {project + 1} card">
+									<div class="grid grid-cols-subgrid gap-4">
+										<p class="text-center font-bold mt-4">{project}</p>
+										<p class="text-left mb-4">This section should be used to provide a brief overview of the project</p>
 									</div>
-								</div>
 							</button>
 						</div>
 					{/each}
