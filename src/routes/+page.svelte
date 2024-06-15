@@ -2,7 +2,10 @@
     import { LightSwitch, popup } from "@skeletonlabs/skeleton";
 
 	import Cursor from "../lib/Cursor.svelte";
-	import Timeline from "../lib/Timeline.svelte";
+	import Timeline from "../lib/Timeline/Timeline.svelte";
+	import TimelineItem from "../lib/Timeline/TimelineItem.svelte";
+	import TimelineIcon from "../lib/Timeline/TimelineIcon.svelte";
+	import TL from "../lib/Timeline.svelte"
 	import placeholder from "../lib/images/placeholder.png";
 
 	// skills logos
@@ -52,8 +55,8 @@
 		<div>
 			<div class="my-16">
 				<h2 class="h2 font-bold">ABOUT ME</h2>
-				<p class="newred">Hi, I'm a recent Computer Systems Engineering graduate from QMUL. As a full-stack engineer, I craft sleek, powerful apps with Svelte, JavaScript, Node.js, and Tailwind. I also specialize in machine learning and data analysis using PyTorch, Hadoop, and Spark. Not to mention additional competencies in C, VHDL, and Java</p>
-				<p>I also excel in architecting resilient and scalable cloud-based solutions using AWS, backed by two AWS certifications: AWS Associate Developer and AWS Cloud Practitioner.</p>
+				<p class="translate-x-5">Hi, I'm a recent Computer Systems Engineering graduate from QMUL. As a full-stack engineer, I craft sleek, powerful apps with Svelte, JavaScript, Node.js, and Tailwind. I also specialize in machine learning and data analysis using PyTorch, Hadoop, and Spark. Not to mention additional competencies in C, VHDL, and Java</p>
+				<p class="translate-x-5">I also excel in architecting resilient and scalable cloud-based solutions using AWS, backed by two AWS certifications: AWS Associate Developer and AWS Cloud Practitioner.</p>
 			</div>
 
 
@@ -103,7 +106,46 @@
 			<div class="my-16">
 				<h2 class="h2 font-bold mb-4">EXPERIENCE</h2>
 				<!-- vertical timeline -->
-				 <Timeline />
+				 <Timeline>
+					<TimelineItem
+						title="Lead front-end developer @ DSEU"
+						startDate="July 2022"
+						endDate="September 2022"
+						description="Designed and developed online marketplace bbmart.in. Used HTML, CSS, JS, jQuery, Bootstrap to a create a fluid app with a modern design, responsive on all platforms; Led a team of 10+ content writers."
+						badgeText="Latest"
+					/>
+
+					<TimelineItem
+						title="Automation developer @ Tiltlabs"
+						startDate="June 2022"
+						endDate="August 2022"
+						description="Developed internal automation tools and macros in Python (OpenCV, Pynput, Pillow) to speed up Illustrator workflows and enable batch rendering; designed NFT assets for a client limoverse.io and game assets for blockchain based farm game in Photoshop and Illustrator."
+					/>
+
+				 	<TimelineItem
+						title="Front-end developer @ LBR Technology"
+						startDate="November 2021"
+						endDate="July 2022"
+						description="Designed a responsive corporate website for lithium battery recycling company; used HTML, CSS, JS and Bootstrap for the front-end, SQL for the back-end; Adobe Illustrator, Photoshop and DaVinci Resolve for images, graphics, logos and animation."
+					/>
+
+					<TimelineItem
+						title="Intern @ Rightbot"
+						startDate="November 2021"
+						endDate="May 2022"
+						description="Application of AI in the field of warehouse automation; produced field reports on use of robotics technology, competing company profiles and investment profiles."
+					/>
+					
+					<TimelineItem
+						title="Intern @ Daiko FHO"
+						startDate="August 2020"
+						endDate="November 2020"
+						description="Worked for clients Gourmet Passport and Wattpad; designed digital adverts and posters that were used by the client for digital advertising using Adobe Photoshop and Adobe Illustrator."
+					/>
+				 </Timeline>
+
+				 <!-- Timeline v1: -->
+				 <!-- <TL /> -->
 			</div>
 
 			<!-- CONTACT -->
