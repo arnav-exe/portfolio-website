@@ -45,35 +45,35 @@
         <div class="absolute w-3 h-3 bg-surface-500 rounded-full mt-1.5 -start-1.5 dark:bg-primary-500"></div>
         <time class="mb-1 text-sm font-normal leading-none text-tertiary-500 dark:text-secondary-500">July 2022</time>
         <h3 class="text-lg font-bold text-surface-500 dark:text-primary-500">Lead front-end developer @ DSEU</h3>
-        <p class="text-base font-normal text-surface-700 dark:text-primary-700">All of the pages and components are first designed in Figma and we keep a parity between the two versions even as we update the project.</p>
+        <p class="text-base font-normal text-surface-700 dark:text-primary-700">Designed and developed online marketplace <a href="https://bbmart.in/">bbmart.in</a>; Used HTML, CSS, JS, jQuery, Bootstrap to a create a fluid app with a modern design, responsive on all platforms; Led a team of 10+ content writers.</p>
     </li>
 
 	<li class="mb-10 ms-4">
         <div class="absolute w-3 h-3 bg-surface-500 rounded-full mt-1.5 -start-1.5 dark:bg-primary-500"></div>
         <time class="mb-1 text-sm font-normal leading-none text-tertiary-500 dark:text-secondary-500">June 2022</time>
         <h3 class="text-lg font-bold text-surface-500 dark:text-primary-500">Automation developer @ Tiltlabs</h3>
-        <p class="text-base font-normal text-surface-700 dark:text-primary-700">All of the pages and components are first designed in Figma and we keep a parity between the two versions even as we update the project.</p>
+        <p class="text-base font-normal text-surface-700 dark:text-primary-700">Developed internal automation tools and macros in Python (OpenCV, Pynput, Pillow) to speed up Illustrator workflows and enable batch rendering; designed NFT assets for a client <a href="https://limoverse.io/">limoverse.io</a> and game assets for blockchain based farm game in Photoshop and Illustrator.</p>
     </li>
 
 	<li class="mb-10 ms-4">
         <div class="absolute w-3 h-3 bg-surface-500 rounded-full mt-1.5 -start-1.5 dark:bg-primary-500"></div>
         <time class="mb-1 text-sm font-normal leading-none text-tertiary-500 dark:text-secondary-500">November 2021</time>
         <h3 class="text-lg font-bold text-surface-500 dark:text-primary-500">Front-end developer @ LBR Technology</h3>
-        <p class="text-base font-normal text-surface-700 dark:text-primary-700">All of the pages and components are first designed in Figma and we keep a parity between the two versions even as we update the project.</p>
+        <p class="text-base font-normal text-surface-700 dark:text-primary-700">Designed a responsive corporate website for lithium battery recycling company; used HTML, CSS, JS and Bootstrap for the front-end, SQL for the back-end; Adobe Illustrator, Photoshop and DaVinci Resolve for images, graphics, logos and animation.</p>
     </li>
 
 	<li class="mb-10 ms-4">
         <div class="absolute w-3 h-3 bg-surface-500 rounded-full mt-1.5 -start-1.5 dark:bg-primary-500"></div>
         <time class="mb-1 text-sm font-normal leading-none text-tertiary-500 dark:text-secondary-500">November 2021</time>
         <h3 class="text-lg font-bold text-surface-500 dark:text-primary-500">Intern @ Rightbot</h3>
-        <p class="text-base font-normal text-surface-700 dark:text-primary-700">All of the pages and components are first designed in Figma and we keep a parity between the two versions even as we update the project.</p>
+        <p class="text-base font-normal text-surface-700 dark:text-primary-700">Application of AI in the field of warehouse automation; produced field reports on use of robotics technology, competing company profiles and investment profiles.</p>
     </li>
 
 	<li class="ms-4">
         <div class="absolute w-3 h-3 bg-surface-500 rounded-full mt-1.5 -start-1.5 dark:bg-primary-500"></div>
         <time class="mb-1 text-sm font-normal leading-none text-tertiary-500 dark:text-secondary-500">August 2020</time>
         <h3 class="text-lg font-bold text-surface-500 dark:text-primary-500">Intern @ Daiko FHO</h3>
-        <p class="text-base font-normal text-surface-700 dark:text-primary-700">All of the pages and components are first designed in Figma and we keep a parity between the two versions even as we update the project.</p>
+        <p class="text-base font-normal text-surface-700 dark:text-primary-700">Worked for clients Gourmet Passport and Wattpad; designed digital adverts and posters that were used by the client for digital advertising using Adobe Photoshop and Adobe Illustrator.</p>
     </li>
 </ol>
 
