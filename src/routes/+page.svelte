@@ -89,7 +89,7 @@
 				<div class="grid grid-cols-2 gap-8 m-8 justify-items-center items-center">
 					{#each projectTitles as project}
 						<div class="block card card-hover p-4 max-w-[50%]">
-							<button class="">
+							<button type="button" class="">
 									<img src="{placeholder}" class="max-w-[100%]" alt="project {project + 1} card">
 									<div class="grid grid-cols-subgrid gap-4">
 										<p class="text-center font-bold mt-4">{project}</p>
@@ -150,6 +150,41 @@
 			<!-- CONTACT -->
 			<div class="my-16">
 				<h2 class="h2 font-bold">CONTACT ME</h2>
+
+				<!-- first name, last name, email, subject, message -->
+				<div class="flex flex-row justify-center my-6">
+					<label class="label w-1/2">
+						<span>First Name</span>
+						<input class="input" type="text" placeholder="First Name" />
+					</label>
+					
+					<div class="w-8"></div>
+
+					<label class="label w-1/2">
+						<span>Last Name</span>
+						<input class="input" type="text" placeholder="Last Name" />
+					</label>
+				</div>
+
+				<label class="label my-6">
+					<span>Email</span>
+					<input class="input" type="text" placeholder="john.appleseed@email.com" />
+				</label>
+
+				<label class="label my-6">
+					<span>Subject</span>
+					<input class="input" type="text" placeholder="Subject" />
+				</label>
+
+				<label class="label my-6">
+					<span>Message</span>
+					<textarea class="textarea" rows="4" placeholder="Message" />
+				</label>
+
+				<div class="flex justify-center">
+					<button type="button" class="button justify-center btn variant-filled-surface dark:variant-filled-primary">SUBMIT</button>
+				</div>
+
 			</div>
 
 			<!-- FOOTER -->
