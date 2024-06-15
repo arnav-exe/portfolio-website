@@ -76,4 +76,3 @@
         <p class="text-base font-normal text-surface-700 dark:text-primary-700">Worked for clients Gourmet Passport and Wattpad; designed digital adverts and posters that were used by the client for digital advertising using Adobe Photoshop and Adobe Illustrator.</p>
     </li>
 </ol>
-
