@@ -4,8 +4,7 @@
 	import Cursor from "../lib/Cursor.svelte";
 	import Timeline from "../lib/Timeline/Timeline.svelte";
 	import TimelineItem from "../lib/Timeline/TimelineItem.svelte";
-	import TimelineIcon from "../lib/Timeline/TimelineIcon.svelte";
-	import TL from "../lib/Timeline.svelte"
+	import TL from "../lib/TL.svelte"
 	import placeholder from "../lib/images/placeholder.png";
 
 	// skills logos
