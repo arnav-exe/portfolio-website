@@ -32,6 +32,7 @@
   "type": "module",
   "dependencies": {
     "@floating-ui/dom": "^1.6.5",
-    "lru-cache": "^10.2.2"
+    "lru-cache": "^10.2.2",
+    "svelte-vertical-timeline": "^1.0.2"
   }
 }

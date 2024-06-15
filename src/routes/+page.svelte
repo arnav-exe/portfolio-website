@@ -2,7 +2,8 @@
     import { LightSwitch, popup } from "@skeletonlabs/skeleton";
 
 	import Cursor from "../lib/Cursor.svelte";
-	import placeholder from "../lib/images/placeholder.png"
+	import Timeline from "../lib/Timeline.svelte";
+	import placeholder from "../lib/images/placeholder.png";
 
 	// skills logos
 	import Svelte from "../lib/icons/Svelte.svelte";
@@ -80,20 +81,11 @@
 			<!-- PROJECTS -->
 			<div class="my-16">
 				<h2 class="h2 font-bold">PROJECTS</h2>
+
 				<!-- glass project cards -->
+				<!-- TODO: ADD GLASS OVERLAY EFFECT TO PROJECT THUMBNAILS -->
 				<div class="grid grid-cols-2 gap-8 m-8 justify-items-center items-center">
 					{#each projectTitles as project}
-						<!-- <div class="card card-hover overflow-hidden max-w-2xl aspect-auto bg-primary-500 dark:bg-logosurface">
-							<button>
-								<span class="flex flex-row bg-primary-500 dark:bg-logosurface">
-									<img src="{placeholder}" class="w-6/12 aspect-[16/9] h-auto object-cover" alt="project {i + 1} card" />
-									<div>
-									<p class="mx-4"><strong>Project {i + 1} description</strong></p>
-									<p class="text-left mx-4">This section should be used to provide a brief overview of the project</p>
-									</div>
-								</span>
-							</button>
-						</div> -->
 						<div class="block card card-hover p-4 max-w-[50%]">
 							<button class="">
 									<img src="{placeholder}" class="max-w-[100%]" alt="project {project + 1} card">
@@ -109,7 +101,9 @@
 
 			<!-- EXPERIENCE -->
 			<div class="my-16">
-				<h2 class="h2 font-bold">EXPERIENCE</h2>
+				<h2 class="h2 font-bold mb-4">EXPERIENCE</h2>
+				<!-- vertical timeline -->
+				 <Timeline />
 			</div>
 
 			<!-- CONTACT -->
