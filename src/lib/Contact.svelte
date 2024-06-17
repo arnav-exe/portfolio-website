@@ -1,8 +1,13 @@
 <script>
+	import { ProgressRadial } from '@skeletonlabs/skeleton';
+
 	let status = "";
+	let submitting = false;
+
 	const handleSubmit = async data => {
 		status = 'Submitting...'
-		let submitting = true;
+		submitting = true;
+
 		const formData = new FormData(data.currentTarget)
 		const object = Object.fromEntries(formData);
 		const json = JSON.stringify(object);
@@ -16,6 +21,8 @@
 			body: json
 		});
 		const result = await response.json();
+
+		submitting = false;
 		
 		if (result.success) {
 			console.log(result);
@@ -60,7 +67,13 @@
 	</label>
 
 	<div class="flex justify-center">
-		<button type="submit" class="button justify-center btn variant-filled-surface dark:variant-filled-primary">SUBMIT</button>
+		<button type="submit" class="button justify-center btn variant-filled-surface dark:variant-filled-primary">
+			{#if submitting}
+				<ProgressRadial class="max-w-5" meter="stroke-primary-500 dark:stroke-surface-500"  track="stroke-secondary-500 dark:stroke-tertiary-500" />
+			{:else}
+				SUBMIT
+			{/if}
+		</button>
 	</div>
 </form>
 
