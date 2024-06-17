@@ -28,6 +28,9 @@
 			console.log(result);
 			status = result.message || "Success"
 		}
+		else if (!result.success) {
+			status = "Failed";
+		}
 	}
 </script>
 
