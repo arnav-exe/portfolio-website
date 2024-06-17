@@ -2,9 +2,11 @@
     import { LightSwitch, popup } from "@skeletonlabs/skeleton";
 
 	import Cursor from "../lib/Cursor.svelte";
-	import Timeline from "../lib/Timeline/Timeline.svelte";
-	import TimelineItem from "../lib/Timeline/TimelineItem.svelte";
-	import TL from "../lib/TL.svelte"
+
+	import Timeline from "../lib/Timeline-old/Timeline.svelte"
+	import TimelineItem from "../lib/Timeline-old/TimelineItem.svelte"
+
+	import TL from "../lib/Timeline.svelte"
 	import placeholder from "../lib/images/placeholder.png";
 
 	// skills logos
@@ -30,7 +32,13 @@
 		["Git", Git]
 	]);
 
-	const projectTitles = ["Project 1", "Project 2", "Project 3", "Project 4", "Project 5"]
+	const projectTitles = ["Project 1", "Project 2", "Project 3", "Project 4", "Project 5"];
+
+	let firstName;
+	let lastName;
+	let email;
+	let subject;
+	let message;
 </script>
 
 <!-- CURSOR BROKEN -->
@@ -104,8 +112,8 @@
 			<!-- EXPERIENCE -->
 			<div class="my-16">
 				<h2 class="h2 font-bold mb-4">EXPERIENCE</h2>
-				<!-- vertical timeline -->
-				 <Timeline>
+				<!-- Timeline v1 -->
+				 <!-- <Timeline>
 					<TimelineItem
 						title="Lead front-end developer @ DSEU"
 						startDate="July 2022"
@@ -141,10 +149,10 @@
 						endDate="November 2020"
 						description="Worked for clients Gourmet Passport and Wattpad; designed digital adverts and posters that were used by the client for digital advertising using Adobe Photoshop and Adobe Illustrator."
 					/>
-				 </Timeline>
+				 </Timeline> -->
 
-				 <!-- Timeline v1: -->
-				 <!-- <TL /> -->
+				<!-- Timeline v2 -->
+				 <TL />
 			</div>
 
 			<!-- CONTACT -->
@@ -152,38 +160,40 @@
 				<h2 class="h2 font-bold">CONTACT ME</h2>
 
 				<!-- first name, last name, email, subject, message -->
-				<div class="flex flex-row justify-center my-6">
-					<label class="label w-1/2">
-						<span>First Name</span>
-						<input class="input" type="text" placeholder="First Name" />
+				<form method="POST">
+					<div class="flex flex-row justify-center my-6">
+						<label class="label w-1/2">
+							<span>First Name</span>
+							<input class="input" type="text" placeholder="First Name" />
+						</label>
+						
+						<div class="w-8"></div>
+
+						<label class="label w-1/2">
+							<span>Last Name</span>
+							<input class="input" type="text" placeholder="Last Name" />
+						</label>
+					</div>
+
+					<label class="label my-6">
+						<span>Email</span>
+						<input class="input" type="text" placeholder="john.appleseed@email.com" />
 					</label>
-					
-					<div class="w-8"></div>
 
-					<label class="label w-1/2">
-						<span>Last Name</span>
-						<input class="input" type="text" placeholder="Last Name" />
+					<label class="label my-6">
+						<span>Subject</span>
+						<input class="input" type="text" placeholder="Subject" />
 					</label>
-				</div>
 
-				<label class="label my-6">
-					<span>Email</span>
-					<input class="input" type="text" placeholder="john.appleseed@email.com" />
-				</label>
+					<label class="label my-6">
+						<span>Message</span>
+						<textarea class="textarea" rows="4" placeholder="Message" />
+					</label>
 
-				<label class="label my-6">
-					<span>Subject</span>
-					<input class="input" type="text" placeholder="Subject" />
-				</label>
-
-				<label class="label my-6">
-					<span>Message</span>
-					<textarea class="textarea" rows="4" placeholder="Message" />
-				</label>
-
-				<div class="flex justify-center">
-					<button type="button" class="button justify-center btn variant-filled-surface dark:variant-filled-primary">SUBMIT</button>
-				</div>
+					<div class="flex justify-center">
+						<button type="button" class="button justify-center btn variant-filled-surface dark:variant-filled-primary">SUBMIT</button>
+					</div>
+				</form>
 
 			</div>
 

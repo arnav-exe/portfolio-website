@@ -15,7 +15,7 @@
 	
 	<!-- Title -->
 	<h6 class="flex items-center mb-1 space-x-2 -translate-y-2">
-		<span class="h6 text-surface-500 dark:text-primary-500">{title}</span>
+		<span class="h6 font-bold text-surface-500 dark:text-primary-500">{title}</span>
 		<!-- Badge -->
 		{#if badgeText}
 			<span class="badge bg-secondary-500 dark:bg-tertiary-500">{badgeText}</span>
@@ -23,7 +23,7 @@
 	</h6>
 	
 	<!-- Description -->
-	<p class="mb-4 opacity-75 text-surface-400 dark:text-primary-700">{description}</p>
+	<p class="mb-4 opacity-75 translate-x-5 text-surface-400 dark:text-primary-700">{description}</p>
 	
 	<!-- Slot: Default -->
 	{#if $$slots.default}
