@@ -168,6 +168,7 @@
 			<!-- FOOTER -->
 			<div>
 				<!-- things to put in footer: -->
+				 <!-- footer background colour should be secondary and tertiary colours -->
 				<!-- all my socials (github, linkedin, email?) -->
 				<!-- made with :heart: using svelte, SkeletonUI and Tailwind -->
 				<!-- copyright @me? -->
