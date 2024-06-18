@@ -1,4 +1,4 @@
-# My portfolio website
+# My portlio website
 
 ### Techstack:
  * Svelte
@@ -30,3 +30,4 @@
  * make portfolio/blog selector stand out more
  * add animations
  * fix skills tooltip disappearing on hover
+ * add footer
