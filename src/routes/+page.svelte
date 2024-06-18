@@ -39,11 +39,8 @@
 
 	const projectTitles = ["Project 1", "Project 2", "Project 3", "Project 4", "Project 5"];
 
-	let firstName;
-	let lastName;
-	let email;
-	let subject;
-	let message;
+	let now = new Date();
+	let year = now.getFullYear();
 </script>
 
 <!-- CURSOR BROKEN -->
@@ -51,7 +48,7 @@
 
 <div class="p-8 space-y-8">
     <div class="flex justify-between items-center h-full mx-auto">
-    <LightSwitch />
+    <LightSwitch bgLight="bg-secondary-500" fillLight="fill-primary-500" />
 
 	<a class="justify-end" href="/blog">BLOG</a>
 	</div>
@@ -172,14 +169,13 @@
 
 <!-- FOOTER -->
 <div class="w-full h-56 bg-secondary-500 dark:bg-surface-700">
-	<!-- things to put in footer: -->
-	<!-- all my socials (github, linkedin, email?) -->
-	<!-- made with :heart: using svelte, SkeletonUI and Tailwind -->
-	<!-- copyright @me? -->
-	<!-- funny quote? -->
-	<div class="flex justify-center flex-row">
-		<GitHub class="w-10" />
-		<Linkedin class="w-10" />
+	<div class="flex justify-center items-center flex-col">
+		<div class="flex justify-center flex-row">
+			<a class="w-10 mx-4 my-8 dark:fill-primary-500 fill-logosurface dark:hover:fill-primary-400 hover:fill-surface-400" href="https://www.github.com/arnav-exe/"><GitHub /></a>
+			<a class="w-10 mx-4 my-8 dark:fill-primary-500 fill-logosurface dark:hover:fill-primary-400 hover:fill-surface-400" href="https://www.linkedin.com/in/arnav-jagetia/"><Linkedin /></a>
+		</div>
+		<p class="mb-8">Forged in the heart of a dying star using <a class="underline" href="https://kit.svelte.dev/">SvelteKit</a>, <a class="underline" href="https://tailwindcss.com/">Tailwind</a>, and <a class="underline" href="https://www.skeleton.dev/">SkeletonUI</a></p>
+		<p class="">© Arnav Jagetia {year}</p>
 	</div>
 </div>
 
