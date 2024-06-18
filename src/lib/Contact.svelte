@@ -45,7 +45,7 @@
 	<div class="flex flex-row justify-center my-6">
 		<label class="label w-1/2">
 			<span>First Name</span>
-			<input class="input bg-secondary-500" type="text" name="firstName" placeholder="First Name" required />
+			<input class="input bg-secondary-500 dark:bg-surface-900" type="text" name="firstName" placeholder="First Name" required />
 		</label>
 
 		<!-- firstname lastname separator -->
@@ -54,26 +54,26 @@
 		<!-- lastname field -->
 		<label class="label w-1/2">
 			<span>Last Name</span>
-			<input class="input bg-secondary-500" type="text" name="lastName" placeholder="Last Name" required />
+			<input class="input bg-secondary-500 dark:bg-surface-900" type="text" name="lastName" placeholder="Last Name" required />
 		</label>
 	</div>
 
 	<!-- email field -->
 	<label class="label my-6">
 		<span>Email</span>
-		<input class="input bg-secondary-500" type="email" name="email" placeholder="john.appleseed@email.com" required />
+		<input class="input bg-secondary-500 dark:bg-surface-900" type="email" name="email" placeholder="john.appleseed@email.com" required />
 	</label>
 
 	<!-- subject field -->
 	<label class="label my-6">
 		<span>Subject</span>
-		<input class="input bg-secondary-500" type="text" name="subject" placeholder="Subject" required />
+		<input class="input bg-secondary-500 dark:bg-surface-900" type="text" name="subject" placeholder="Subject" required />
 	</label>
 
 	<!-- message field -->
 	<label class="label my-6">
 		<span>Message</span>
-		<textarea class="textarea bg-secondary-500" rows="4" name="message" placeholder="Message" required />
+		<textarea class="textarea bg-secondary-500 dark:bg-surface-900" rows="4" name="message" placeholder="Message" required />
 	</label>
 
 	<!-- status message -->
