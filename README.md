@@ -25,9 +25,7 @@
 
 
 ### TODO:
- * fix light mode colours on project cards and contact form
  * make project cards link to github
  * make portfolio/blog selector stand out more
  * add animations
  * fix skills tooltip disappearing on hover
- * add footer
