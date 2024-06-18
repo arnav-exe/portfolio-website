@@ -20,12 +20,12 @@
 			},
 			body: json
 		});
+
 		const result = await response.json();
 
 		submitting = false;
 		
 		if (result.success) {
-			console.log(result);
 			status = result.message || "Success"
 		}
 		else if (!result.success) {
@@ -36,39 +36,51 @@
 
 
 
+<!-- contact form -->
 <form on:submit|preventDefault={handleSubmit}>
 
+	<!-- web3forms api -->
 	<input type="hidden" name="access_key" value="d6e3a62f-1428-4649-bb9f-fe7d35d94e93">
 
+	<!-- firstname field -->
 	<div class="flex flex-row justify-center my-6">
 		<label class="label w-1/2">
 			<span>First Name</span>
-			<input class="input" type="text" name="firstName" placeholder="First Name" required />
+			<input class="input bg-secondary-500" type="text" name="firstName" placeholder="First Name" required />
 		</label>
-		
+
+		<!-- firstname lastname separator -->
 		<div class="w-8"></div>
 
+		<!-- lastname field -->
 		<label class="label w-1/2">
 			<span>Last Name</span>
-			<input class="input" type="text" name="lastName" placeholder="Last Name" required />
+			<input class="input bg-secondary-500" type="text" name="lastName" placeholder="Last Name" required />
 		</label>
 	</div>
 
+	<!-- email field -->
 	<label class="label my-6">
 		<span>Email</span>
-		<input class="input" type="text" name="email" placeholder="john.appleseed@email.com" required />
+		<input class="input bg-secondary-500" type="email" name="email" placeholder="john.appleseed@email.com" required />
 	</label>
 
+	<!-- subject field -->
 	<label class="label my-6">
 		<span>Subject</span>
-		<input class="input" type="text" name="subject" placeholder="Subject" required />
+		<input class="input bg-secondary-500" type="text" name="subject" placeholder="Subject" required />
 	</label>
 
+	<!-- message field -->
 	<label class="label my-6">
 		<span>Message</span>
-		<textarea class="textarea" rows="4" name="message" placeholder="Message" required />
+		<textarea class="textarea bg-secondary-500" rows="4" name="message" placeholder="Message" required />
 	</label>
 
+	<!-- status message -->
+	<h6 class="h6 flex justify-center mb-6 text-surface-500 dark:text-primary-500">{status}</h6>
+
+	<!-- submit button -->
 	<div class="flex justify-center">
 		<button type="submit" class="button justify-center btn variant-filled-surface dark:variant-filled-primary">
 			{#if submitting}
@@ -79,5 +91,3 @@
 		</button>
 	</div>
 </form>
-
-<div>{status}</div>
