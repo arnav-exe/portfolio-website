@@ -68,7 +68,7 @@
 
 		<!-- ABOUT ME -->
 		<div class="my-16">
-			<h2 class="h2 font-bold">ABOUT ME</h2>
+			<h2 class="h2 font-bold text-center">ABOUT ME</h2>
 			<p class="translate-x-5">Hi, I'm a recent Computer Systems Engineering graduate from QMUL. As a full-stack engineer, I craft sleek, powerful apps with Svelte, JavaScript, Node.js, and Tailwind. I also specialize in machine learning and data analysis using PyTorch, Hadoop, and Spark. Not to mention additional competencies in C, VHDL, and Java</p>
 			<p class="translate-x-5">I also excel in architecting resilient and scalable cloud-based solutions using AWS, backed by two AWS certifications: AWS Associate Developer and AWS Cloud Practitioner.</p>
 		</div>
@@ -77,7 +77,7 @@
 
 		<!-- SKILLS -->
 		<div class="my-16">
-			<h2 class="h2 font-bold">SKILLS</h2>
+			<h2 class="h2 font-bold text-center">SKILLS</h2>
 			<div class="flex justify-center items-center h-full flex-row">
 				<!-- single row of LOGOS of all languages/frameworks HERE: -->
 				{#each logos as [name, logo]}
@@ -98,20 +98,20 @@
 
 		<!-- PROJECTS -->
 		<div class="my-16">
-			<h2 class="h2 font-bold">PROJECTS</h2>
+			<h2 class="h2 font-bold text-center">PROJECTS</h2>
 
 			<!-- glass project cards -->
 			<!-- TODO: ADD GLASS OVERLAY EFFECT TO PROJECT THUMBNAILS -->
-			<div class="grid grid-cols-2 gap-8 m-8 justify-items-center items-center">
+			<div class="grid grid-cols-2 gap-8 justify-items-center items-center">
 				{#each projectTitles as project}
 					<div class="block card card-hover p-4 max-w-[50%] bg-secondary-500 dark:bg-surface-900">
 						<a href="https://github.com/">
-								<img src="{placeholder}" class="max-w-[100%]" alt="project {project + 1} card">
-								<div class="grid grid-cols-subgrid gap-4">
-									<p class="text-center font-bold mt-4">{project}</p>
-									<p class="text-left mb-4">This section should be used to provide a brief overview of the project</p>
-								</div>
-							</a>
+							<img src="{placeholder}" class="max-w-[100%]" alt="project {project + 1} card" />
+							<div class="grid grid-cols-subgrid gap-4">
+								<p class="text-center font-bold mt-4">{project}</p>
+								<p class="text-left mb-4">This section should be used to provide a brief overview of the project</p>
+							</div>
+						</a>
 					</div>
 				{/each}
 			</div>
@@ -119,7 +119,7 @@
 
 		<!-- EXPERIENCE -->
 		<div class="my-16">
-			<h2 class="h2 font-bold mb-4">EXPERIENCE</h2>
+			<h2 class="h2 font-bold text-center">EXPERIENCE</h2>
 			<!-- Timeline v1 -->
 			<!-- <Timeline>
 				<TimelineItem
@@ -164,12 +164,12 @@
 		</div>
 
 		<!-- CONTACT -->
-		<div class="my-16">
-			<h2 class="h2 font-bold">CONTACT ME</h2>
+		<div class="mt-16">
+			<h2 class="h2 font-bold text-center">CONTACT ME</h2>
 
 			<!-- first name, last name, email, subject, message -->
-			<Contact />
 		</div>
+		<Contact />
     </div>
 </div>
 

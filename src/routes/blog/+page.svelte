@@ -31,12 +31,8 @@
 
 		<h1 class="h1 font-bold my-16">BLOG</h1>
 
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati delectus possimus temporibus voluptatibus explicabo ex neque atque? Inventore aspernatur non, soluta fugiat quo in alias, provident, quia fugit consequatur id.
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati delectus possimus temporibus voluptatibus explicabo ex neque atque? Inventore aspernatur non, soluta fugiat quo in alias, provident, quia fugit consequatur id.</p>
-
-
-		<br><br><br><br>
-		<p>asdfasdfasdf</p>
+		<p class="mb-8">WELCOME TO MY DEV BLOG</p>
+		<p>FIRST BLOG COMING SOON</p>
 	</div>
 
 </div>
