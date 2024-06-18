@@ -29,3 +29,6 @@
  * make portfolio/blog selector stand out more
  * add animations
  * fix skills tooltip disappearing on hover
+ * fix custom cursor
+ * add aws certifications somewhere (maybe somewhere in landing page?)
+ * fix styling of page selector on top right

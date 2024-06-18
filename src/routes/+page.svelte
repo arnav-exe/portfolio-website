@@ -1,5 +1,5 @@
 <script>
-    import { LightSwitch, popup } from "@skeletonlabs/skeleton";
+    import { LightSwitch, popup, RadioGroup, RadioItem } from "@skeletonlabs/skeleton";
 
 	import Cursor from "../lib/Cursor.svelte";
 
@@ -25,6 +25,8 @@
 	import GitHub from "../lib/icons/GitHub.svelte";
 	import Linkedin from "../lib/icons/Linkedin.svelte";
 
+	let page = 0;
+
 	const logos = new Map([
 		["Svelte", Svelte],
 		["Node.js", Node],
@@ -48,9 +50,13 @@
 
 <div class="p-8 space-y-8">
     <div class="flex justify-between items-center h-full mx-auto">
-    <LightSwitch bgLight="bg-secondary-500" fillLight="fill-primary-500" />
+		<LightSwitch bgLight="bg-secondary-500" bgDark="bg-surface-900" fillLight="fill-primary-500" />
 
-	<a class="justify-end" href="/blog">BLOG</a>
+		<!-- <a class="justify-end" href="/blog">BLOG</a> -->
+		<RadioGroup class="justify-end" background="bg-secondary-500 dark:bg-surface-900">
+			<RadioItem bind:group={page} name="justify" value={0}>Portfolio</RadioItem>
+			<a href="/blog"><RadioItem bind:group={page} name="justify" value={1}>Blog</RadioItem></a>
+		</RadioGroup>
 	</div>
 
     <div class="flex justify-center items-center h-full flex-col mx-auto w-[90%]">
@@ -98,14 +104,14 @@
 			<!-- TODO: ADD GLASS OVERLAY EFFECT TO PROJECT THUMBNAILS -->
 			<div class="grid grid-cols-2 gap-8 m-8 justify-items-center items-center">
 				{#each projectTitles as project}
-					<div class="block card card-hover p-4 max-w-[50%] bg-secondary-500">
-						<button type="button" class="">
+					<div class="block card card-hover p-4 max-w-[50%] bg-secondary-500 dark:bg-surface-900">
+						<a href="https://github.com/">
 								<img src="{placeholder}" class="max-w-[100%]" alt="project {project + 1} card">
 								<div class="grid grid-cols-subgrid gap-4">
 									<p class="text-center font-bold mt-4">{project}</p>
 									<p class="text-left mb-4">This section should be used to provide a brief overview of the project</p>
 								</div>
-						</button>
+							</a>
 					</div>
 				{/each}
 			</div>
@@ -168,13 +174,13 @@
 </div>
 
 <!-- FOOTER -->
-<div class="w-full h-56 bg-secondary-500 dark:bg-surface-700">
+<div class="w-full h-56 bg-secondary-500 dark:bg-surface-900">
 	<div class="flex justify-center items-center flex-col">
 		<div class="flex justify-center flex-row">
 			<a class="w-10 mx-4 my-8 dark:fill-primary-500 fill-logosurface dark:hover:fill-primary-400 hover:fill-surface-400" href="https://www.github.com/arnav-exe/"><GitHub /></a>
 			<a class="w-10 mx-4 my-8 dark:fill-primary-500 fill-logosurface dark:hover:fill-primary-400 hover:fill-surface-400" href="https://www.linkedin.com/in/arnav-jagetia/"><Linkedin /></a>
 		</div>
-		<p class="mb-8">Forged in the heart of a dying star using <a class="underline" href="https://kit.svelte.dev/">SvelteKit</a>, <a class="underline" href="https://tailwindcss.com/">Tailwind</a>, and <a class="underline" href="https://www.skeleton.dev/">SkeletonUI</a></p>
+		<p class="mb-8">Forged in the heart of a dying star using <a class="underline" href="https://kit.svelte.dev/">SvelteKit</a>, <a class="underline" href="https://tailwindcss.com/">Tailwind</a>, and <a class="underline " href="https://www.skeleton.dev/">SkeletonUI</a></p>
 		<p class="">© Arnav Jagetia {year}</p>
 	</div>
 </div>
