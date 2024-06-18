@@ -5,7 +5,6 @@
 	let submitting = false;
 
 	const handleSubmit = async data => {
-		status = 'Submitting...'
 		submitting = true;
 
 		const formData = new FormData(data.currentTarget)
