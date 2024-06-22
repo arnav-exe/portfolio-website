@@ -9,6 +9,7 @@
 	import TL from "../lib/Timeline.svelte"
 	import Contact from "../lib/Contact.svelte"
 	import placeholder from "../lib/images/placeholder.png";
+	import Scrollable from "../lib/Scrollable.svelte";
 
 	// skills logos
 	import Svelte from "../lib/icons/Svelte.svelte";
@@ -45,7 +46,8 @@
 	let year = now.getFullYear();
 </script>
 
-<!-- CURSOR BROKEN -->
+
+
 <Cursor />
 
 <div class="p-8 space-y-8">
@@ -61,9 +63,13 @@
 
     <div class="flex justify-center items-center h-full flex-col mx-auto w-[90%]">
 		<!-- LANDING PAGE -->
-		<div>
-			<h1 class="h1 font-bold title -translate-x-[10%] title">ARNAV</h1>
-			<h1 class="h1 font-bold title translate-x-[10%] title">JAGETIA</h1>
+		<div class="w-full h-screen flex flex-col -translate-y-32 justify-center items-center">
+			<h1 class="h1 font-bold title -translate-x-[20%] title">&lt;ARNAV</h1>
+			<h1 class="h1 font-bold title translate-x-[20%] title">JAGETIA /&gt;</h1>
+		</div>
+
+		<div class="w-8 -translate-y-56">
+			<Scrollable />
 		</div>
 
 		<!-- ABOUT ME -->
@@ -192,8 +198,8 @@
 	}
 
 	/* BIGGER font (idk if needed) */
-	/* p {
-		font-size: 1.5vw;
+	:global(p) {
+		font-size: 1.25rem;
 		line-height: normal;
-	} */
+	}
 </style>

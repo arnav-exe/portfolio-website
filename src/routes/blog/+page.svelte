@@ -8,8 +8,7 @@
 
 
 
-<!-- CURSOR BROKEN -->
-<!-- <Cursor /> -->
+<Cursor />
 
 <div class="p-8 space-y-8">
 	<div class="z-0 relative flex justify-between items-center m-0 start-0">
@@ -36,3 +35,12 @@
 	</div>
 
 </div>
+
+
+
+<style>
+	p {
+		font-size: 1.5vw;
+		line-height: normal;
+	}
+</style>
