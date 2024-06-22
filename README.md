@@ -28,5 +28,4 @@
 ### TODO:
  * add animations
  * fix skills tooltip disappearing on hover
- * fix custom cursor
  * add aws certifications somewhere (maybe somewhere in landing page?)
