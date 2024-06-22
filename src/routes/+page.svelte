@@ -1,5 +1,11 @@
 <script>
+	import { onMount } from "svelte";
+
     import { LightSwitch, popup, RadioGroup, RadioItem } from "@skeletonlabs/skeleton";
+
+	// gsap
+	import { gsap } from "gsap";
+	import { TextPlugin } from "gsap/dist/TextPlugin";
 
 	import Cursor from "../lib/Cursor.svelte";
 
@@ -9,7 +15,8 @@
 	import TL from "../lib/Timeline.svelte"
 	import Contact from "../lib/Contact.svelte"
 	import placeholder from "../lib/images/placeholder.png";
-	import Scrollable from "../lib/Scrollable.svelte";
+	import Scrollable1 from "../lib/Scrollable1.svelte";
+	import Scrollable2 from "../lib/Scrollable2.svelte";
 
 	// skills logos
 	import Svelte from "../lib/icons/Svelte.svelte";
@@ -25,6 +32,9 @@
 	// footer logos
 	import GitHub from "../lib/icons/GitHub.svelte";
 	import Linkedin from "../lib/icons/Linkedin.svelte";
+
+	// gsap plugin registering
+	gsap.registerPlugin(TextPlugin);
 
 	let page = 0;
 
@@ -44,6 +54,14 @@
 
 	let now = new Date();
 	let year = now.getFullYear();
+
+
+	onMount(_ => {
+		const tl = gsap.timeline({ defaults: { ease: "power1.inOut" }});
+
+		tl.to(".hero-firstname", { text: "&lt; ARNAV", duration: 1.5 });
+		tl.to(".hero-lastname", { text: "JAGETIA /&gt;", duration: 1.5 });
+	})
 </script>
 
 
@@ -64,12 +82,14 @@
     <div class="flex justify-center items-center h-full flex-col mx-auto w-[90%]">
 		<!-- LANDING PAGE -->
 		<div class="w-full h-screen flex flex-col -translate-y-32 justify-center items-center">
-			<h1 class="h1 font-bold title -translate-x-[20%] title">&lt;ARNAV</h1>
-			<h1 class="h1 font-bold title translate-x-[20%] title">JAGETIA /&gt;</h1>
+			<h1 class="hero-firstname h1 font-bold title -translate-x-[20%] title"></h1>
+			<h1 class="hero-lastname h1 font-bold title translate-x-[20%] title"></h1>
 		</div>
 
 		<div class="w-8 -translate-y-56">
-			<Scrollable />
+			<Scrollable1 />
+			<br>
+			<Scrollable2 />
 		</div>
 
 		<!-- ABOUT ME -->
