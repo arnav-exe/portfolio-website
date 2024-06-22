@@ -2,6 +2,7 @@
 
 ### Techstack:
  * Svelte
+ * TailwindCSS
  * SkeletonUI
 
 ### Potential animation libraries:

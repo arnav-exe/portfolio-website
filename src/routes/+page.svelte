@@ -46,7 +46,7 @@
 </script>
 
 <!-- CURSOR BROKEN -->
-<!-- <Cursor /> -->
+<Cursor />
 
 <div class="p-8 space-y-8">
     <div class="flex justify-between items-center h-full mx-auto">
