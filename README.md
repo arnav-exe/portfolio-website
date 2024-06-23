@@ -26,6 +26,6 @@
 
 
 ### TODO:
- * add animations
+ * add idle animations to hero page text
  * fix skills tooltip disappearing on hover
  * add aws certifications somewhere (maybe somewhere in landing page?)
