@@ -90,8 +90,6 @@
 		},
 		
 	]
-	const car = {type:"Fiat", model:"500", color:"white"};
-
 
 	let now = new Date();
 	let year = now.getFullYear();
@@ -163,11 +161,11 @@
 		<!-- aws certifications -->
 		<div class="absolute bottom-4 right-0 sm:w-56 w-28">
 			<div class="flex flex-row">
-				<a href="https://www.credly.com/badges/7e08ab0f-ab35-4596-b6d9-d4bb5f45039f/public_url">
+				<a class="hover:scale-125 transition-all" href="https://www.credly.com/badges/7e08ab0f-ab35-4596-b6d9-d4bb5f45039f/public_url">
 					<img src="{developer}" alt="AWS Developer Associate Certification" />
 				</a>
 				
-				<a href="https://www.credly.com/badges/890bf57a-2cac-4be1-9d14-d81201defc6d/public_url">
+				<a class="hover:scale-125 transition-all" href="https://www.credly.com/badges/890bf57a-2cac-4be1-9d14-d81201defc6d/public_url">
 					<img src="{practitioner}" alt="AWS Cloud Practitioner Certification" />
 				</a>
 			</div>
@@ -287,14 +285,18 @@
 					</Timeline> -->
 
 				<!-- Timeline v2 -->
-				<TL class="experience-section" />
+				<div class="experience-section">
+					<TL />
+				</div>
 			</div>
 
 			<!-- CONTACT -->
 			<div class="mt-32 mb-32">
 				<h2 class="h2 font-bold text-center mb-4">CONTACT ME</h2>
 
-				<Contact class="contact-section" />
+				<div class="contact-section">
+					<Contact />
+				</div>
 			</div>
 		</div>
 	</div>
