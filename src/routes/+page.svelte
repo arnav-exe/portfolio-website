@@ -227,9 +227,9 @@
 				<h2 class="h2 font-bold text-center mb-4">PROJECTS</h2>
 
 				<!-- glass project cards -->
-				<div class="projects-section grid grid-cols-2 min-w-64 gap-8 justify-items-center items-center">
+				<div class="projects-section grid sm:grid-cols-2 grid-cols-1 gap-8 justify-items-center items-center">
 					{#each projects as project}
-						<div class="project-card block card card-hover p-4 max-w-[50%] bg-secondary-500 dark:bg-surface-900">
+						<div class="project-card block card card-hover p-4 max-w-xl bg-secondary-500 dark:bg-surface-900">
 							<a href="{project.link}">
 								<img src="{project.image}" alt="project card" />
 								<div class="grid grid-cols-subgrid gap-4">
