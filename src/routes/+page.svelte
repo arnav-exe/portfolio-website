@@ -10,8 +10,9 @@
 
 	import Cursor from "../lib/Cursor.svelte";
 
-	import Timeline from "../lib/Timeline-old/Timeline.svelte"
-	import TimelineItem from "../lib/Timeline-old/TimelineItem.svelte"
+	// timeline v1 imports [legacy]
+	// import Timeline from "../lib/Timeline-old/Timeline.svelte"
+	// import TimelineItem from "../lib/Timeline-old/TimelineItem.svelte"
 
 	import TL from "../lib/Timeline.svelte"
 	import Contact from "../lib/Contact.svelte"
@@ -57,13 +58,15 @@
 	let now = new Date();
 	let year = now.getFullYear();
 
-
+	// gsap animations
 	onMount(_ => {
 		const tl = gsap.timeline({ defaults: { ease: "power1.inOut" }});
 
 		tl.fromTo(".hero-firstname", {text: "", opacity: 0}, { text: "&lt; ARNAV", opacity: 1, duration: 1.5 });
 		tl.fromTo(".hero-lastname", {text: "", opacity: 0}, { text: "JAGETIA /&gt;", opacity: 1, duration: 1.5 });
-		tl.fromTo(".hero-text", {opacity: 0, y: 50}, {opacity: 1, y: 0, duration: 1.5});
+		tl.fromTo(".hero-text1", {opacity: 0, y: 50}, {opacity: 1, y: 0, duration: 1.5});
+		tl.fromTo(".hero-text2", {opacity: 0, y: 50}, {opacity: 1, y: 0, duration: 1.5, delay: -1});
+		tl.fromTo(".hero-text3", {opacity: 0, y: 50}, {opacity: 1, y: 0, duration: 1.5, delay: -1});
 
 
 		gsap.set(".about-section", { y: 100, opacity: 0 });
@@ -80,7 +83,7 @@
 
 		let proxy = { skew: 0 },
 			skewSetter = gsap.quickSetter(".project-card", "skewY", "deg"), // fast
-			clamp = gsap.utils.clamp(-20, 20); // don't let the skew go beyond 20 degrees. 
+			clamp = gsap.utils.clamp(-10, 10); // don't let the skew go beyond 20 degrees. 
 
 		ScrollTrigger.create({
 			onUpdate: self => {
@@ -91,15 +94,12 @@
 				}
 			}
 		});
-
-
-
-
 	});
 </script>
 
 
 
+<!-- custom cursor -->
 <Cursor />
 
 <div class="p-8 space-y-8">
@@ -118,12 +118,13 @@
 		<div class="w-full h-screen flex flex-col -translate-y-32 justify-center items-center">
 			<h1 class="hero-firstname h1 font-bold title -translate-x-[20%] title">ARNAV</h1>
 			<h1 class="hero-lastname h1 mb-40 font-bold title translate-x-[20%] title">JAGETIA</h1>
-			<p class="hero-text">
-				<span>FULL-STACK DEVELOPER</span>
-				<span class="mx-16">CLOUD ARCHITECT</span>
-				<span>BACHELOR OF ENGINEERING</span>
+			<p>
+				<span class="hero-text1">FULL-STACK DEVELOPER</span>
+				<span class="mx-16 hero-text2">CLOUD ARCHITECT</span>
+				<span class="hero-text3">BACHELOR OF ENGINEERING</span>
 			</p>
 
+			<!-- aws certifications -->
 			<div class="absolute bottom-4 -right-28 w-56">
 				<div class="flex flex-row">
 					<a href="https://www.credly.com/badges/7e08ab0f-ab35-4596-b6d9-d4bb5f45039f/public_url">
@@ -136,6 +137,7 @@
 				</div>
 			</div>
 
+			<!-- socials -->
 			<div class="absolute -right-28 w-10">
 				<a class="w-10 mx-4 my-8 dark:fill-primary-500 fill-logosurface dark:hover:fill-primary-400 hover:fill-surface-400" href="https://www.github.com/arnav-exe/"><GitHub /></a>
 				<a class="w-10 mx-4 my-8 dark:fill-primary-500 fill-logosurface dark:hover:fill-primary-400 hover:fill-surface-400" href="https://www.linkedin.com/in/arnav-jagetia/"><Linkedin /></a>
