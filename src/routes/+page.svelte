@@ -23,7 +23,7 @@
 	// skills logos
 	import Svelte from "../lib/icons/Svelte.svelte";
 	import Node from "../lib/icons/Node.svelte";
-	import js from "../lib/icons/Javascript.Svelte";
+	import Lang from "../lib/icons/Language.Svelte";
 	import Tailwind from "../lib/icons/Tailwind.svelte";
 	import Python from "../lib/icons/Python.svelte";
 	import Pytorch from "../lib/icons/Pytorch.svelte";
@@ -44,7 +44,7 @@
 	const logos = new Map([
 		["Svelte", Svelte],
 		["Node.js", Node],
-		["JavaScript", js],
+		["JavaScript", Lang],
 		["Tailwind CSS", Tailwind],
 		["Python", Python],
 		["PyTorch", Pytorch],
