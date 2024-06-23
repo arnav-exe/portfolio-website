@@ -23,7 +23,7 @@
 	// skills logos
 	import Svelte from "../lib/icons/Svelte.svelte";
 	import Node from "../lib/icons/Node.svelte";
-	import js from "../lib/icons/JS.Svelte";
+	import js from "../lib/icons/Javascript.Svelte";
 	import Tailwind from "../lib/icons/Tailwind.svelte";
 	import Python from "../lib/icons/Python.svelte";
 	import Pytorch from "../lib/icons/Pytorch.svelte";
@@ -116,13 +116,12 @@
 		gsap.to(".contact-section", {opacity: 1, y: 0, duration: 1.5, scrollTrigger: ".contact-section"})
 
 		let proxy = { skew: 0 },
-			skewSetter = gsap.quickSetter(".project-card", "skewY", "deg"), // fast
-			clamp = gsap.utils.clamp(-10, 10); // don't let the skew go beyond 20 degrees. 
+			skewSetter = gsap.quickSetter(".project-card", "skewY", "deg"),
+			clamp = gsap.utils.clamp(-10, 10); // restricts skew to +- 10 degrees 
 
 		ScrollTrigger.create({
 			onUpdate: self => {
 				let skew = clamp(self.getVelocity() / -300);
-				// only do something if the skew is MORE severe. Remember, we're always tweening back to 0, so if the user slows their scrolling quickly, it's more natural to just let the tween handle that smoothly rather than jumping to the smaller skew.
 				if (Math.abs(skew) > Math.abs(proxy.skew)) {
 					proxy.skew = skew;gsap.to(proxy, {skew: 0, duration: 0.8, ease: "power3", overwrite: true, onUpdate: () => skewSetter(proxy.skew)});
 				}
