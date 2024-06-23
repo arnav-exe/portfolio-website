@@ -137,7 +137,7 @@
 <!-- custom cursor -->
 <Cursor />
 
-<div class="p-8 space-y-8 w-full">
+<div class="p-8 space-y-8 w-full overflow-x-hidden">
     <div class="relative z-40 flex justify-between items-center h-full mx-auto">
 		<LightSwitch bgLight="bg-secondary-500" bgDark="bg-surface-900" fillLight="fill-primary-500" />
 
@@ -152,10 +152,10 @@
 	<div class="w-full h-screen flex flex-col -translate-y-32 justify-center items-center">
 		<h1 class="hero-firstname h1 font-bold title -translate-x-[20%] title">ARNAV</h1>
 		<h1 class="hero-lastname h1 mb-40 font-bold title translate-x-[20%] title">JAGETIA</h1>
-		<div class="flex flex-row">
-			<div class="text-xl hero-text1">FULL-STACK DEVELOPER</div>
-			<div class="text-xl mx-16 hero-text2">CLOUD ARCHITECT</div>
-			<div class="text-xl hero-text3">BACHELOR OF ENGINEERING</div>
+		<div class="flex flex-col sm:flex-row">
+			<div class="text-xl text-center hero-text1">FULL-STACK DEVELOPER</div>
+			<div class="text-xl text-center mx-16 hero-text2">CLOUD ARCHITECT</div>
+			<div class="text-xl text-center hero-text3">BACHELOR OF ENGINEERING</div>
 		</div>
 
 		<!-- aws certifications -->
@@ -227,7 +227,7 @@
 				<h2 class="h2 font-bold text-center mb-4">PROJECTS</h2>
 
 				<!-- glass project cards -->
-				<div class="projects-section grid grid-cols-2 gap-8 justify-items-center items-center">
+				<div class="projects-section grid grid-cols-2 min-w-64 gap-8 justify-items-center items-center">
 					{#each projects as project}
 						<div class="project-card block card card-hover p-4 max-w-[50%] bg-secondary-500 dark:bg-surface-900">
 							<a href="{project.link}">
