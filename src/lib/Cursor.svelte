@@ -36,7 +36,7 @@
 />
 
 <svg
-	class="w-full h-full z-10 fixed pointer-events-none fill-surface-500 stroke-surface-500 dark:fill-primary-500 dark:stroke-primary-500"
+	class="w-full h-full z-50 fixed pointer-events-none fill-surface-500 stroke-surface-500 dark:fill-primary-500 dark:stroke-primary-500"
 >
 	<circle cx={$coords1.x} cy={$coords1.y} r={$size} stroke-width="1" fill-opacity="0"/>
 	<circle cx={$coords2.x} cy={$coords2.y} r={$size / 4} />
