@@ -16,9 +16,13 @@
 
 	import TL from "../lib/Timeline.svelte"
 	import Contact from "../lib/Contact.svelte"
-	import placeholder from "../lib/images/placeholder.png";
 	import Scrollable1 from "../lib/Scrollable1.svelte";
 	import Scrollable2 from "../lib/Scrollable2.svelte";
+
+	// imgs
+	import placeholder from "../lib/images/placeholder.png";
+	import developer from "../lib/images/developer.png";
+	import practitioner from "../lib/images/practitioner.png";
 
 	// skills logos
 	import Svelte from "../lib/icons/Svelte.svelte";
@@ -160,11 +164,11 @@
 		<div class="absolute bottom-4 right-0 sm:w-56 w-28">
 			<div class="flex flex-row">
 				<a href="https://www.credly.com/badges/7e08ab0f-ab35-4596-b6d9-d4bb5f45039f/public_url">
-					<img src="../src/lib/images/aws-developer-associate.png" alt="AWS Developer Associate Certification" />
+					<img src="{developer}" alt="AWS Developer Associate Certification" />
 				</a>
 				
 				<a href="https://www.credly.com/badges/890bf57a-2cac-4be1-9d14-d81201defc6d/public_url">
-					<img src="../src/lib/images/aws-cloud-practitioner.png" alt="AWS Cloud Practitioner Certification" />
+					<img src="{practitioner}" alt="AWS Cloud Practitioner Certification" />
 				</a>
 			</div>
 		</div>
