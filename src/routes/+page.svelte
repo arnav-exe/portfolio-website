@@ -190,18 +190,20 @@
 	<div class="flex justify-center">
 		<div class="w-[90%]">
 			<!-- ABOUT ME -->
-			<div class="my-32 about-section">
+			<div class="my-32">
 				<h2 class="h2 font-bold text-center mb-4">ABOUT ME</h2>
-				<p class="translate-x-5">Hi, I'm a recent Computer Systems Engineering graduate from QMUL. As a full-stack engineer, I craft sleek, powerful apps with Svelte, JavaScript, Node.js, and Tailwind. I also specialize in machine learning and data analysis using PyTorch, Hadoop, and Spark. Not to mention additional competencies in C, VHDL, and Java</p>
-				<p class="translate-x-5">I also excel in architecting resilient and scalable cloud-based solutions using AWS, backed by two AWS certifications: AWS Associate Developer and AWS Cloud Practitioner.</p>
+				<div class="about-section">
+					<p class="translate-x-5">Hi, I'm a recent Computer Systems Engineering graduate from QMUL. As a full-stack engineer, I craft sleek, powerful apps with Svelte, JavaScript, Node.js, and Tailwind. I also specialize in machine learning and data analysis using PyTorch, Hadoop, and Spark. Not to mention additional competencies in C, VHDL, and Java</p>
+					<p class="translate-x-5">I also excel in architecting resilient and scalable cloud-based solutions using AWS, backed by two AWS certifications: AWS Associate Developer and AWS Cloud Practitioner.</p>
+				</div>
 			</div>
 
 
 
 			<!-- SKILLS -->
-			<div class="my-32 skills-section">
+			<div class="my-32">
 				<h2 class="h2 font-bold text-center mb-4">SKILLS</h2>
-				<div class="flex justify-center items-center h-full flex-row">
+				<div class="skills-section flex justify-center items-center h-full flex-row">
 					<!-- single row of LOGOS of all languages/frameworks HERE: -->
 					{#each logos as [name, logo]}
 						<div class="min-w-[7.5%] mx-[1%]">
@@ -220,12 +222,11 @@
 			</div>
 
 			<!-- PROJECTS -->
-			<div class="my-32 projects-section">
+			<div class="my-32">
 				<h2 class="h2 font-bold text-center mb-4">PROJECTS</h2>
 
 				<!-- glass project cards -->
-				<!-- TODO: ADD GLASS OVERLAY EFFECT TO PROJECT THUMBNAILS -->
-				<div class="grid grid-cols-2 gap-8 justify-items-center items-center">
+				<div class="projects-section grid grid-cols-2 gap-8 justify-items-center items-center">
 					{#each projects as project}
 						<div class="project-card block card card-hover p-4 max-w-[50%] bg-secondary-500 dark:bg-surface-900">
 							<a href="{project.link}">
@@ -241,7 +242,7 @@
 			</div>
 
 			<!-- EXPERIENCE -->
-			<div class="my-32 experience-section">
+			<div class="my-32">
 				<h2 class="h2 font-bold text-center mb-4">EXPERIENCE</h2>
 				<!-- Timeline v1 -->
 				<!-- <Timeline>
@@ -283,14 +284,14 @@
 					</Timeline> -->
 
 				<!-- Timeline v2 -->
-				<TL />
+				<TL class="experience-section" />
 			</div>
 
 			<!-- CONTACT -->
-			<div class="mt-32 mb-32 contact-section">
+			<div class="mt-32 mb-32">
 				<h2 class="h2 font-bold text-center mb-4">CONTACT ME</h2>
 
-				<Contact />
+				<Contact class="contact-section" />
 			</div>
 		</div>
 	</div>
@@ -303,7 +304,7 @@
 			<a class="w-10 mx-4 my-8 dark:fill-primary-500 fill-logosurface dark:hover:fill-primary-400 hover:fill-surface-400" href="https://www.github.com/arnav-exe/"><GitHub /></a>
 			<a class="w-10 mx-4 my-8 dark:fill-primary-500 fill-logosurface dark:hover:fill-primary-400 hover:fill-surface-400" href="https://www.linkedin.com/in/arnav-jagetia/"><Linkedin /></a>
 		</div>
-		<p class="mb-8">Forged in the heart of a dying star using <a class="underline" href="https://kit.svelte.dev/">SvelteKit</a>, <a class="underline" href="https://tailwindcss.com/">Tailwind</a>, and <a class="underline " href="https://www.skeleton.dev/">SkeletonUI</a></p>
+		<p class="mb-8">Forged in the heart of a dying star using <a class="underline" href="https://kit.svelte.dev/">SvelteKit</a>, <a class="underline" href="https://tailwindcss.com/">Tailwind</a>, <a class="underline " href="https://www.skeleton.dev/">SkeletonUI</a>, and <a class="underline " href="https://gsap.com/">gsap</a></p>
 		<p>© Arnav Jagetia {year}</p>
 	</div>
 </div>
