@@ -17,8 +17,8 @@
 
 	import TL from "../lib/Timeline.svelte"
 	import Contact from "../lib/Contact.svelte"
-	import Scrollable1 from "../lib/Scrollable1.svelte";
-	import Scrollable2 from "../lib/Scrollable2.svelte";
+	import Mouse from "../lib/Mouse.svelte";
+	import DownChevron from "../lib/DownChevron.svelte";
 
 	// imgs
 	import placeholder from "../lib/images/placeholder.png";
@@ -183,10 +183,11 @@
 
 	<!-- scroll indicator svg -->
 	<div class="w-full flex justify-center">
-		<div class="w-8 -translate-y-64">
-			<Scrollable1 />
-			<br>
-			<Scrollable2 />
+		<div class="w-8 my-3 -translate-y-64">
+			<div class="mb-3">
+				<Mouse />
+			</div>
+			<DownChevron />
 		</div>
 	</div>
 
@@ -316,6 +317,7 @@
 		<p>© Arnav Jagetia {year}</p>
 	</div>
 </div>
+
 
 
 <style>
