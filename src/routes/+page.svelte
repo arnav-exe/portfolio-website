@@ -152,7 +152,7 @@
 	</div>
 
 	<!-- LANDING PAGE -->
-	<div class="w-full h-screen flex flex-col -translate-y-32 justify-center items-center">
+	<div class="w-full h-dvh flex flex-col -translate-y-32 justify-center items-center">
 		<h1 class="hero-firstname h1 font-bold title -translate-x-[20%] title">ARNAV</h1>
 		<h1 class="hero-lastname h1 mb-40 font-bold title translate-x-[20%] title">JAGETIA</h1>
 		<div class="flex flex-col sm:flex-row">

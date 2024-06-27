@@ -46,9 +46,9 @@
 		<div class="mb-24 flex items-center w-full">
 			<!-- date -->
 			<div class="w-1/2 text-right">
-				<time class="block mb-2 text-sm font-normal leading-none text-surface-400 dark:text-secondary-700">
+				<p class="block mb-2 leading-none text-surface-400 dark:text-secondary-700">
 					{e.startDate} - {e.endDate}
-				</time>
+				</p>
 			</div>
 			
 			<!-- dot -->
@@ -58,7 +58,7 @@
 			
 			<!-- title & description -->
 			<div class="w-1/2">
-				<h6 class="h6 font-bold text-surface-500 dark:text-primary-500">{@html e.title}</h6>
+				<p class="font-bold text-surface-500 dark:text-primary-500">{@html e.title}</p>
 				<p class="translate-x-5 m-2 text-surface-400 dark:text-secondary-700">{@html e.description}</p>
 			</div>
 		</div>
