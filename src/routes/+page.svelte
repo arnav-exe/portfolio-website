@@ -2,6 +2,7 @@
 	import { onMount } from "svelte";
 
     import { LightSwitch, popup, RadioGroup, RadioItem } from "@skeletonlabs/skeleton";
+	import { autoModeWatcher } from "@skeletonlabs/skeleton";
 
 	// gsap
 	import { gsap } from "gsap";
@@ -132,6 +133,8 @@
 	});
 </script>
 
+
+<svelte:head>{@html '<script>(' + autoModeWatcher.toString() + ')();</script>'}</svelte:head>
 
 
 <!-- custom cursor -->

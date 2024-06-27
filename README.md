@@ -10,4 +10,6 @@
 
 ### TODO:
  * add idle animations to hero page text
- * design logos for all projects
+ * design thumbnails for all projects
+ * make dark mode default
+ * add perspective shift on hover to aws badges
