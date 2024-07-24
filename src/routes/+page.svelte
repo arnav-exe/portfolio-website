@@ -36,7 +36,7 @@
 	import aws from "../lib/icons/AWS.svelte";
 	import Git from "../lib/icons/Git.svelte";
 
-	// footer logos
+	// socials logos
 	import GitHub from "../lib/icons/GitHub.svelte";
 	import Linkedin from "../lib/icons/Linkedin.svelte";
 
@@ -91,9 +91,6 @@
 		},
 		
 	]
-
-	let now = new Date();
-	let year = now.getFullYear();
 
 	// gsap animations
 	onMount(_ => {
@@ -233,7 +230,7 @@
 				<!-- glass project cards -->
 				<div class="projects-section grid sm:grid-cols-2 grid-cols-1 gap-8 justify-items-center items-center">
 					{#each projects as project}
-						<div class="project-card block card card-hover p-4 max-w-xl bg-secondary-500 dark:bg-surface-900">
+						<div class="project-card block card card-hover p-4 max-w-xl bg-secondary-500 dark:bg-surface-500">
 							<a href="{project.link}">
 								<img src="{project.image}" alt="project card" />
 								<div class="grid grid-cols-subgrid gap-4">
@@ -303,18 +300,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
-
-<!-- FOOTER -->
-<div class="w-full h-56 bg-secondary-500 dark:bg-surface-900">
-	<div class="flex justify-center items-center flex-col">
-		<div class="flex justify-center flex-row">
-			<a class="w-10 mx-4 my-8 dark:fill-primary-500 fill-logosurface dark:hover:fill-primary-400 hover:fill-surface-400" href="https://www.github.com/arnav-exe/"><GitHub /></a>
-			<a class="w-10 mx-4 my-8 dark:fill-primary-500 fill-logosurface dark:hover:fill-primary-400 hover:fill-surface-400" href="https://www.linkedin.com/in/arnav-jagetia/"><Linkedin /></a>
-		</div>
-		<p class="mb-8">Forged in the heart of a dying star using <a class="underline" href="https://kit.svelte.dev/">SvelteKit</a>, <a class="underline" href="https://tailwindcss.com/">Tailwind</a>, <a class="underline " href="https://www.skeleton.dev/">SkeletonUI</a>, and <a class="underline " href="https://gsap.com/">gsap</a></p>
-		<p>© Arnav Jagetia {year}</p>
 	</div>
 </div>
 
