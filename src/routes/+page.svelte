@@ -24,6 +24,12 @@
 	import placeholder from "../lib/images/placeholder.png";
 	import developer from "../lib/images/developer.png";
 	import practitioner from "../lib/images/practitioner.png";
+	
+	import CssbattleMinifier from "../lib/icons/projects/cssbattle-minifier.svelte";
+	import NewsPlatform from "../lib/icons/projects/news-platform.svelte";
+	import Polyboard from "../lib/icons/projects/polyboard.svelte";
+	import PortfolioWebsite from "../lib/icons/projects/portfolio-website.svelte";
+	import RedditToVideo from "../lib/icons/projects/reddit-to-video.svelte";
 
 	// skills logos
 	import Svelte from "../lib/icons/Svelte.svelte";
@@ -58,35 +64,32 @@
 		["Git", Git]
 	]);
 
+	const imgs = [NewsPlatform, PortfolioWebsite, CssbattleMinifier, Polyboard, RedditToVideo];
+
 	const projects = [
 		{
 			title: "AI-Powered News Platform",
 			description: "A responsive, modern news platform that leverages Natural Language Processing (NLP) to deliver high-quality article summaries to readers, allowing them to get up-to-date on current affairs in a fraction of the time",
-			image: placeholder,
 			link: "https://github.com/arnav-exe/ai-news-platform"
 		},
 		{
 			title: "Portfolio Website",
 			description: "My revamped portfolio website built using SvelteKit, TailwindCSS, SkeletonUI and gsap",
-			image: placeholder,
 			link: "https://github.com/arnav-exe/portfolio-website"
 		},
 		{
 			title: "CSSBattle Minifier",
 			description: "A Python script built to intelligently minify your code for the online code golfing game CSSBattle.dev",
-			image: placeholder,
 			link: "https://github.com/arnav-exe/cssbattle-minifier"
 		},
 		{
 			title: "Polyboard - Multiple Clipboards",
 			description: "A lightweight Python applet that provides the user with upto 10 additional clipboards to store/retrieve text-based data from",
-			image: placeholder,
 			link: "https://github.com/arnav-exe/polyboard"
 		},
 		{
 			title: "Reddit Post-to-Video Creator",
 			description: "A program that scrapes Reddit posts for their title, content, and x number of top comments and compiles that into a video complete with visuals and text-to-speech narration",
-			image: placeholder,
 			link: "https://github.com/arnav-exe/reddit-video-narrator"
 		},
 		
@@ -229,10 +232,12 @@
 
 				<!-- glass project cards -->
 				<div class="projects-section grid sm:grid-cols-2 grid-cols-1 gap-8 justify-items-center items-center">
-					{#each projects as project}
-						<div class="project-card block card card-hover p-4 max-w-xl bg-secondary-500 dark:bg-surface-500">
+					{#each projects as project, i}
+						<div class="project-card block rounded card-hover p-4 max-w-l bg-secondary-500 dark:bg-surface-500">
 							<a href="{project.link}">
-								<img src="{project.image}" alt="project card" />
+								<div class="min-w-96">
+									<svelte:component this={imgs[i]} />
+								</div>
 								<div class="grid grid-cols-subgrid gap-4">
 									<p class="text-center font-bold mt-4">{project.title}</p>
 									<p class="text-left mb-4">{project.description}</p>
