@@ -198,7 +198,7 @@
 			<div class="my-32">
 				<h2 class="h2 font-bold text-center mb-4">ABOUT ME</h2>
 				<div class="about-section">
-					<p class="translate-x-5">Hi, I'm a recent Computer Systems Engineering graduate from QMUL. As a full-stack engineer, I craft sleek, powerful apps with Svelte, JavaScript, Node.js, and Tailwind. I also specialize in machine learning and data analysis using PyTorch, Hadoop, and Spark. Not to mention additional competencies in C, VHDL, and Java.</p>
+					<p class="translate-x-5">Hi, I'm a first class Computer Systems Engineering graduate from QMUL. As a full-stack engineer, I craft sleek, powerful apps with Svelte, TypeScript, JavaScript, Node.js, and Tailwind. I also specialize in machine learning and data analysis using PyTorch, Hadoop, and Spark. Not to mention additional competencies in C, VHDL, and Java.</p>
 					<p class="translate-x-5">I also excel in architecting resilient and scalable cloud-based solutions using AWS, backed by two AWS certifications: AWS Associate Developer and AWS Cloud Practitioner.</p>
 				</div>
 			</div>
