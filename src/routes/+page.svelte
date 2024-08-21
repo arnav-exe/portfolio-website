@@ -144,7 +144,6 @@
     <div class="relative z-40 flex justify-between items-center h-full mx-auto">
 		<LightSwitch bgLight="bg-secondary-500" bgDark="bg-surface-900" fillLight="fill-primary-500" />
 
-		<!-- <a class="justify-end" href="/blog">BLOG</a> -->
 		<RadioGroup class="justify-end" background="bg-secondary-500 dark:bg-surface-900" active="bg-surface-900 dark:bg-primary-500" color="text-primary-500 dark:text-surface-900">
 			<RadioItem bind:group={page} name="justify" value={0}>Portfolio</RadioItem>
 			<a href="/blog"><RadioItem bind:group={page} name="justify" value={1}>Blog</RadioItem></a>
