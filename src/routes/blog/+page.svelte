@@ -31,7 +31,7 @@
 
 		<h1 class="h1 font-bold my-16">WELCOME TO MY DEV BLOG</h1>
 
-		<div class="divide-y-8  divide-solid divide-logosurface dark:divide-logoprimary">
+		<div class="divide-y-2 divide-solid divide-logosurface dark:divide-logoprimary" href="www.example.com">
 			<div class="w-full h-80">
 				<a href="/blog"> <!-- LINK TO MDSVEX BLOG FILE -->
 					<div>
@@ -43,13 +43,13 @@
 				</a>
 			</div>
 			
-			<!-- <div class="w-full h-80 bg-blue-300">
-				<a href="example.com">
+			<div class="w-full h-80">
+				<a href="www.example.com">
 					<div></div>
 				</a>
 			</div>
 
-			<div class="w-full h-80 bg-blue-300">
+			<!-- <div class="w-full h-80 bg-blue-300">
 				<a href="example.com">
 					<div></div>
 				</a>
