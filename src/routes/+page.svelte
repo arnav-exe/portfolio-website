@@ -212,7 +212,7 @@
 					{#each logos as [name, logo]}
 						<div class="min-w-[7.5%] mx-[1%]">
 							<!-- skill logo -->
-							<div use:popup={{ event: 'hover', target: 'popupHover-' + name, placement: 'bottom' }}>	
+							<div use:popup={{ event: 'hover', target: 'popupHover-' + name, placement: 'bottom' }}> 
 								<svelte:component this={logo} />
 							</div>
 						</div>
