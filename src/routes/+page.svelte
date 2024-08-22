@@ -232,16 +232,18 @@
 				<!-- glass project cards -->
 				<div class="projects-section grid sm:grid-cols-2 grid-cols-1 gap-8 justify-items-center items-center">
 					{#each projects as project, i}
-						<div class="project-card block rounded card-hover p-4 max-w-l bg-secondary-500 dark:bg-surface-500">
-							<a href="{project.link}">
-								<div class="min-w-96">
-									<svelte:component this={imgs[i]} />
-								</div>
-								<div class="grid grid-cols-subgrid gap-4">
-									<p class="text-center font-bold mt-4">{project.title}</p>
-									<p class="text-left mb-4">{project.description}</p>
-								</div>
-							</a>
+						<div class="card-hover">
+							<div class="project-card block rounded card-hover p-4 max-w-l bg-secondary-500 dark:bg-surface-500">
+								<a href="{project.link}">
+									<div class="min-w-96">
+										<svelte:component this={imgs[i]} />
+									</div>
+									<div class="grid grid-cols-subgrid gap-4">
+										<p class="text-center font-bold mt-4">{project.title}</p>
+										<p class="text-left mb-4">{project.description}</p>
+									</div>
+								</a>
+							</div>
 						</div>
 					{/each}
 				</div>
