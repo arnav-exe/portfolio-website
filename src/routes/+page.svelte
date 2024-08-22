@@ -175,8 +175,8 @@
 
 		<!-- socials -->
 		<div class="absolute right-0 w-10">
-			<a class="w-10 mx-4 my-8 dark:fill-primary-500 fill-logosurface dark:hover:fill-primary-400 hover:fill-surface-400" href="https://www.github.com/arnav-exe/"><GitHub /></a>
-			<a class="w-10 mx-4 my-8 dark:fill-primary-500 fill-logosurface dark:hover:fill-primary-400 hover:fill-surface-400" href="https://www.linkedin.com/in/arnav-jagetia/"><Linkedin /></a>
+			<a class="w-10 mx-4 my-8 fill-surface-500 hover:fill-surface-400 dark:fill-primary-500 dark:hover:fill-primary-700" href="https://www.github.com/arnav-exe/"><GitHub /></a>
+			<a class="w-10 mx-4 my-8 fill-surface-500 hover:fill-surface-400 dark:fill-primary-500 dark:hover:fill-primary-700" href="https://www.linkedin.com/in/arnav-jagetia/"><Linkedin /></a>
 		</div>
 	</div>
 
@@ -191,7 +191,7 @@
 	</div>
 
 
-	<div class="flex justify-center">
+	<div class="flex justify-center -translate-y-64">
 		<div class="w-[90%]">
 			<!-- ABOUT ME -->
 			<div class="my-32">

@@ -43,7 +43,8 @@
 </svg>
 
 <style>
-	:global(body), :global(body):hover {
-		cursor: none;
+	:global(body), :global(body):hover,
+	:global(a), :global(button), :global(input), :global(select), :global(textarea) {
+		cursor: none !important;
 	}
 </style>
