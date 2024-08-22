@@ -34,10 +34,10 @@
 		<div class="divide-y-2 divide-solid divide-logosurface dark:divide-logoprimary" href="www.example.com">
 			
 			<a href="/blog" class="w-full h-80"> <!-- LINK TO MDSVEX BLOG FILE -->
-				<div class="p-4 bg-red-500">
+				<div class="p-4 hover:bg-logoprimary transition-all hover:dark:bg-logosurface">
 					<h2 class="h2">Why you should learn Svelte instead of React.js in 2024</h2>
 					
-					<p>21/08/2024</p>
+					<p class="m-2">21/08/2024</p>
 					<p>Svelte was voted most loved framework in 2021, and has remained at the top ever since. Here is why I believe Svelte should be a part of your arsenal as a web developer.</p>
 				</div>
 			</a>
@@ -61,9 +61,9 @@
 
 
 
-<!-- <style>
+<style>
 	p {
-		font-size: 1.5vw;
-		line-height: normal;
+		margin-top: 0.5rem;
+		margin-bottom: 0.5rem;
 	}
-</style> -->
+</style>
