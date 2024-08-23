@@ -31,12 +31,12 @@
 
 		<h1 class="h1 font-bold mt-8 mb-16">WELCOME TO MY DEV BLOG</h1>
 
-		<div class="divide-y-2 divide-solid divide-logosurface dark:divide-logoprimary" href="www.example.com">
+		<div class="divide-y-2 divide-solid divide-logosurface dark:divide-logoprimary">
 			
 			<a href="/blog" class="w-full h-80"> <!-- LINK TO MDSVEX BLOG FILE -->
 				<div class="p-4 hover:bg-logoprimary transition-all hover:dark:bg-logosurface">
 					<h2 class="h2">Why you should learn Svelte instead of React.js in 2024</h2>
-					
+
 					<p class="m-2">21/08/2024</p>
 					<p>Svelte was voted most loved framework in 2021, and has remained at the top ever since. Here is why I believe Svelte should be a part of your arsenal as a web developer.</p>
 				</div>
