@@ -1,6 +1,10 @@
 import adapter from '@sveltejs/adapter-auto';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import path from "node:path";
+import { fileURLToPath } from 'node:url';
 import  { mdsvex } from "mdsvex";
+
+const dir = path.resolve(fileURLToPath(import.meta.url), "../");
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -9,6 +13,9 @@ const config = {
 	// for more information about preprocessors
 	preprocess: [vitePreprocess(), mdsvex({
 		extensions: ['.md', '.svx'],
+		layout: {
+			blog: path.join(dir, "./src/lib/components/default-layout.svelte")
+		}
 	})],
 	
 	kit: {
