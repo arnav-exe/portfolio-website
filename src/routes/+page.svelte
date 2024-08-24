@@ -9,16 +9,16 @@
 	import { TextPlugin } from "gsap/dist/TextPlugin";
 	import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
-	import Cursor from "../lib/Cursor.svelte";
+	import Cursor from "../lib/components/Cursor.svelte";
 
 	// timeline v1 imports [legacy]
 	// import Timeline from "../lib/Timeline-old/Timeline.svelte"
 	// import TimelineItem from "../lib/Timeline-old/TimelineItem.svelte"
 
-	import TL from "../lib/Timeline.svelte"
-	import Contact from "../lib/Contact.svelte"
-	import Mouse from "../lib/Mouse.svelte";
-	import DownChevron from "../lib/DownChevron.svelte";
+	import TL from "../lib/components/Timeline.svelte"
+	import Contact from "../lib/components/Contact.svelte"
+	import Mouse from "../lib/components/Mouse.svelte";
+	import DownChevron from "../lib/components/DownChevron.svelte";
 
 	// imgs
 	import placeholder from "../lib/images/placeholder.png";
