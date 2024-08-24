@@ -9,6 +9,6 @@
 </svelte:head>
 
 <main>
-    <h1>{title}</h1>
+    <h1 class="h1 text-center">{title}</h1>
     <slot />
 </main>

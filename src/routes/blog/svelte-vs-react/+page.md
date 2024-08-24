@@ -2,13 +2,12 @@
 title: Why You Should Learn Svelte Instead of React.js in 2024
 author: Arnav Jagetia
 date: "24/08/2024"
-published: false
+layout: blog
 ---
 
 
 
 
-# {title}
 ## Written on {date} by {author}
 
 
