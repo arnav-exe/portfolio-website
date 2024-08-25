@@ -7,10 +7,6 @@ layout: blog
 
 
 
-
-## Written on {date} by {author}
-
-
 If you're planning to learn a new front-end framework in 2024, let me cut to the chase: Svelte should be at the top of your list, not React.js. While React has dominated the scene for years, Svelte is quickly rising in popularity—and for good reason. Here’s why it could be the smarter choice for your next project.
 
 ### 1. Simplicity at Its Core
