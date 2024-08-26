@@ -22,7 +22,7 @@
 
 
 	let isHovering = false;
-	const interactableTags = ['A', 'BUTTON'];
+	const interactableTags = ['A', 'BUTTON', "IMG", "SVG"];
 
 	const isInteractable = event => {
 		const element = event.target;
