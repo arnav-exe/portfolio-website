@@ -22,15 +22,14 @@
 
 
 	let isHovering = false;
-	const interactableTags = ['A', 'BUTTON', "IMG", "SVG"];
+	const interactableTags = ['a', 'button', "img", "path", "svg"];
 
-	const isInteractable = event => {
-		const element = event.target;
-		return interactableTags.includes(element.tagName);
+	const isInteractable = e => {
+		return interactableTags.includes(e.toLowerCase());
 	}
 
 	const cursorMorph = event => {
-		isHovering = isInteractable(event);
+		isHovering = isInteractable(event.target.tagName);
 	}
 
 	onMount(_ => {
