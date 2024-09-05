@@ -52,17 +52,17 @@
 
 	let page = 0;
 
-	const logos = new Map([
-		["Svelte", Svelte],
-		["Node.js", Node],
-		["JavaScript", JSLogo],
-		["Tailwind CSS", Tailwind],
-		["Python", Python],
-		["PyTorch", Pytorch],
-		["Pandas", Pandas],
-		["AWS", aws],
-		["Git", Git]
-	]);
+	const logos = [
+		["Svelte", Svelte, "https://svelte.dev/"],
+		["Node.js", Node, "https://nodejs.org/"],
+		["JavaScript", JSLogo, "https://v8.dev/"],
+		["Tailwind CSS", Tailwind, "https://tailwindcss.com/"],
+		["Python", Python, "https://www.python.org/"],
+		["PyTorch", Pytorch, "https://pytorch.org/"],
+		["Pandas", Pandas, "https://pandas.pydata.org/"],
+		["AWS", aws, "https://aws.amazon.com/"],
+		["Git", Git, "https://git-scm.com/"]
+	];
 
 	const imgs = [NewsPlatform, PortfolioWebsite, CssbattleMinifier, Polyboard, RedditToVideo];
 
@@ -209,12 +209,14 @@
 				<h2 class="h2 font-bold text-center mb-4">SKILLS</h2>
 				<div class="skills-section flex justify-center items-center h-full flex-row">
 					<!-- single row of LOGOS of all languages/frameworks HERE: -->
-					{#each logos as [name, logo]}
+					{#each logos as [name, logo, url]}
 						<div class="min-w-[7.5%] mx-[1%]">
-							<!-- skill logo -->
-							<div use:popup={{ event: 'hover', target: 'popupHover-' + name, placement: 'bottom' }}> 
-								<svelte:component this={logo} />
-							</div>
+							<a href="{url}" target="_blank">
+								<div use:popup={{ event: 'hover', target: 'popupHover-' + name, placement: 'bottom' }}> 
+								<!-- skill logo -->
+									<svelte:component this={logo} />
+								</div>
+							</a>
 						</div>
 						<!-- toolip -->
 						<div class="card p-4 variant-filled-secondary dark:variant-filled-tertiary" data-popup="popupHover-{name}">

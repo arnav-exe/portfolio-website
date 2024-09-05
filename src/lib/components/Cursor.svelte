@@ -22,7 +22,7 @@
 
 
 	let isHovering = false;
-	const interactableTags = ['a', 'button', "img", "path", "svg"];
+	const interactableTags = ['a', 'button', "img", "path", "rect", "circle"];
 
 	const isInteractable = e => {
 		return interactableTags.includes(e.toLowerCase());
