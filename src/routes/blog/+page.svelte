@@ -33,7 +33,7 @@
 
 		<div class="divide-y-2 divide-solid divide-logosurface dark:divide-logoprimary">
 			
-			<a href="/blog" class="w-full h-80"> <!-- LINK TO MDSVEX BLOG FILE -->
+			<a href="/blog/test.svx" class="w-full h-80"> <!-- LINK TO MDSVEX BLOG FILE -->
 				<div class="p-4 hover:bg-logoprimary transition-all hover:dark:bg-logosurface">
 					<h2 class="h2">Why you should learn Svelte instead of React.js in 2024</h2>
 
