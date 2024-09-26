@@ -197,8 +197,9 @@
 			<div class="my-32">
 				<h2 class="h2 font-bold text-center mb-4">ABOUT ME</h2>
 				<div class="about-section">
-					<p class="translate-x-5">Hi, I'm a first class Computer Systems Engineering graduate from QMUL. As a full-stack engineer, I craft sleek, powerful apps with Svelte, TypeScript, JavaScript, Node.js, and Tailwind. I also specialize in machine learning and data analysis using PyTorch, Hadoop, and Spark. Not to mention additional competencies in C, VHDL, and Java.</p>
-					<p class="translate-x-5">I also excel in architecting resilient and scalable cloud-based solutions using AWS, backed by two AWS certifications: AWS Associate Developer and AWS Cloud Practitioner.</p>
+					<p class="translate-x-5">Hi, I'm a full-stack engineer, AI engineer, and cloud architect currently pursuing an MSc at the University of St Andrews. I'm also a recent first class with honours Computer Systems Engineering graduate from QMUL.</p>
+					<p class="translate-x-5">As a full-stack engineer, I craft sleek, powerful apps with Svelte, TypeScript, Node.js, and Tailwind. I also specialize in machine learning and data analysis using PyTorch, Hadoop, and Spark. Not to mention additional competencies in C, VHDL, and Java.</p>
+					<p class="translate-x-5">Furthermore, I excel in architecting resilient and scalable cloud-based solutions using AWS, backed by two AWS certifications: AWS Associate Developer and AWS Cloud Practitioner.</p>
 				</div>
 			</div>
 
