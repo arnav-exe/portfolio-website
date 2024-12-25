@@ -99,8 +99,7 @@
 	onMount(_ => {
 		const tl = gsap.timeline({ defaults: { ease: "power1.inOut" }});
 
-		tl.fromTo(".hero-firstname", {text: "", opacity: 0}, { text: "&lt; ARNAV", opacity: 1, duration: 1.5 });
-		tl.fromTo(".hero-lastname", {text: "", opacity: 0}, { text: "JAGETIA /&gt;", opacity: 1, duration: 1.5 });
+		tl.fromTo(".hero-name", {text: "", opacity: 0}, { text: "ARNAV JAGETIA", opacity: 1, duration: 1.5 });
 		tl.fromTo(".hero-text1", {opacity: 0, y: 50}, {opacity: 1, y: 0, duration: 1.5});
 		tl.fromTo(".hero-text2", {opacity: 0, y: 50}, {opacity: 1, y: 0, duration: 1.5, delay: -1});
 		tl.fromTo(".hero-text3", {opacity: 0, y: 50}, {opacity: 1, y: 0, duration: 1.5, delay: -1});
@@ -152,9 +151,8 @@
 
 	<!-- LANDING PAGE -->
 	<div class="w-full h-dvh flex flex-col -translate-y-32 justify-center items-center">
-		<h1 class="hero-firstname h1 font-bold title -translate-x-[20%] title">ARNAV</h1>
-		<h1 class="hero-lastname h1 mb-40 font-bold title translate-x-[20%] title">JAGETIA</h1>
-		<div class="flex flex-col sm:flex-row">
+		<h1 class="h1 hero-name leading-none mx-16 text-center font-bold title">ARNAV JAGETIA</h1>
+		<div class="flex flex-col translate-y-32 sm:flex-row">
 			<div class="text-xl text-center hero-text1">FULL-STACK DEVELOPER</div>
 			<div class="text-xl text-center mx-16 hero-text2">CLOUD ARCHITECT</div>
 			<div class="text-xl text-center hero-text3">BACHELOR OF ENGINEERING</div>
