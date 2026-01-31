@@ -63,8 +63,8 @@
 		y={$coords1.y - $size}
 		width={$size * 2}
 		height={$size * 2}
-		rx={isHovering ? 0 : $size}
-		ry={isHovering ? 0 : $size}
+		rx={isHovering ? 0 : 999}
+		ry={isHovering ? 0 : 999}
 		stroke-width="1"
 		fill-opacity="0"
 	/>
@@ -74,8 +74,8 @@
 		y={$coords2.y - $size / 4}
 		width={$size / 2}
 		height={$size / 2}
-		rx={isHovering ? 0 : $size / 4}
-		ry={isHovering ? 0 : $size / 4}
+		rx={isHovering ? 0 : 999}
+		ry={isHovering ? 0 : 999}
 	/>
 
 	<!-- original custom cursor (2 concentric circles) -->
