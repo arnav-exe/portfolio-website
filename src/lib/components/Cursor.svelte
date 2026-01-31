@@ -79,8 +79,8 @@
 	<rect
 		x={$coords1.x - $size}
 		y={$coords1.y - $size}
-		width={$size * 2}
-		height={$size * 2}
+		width={Math.max(0, $size * 2)}
+		height={Math.max(0, $size * 2)}
 		rx={Math.max(0, $borderRadius)}
 		ry={Math.max(0, $borderRadius)}
 		stroke-width="1"
@@ -89,8 +89,8 @@
 	<rect
 		x={$coords2.x - $size / 4}
 		y={$coords2.y - $size / 4}
-		width={$size / 2}
-		height={$size / 2}
+		width={Math.max(0, $size / 2)}
+		height={Math.max(0, $size / 2)}
 		rx={Math.max(0, $borderRadius)}
 		ry={Math.max(0, $borderRadius)}
 	/>
