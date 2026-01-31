@@ -228,7 +228,8 @@
 			<div class="my-32">
 				<h2 class="h2 font-bold text-center mb-4">PROJECTS</h2>
 
-				<!-- glass project cards -->
+				<!-- project cards -->
+                <!-- TODO: change youtube+reddit logo such that it is an outline of the youtube and reddit logo in the primary colour instead of the actual youtube and reddit colours so that it is more inline with the other logos -->
 				<div class="projects-section grid sm:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-6 justify-items-center items-start">
 					{#each projects as project, i}
 						<div class="card-hover w-full max-w-sm">
