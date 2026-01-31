@@ -1,8 +1,7 @@
 <script>
 	import { onMount } from "svelte";
 
-    import { LightSwitch, popup, RadioGroup, RadioItem } from "@skeletonlabs/skeleton";
-	import { autoModeWatcher } from "@skeletonlabs/skeleton";
+    import { popup, RadioGroup, RadioItem } from "@skeletonlabs/skeleton";
 
 	// gsap
 	import { gsap } from "gsap";
@@ -132,17 +131,16 @@
 	});
 </script>
 
-
-<svelte:head>{@html '<script>(' + autoModeWatcher.toString() + ')();</script>'}</svelte:head>
-
+<svelte:head>
+	<title>Arnav Jagetia | Full-Stack Developer, Cloud Architect & AI Engineer</title>
+	<meta name="description" content="Portfolio of Arnav Jagetia - Full-stack engineer, AI engineer, and AWS certified cloud architect. Specializing in Svelte, TypeScript, Node.js, PyTorch, and cloud solutions." />
+</svelte:head>
 
 <!-- custom cursor -->
 <Cursor />
 
 <div class="p-8 space-y-8 w-full overflow-x-hidden">
-    <div class="relative z-40 flex justify-between items-center h-full mx-auto">
-		<LightSwitch bgLight="bg-secondary-500" bgDark="bg-surface-900" fillLight="fill-primary-500" />
-
+    <div class="relative z-40 flex justify-end items-center h-full mx-auto">
 		<RadioGroup class="justify-end" background="bg-secondary-500 dark:bg-surface-900" active="bg-surface-900 dark:bg-primary-500" color="text-primary-500 dark:text-surface-900">
 			<RadioItem bind:group={page} name="justify" value={0}>Portfolio</RadioItem>
 			<a href="/blog"><RadioItem bind:group={page} name="justify" value={1}>Blog</RadioItem></a>
