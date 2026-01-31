@@ -204,12 +204,12 @@
 			<!-- SKILLS -->
 			<div class="my-32">
 				<h2 class="h2 font-bold text-center mb-4">SKILLS</h2>
-				<div class="skills-section flex justify-center items-center h-full flex-row">
+				<div class="skills-section flex justify-center items-center flex-wrap gap-6">
 					<!-- single row of LOGOS of all languages/frameworks HERE: -->
 					{#each logos as [name, logo, url]}
-						<div class="min-w-[7.5%] mx-[1%]">
-							<a href="{url}" target="_blank">
-								<div use:popup={{ event: 'hover', target: 'popupHover-' + name, placement: 'bottom' }}> 
+						<div class="w-16 sm:w-20 skill-logo-container">
+							<a href="{url}" target="_blank" class="block">
+								<div use:popup={{ event: 'hover', target: 'popupHover-' + name, placement: 'bottom' }} class="skill-logo-wrapper">
 								<!-- skill logo -->
 									<svelte:component this={logo} />
 								</div>
@@ -319,5 +319,25 @@
 	:global(p) {
 		font-size: 1.25rem;
 		line-height: normal;
+	}
+
+	/* Skill logo fixes */
+	.skill-logo-wrapper {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	/* Make SVG logos trigger hover on entire bounding box, not just filled areas */
+	:global(.skill-logo-wrapper svg) {
+		pointer-events: bounding-box;
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	/* Ensure skill logos have consistent sizing */
+	.skill-logo-container {
+		flex-shrink: 0;
 	}
 </style>
