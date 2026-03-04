@@ -1,8 +1,7 @@
 <script>
 	import { onMount } from "svelte";
 
-    import { LightSwitch, popup, RadioGroup, RadioItem } from "@skeletonlabs/skeleton";
-	import { autoModeWatcher } from "@skeletonlabs/skeleton";
+    import { popup, RadioGroup, RadioItem } from "@skeletonlabs/skeleton";
 
 	// gsap
 	import { gsap } from "gsap";
@@ -132,17 +131,16 @@
 	});
 </script>
 
-
-<svelte:head>{@html '<script>(' + autoModeWatcher.toString() + ')();</script>'}</svelte:head>
-
+<svelte:head>
+	<title>Arnav Jagetia | Full-Stack Developer, Cloud Architect & AI Engineer</title>
+	<meta name="description" content="Portfolio of Arnav Jagetia - Full-stack engineer, AI engineer, and AWS certified cloud architect. Specializing in Svelte, TypeScript, Node.js, PyTorch, and cloud solutions." />
+</svelte:head>
 
 <!-- custom cursor -->
 <Cursor />
 
 <div class="p-8 space-y-8 w-full overflow-x-hidden">
-    <div class="relative z-40 flex justify-between items-center h-full mx-auto">
-		<LightSwitch bgLight="bg-secondary-500" bgDark="bg-surface-900" fillLight="fill-primary-500" />
-
+    <div class="relative z-40 flex justify-end items-center h-full mx-auto">
 		<RadioGroup class="justify-end" background="bg-secondary-500 dark:bg-surface-900" active="bg-surface-900 dark:bg-primary-500" color="text-primary-500 dark:text-surface-900">
 			<RadioItem bind:group={page} name="justify" value={0}>Portfolio</RadioItem>
 			<a href="/blog"><RadioItem bind:group={page} name="justify" value={1}>Blog</RadioItem></a>
@@ -206,12 +204,12 @@
 			<!-- SKILLS -->
 			<div class="my-32">
 				<h2 class="h2 font-bold text-center mb-4">SKILLS</h2>
-				<div class="skills-section flex justify-center items-center h-full flex-row">
+				<div class="skills-section flex justify-center items-center flex-wrap gap-6">
 					<!-- single row of LOGOS of all languages/frameworks HERE: -->
 					{#each logos as [name, logo, url]}
-						<div class="min-w-[7.5%] mx-[1%]">
-							<a href="{url}" target="_blank">
-								<div use:popup={{ event: 'hover', target: 'popupHover-' + name, placement: 'bottom' }}> 
+						<div class="w-16 sm:w-20 skill-logo-container">
+							<a href="{url}" target="_blank" class="block">
+								<div use:popup={{ event: 'hover', target: 'popupHover-' + name, placement: 'bottom' }} class="skill-logo-wrapper">
 								<!-- skill logo -->
 									<svelte:component this={logo} />
 								</div>
@@ -230,16 +228,17 @@
 			<div class="my-32">
 				<h2 class="h2 font-bold text-center mb-4">PROJECTS</h2>
 
-				<!-- glass project cards -->
-				<div class="projects-section grid sm:grid-cols-2 grid-cols-1 gap-8 justify-items-center items-center">
+				<!-- project cards -->
+                <!-- TODO: change youtube+reddit logo such that it is an outline of the youtube and reddit logo in the primary colour instead of the actual youtube and reddit colours so that it is more inline with the other logos -->
+				<div class="projects-section grid sm:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-6 justify-items-center items-start">
 					{#each projects as project, i}
-						<div class="card-hover">
-							<div class="project-card block rounded card-hover p-4 max-w-l bg-secondary-500 dark:bg-surface-500">
+						<div class="card-hover w-full max-w-sm">
+							<div class="project-card block rounded card-hover p-3 bg-secondary-500 dark:bg-surface-500">
 								<a href="{project.link}">
-									<div class="min-w-96">
+									<div class="w-full max-w-[180px] mx-auto">
 										<svelte:component this={imgs[i]} />
 									</div>
-									<div class="grid grid-cols-subgrid gap-4">
+									<div class="mt-3">
 										<p class="text-center font-bold mt-4">{project.title}</p>
 										<p class="text-left mb-4">{project.description}</p>
 									</div>
@@ -321,5 +320,25 @@
 	:global(p) {
 		font-size: 1.25rem;
 		line-height: normal;
+	}
+
+	/* Skill logo fixes */
+	.skill-logo-wrapper {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	/* Make SVG logos trigger hover on entire bounding box, not just filled areas */
+	:global(.skill-logo-wrapper svg) {
+		pointer-events: bounding-box;
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	/* Ensure skill logos have consistent sizing */
+	.skill-logo-container {
+		flex-shrink: 0;
 	}
 </style>

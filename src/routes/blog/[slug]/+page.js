@@ -1,0 +1,15 @@
+import { error } from '@sveltejs/kit';
+
+export async function load({ params }) {
+	try {
+		const post = await import(`../posts/${params.slug}.svx`);
+
+		return {
+			content: post.default,
+			metadata: post.metadata,
+			readingTime: post.metadata.readingTime || 5
+		};
+	} catch (e) {
+		throw error(404, `Post not found: ${params.slug}`);
+	}
+}

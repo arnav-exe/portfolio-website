@@ -7,15 +7,12 @@ import { mdsvex } from "mdsvex";
 const dir = path.resolve(fileURLToPath(import.meta.url), "../");
 
 const mdsvexOptions = {
-	extensions: [".md", ".svx"],
-	layout: {
-		blog: path.join(dir, "./src/lib/components/blog-layout.svelte")
-	}
+	extensions: [".md", ".svx"]
 }
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	extensions: ['.svelte'],
+	extensions: ['.svelte', '.md', '.svx'],
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
 	preprocess: [vitePreprocess(), mdsvex(mdsvexOptions)],

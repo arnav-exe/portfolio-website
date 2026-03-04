@@ -20,16 +20,35 @@
 
 	let size = spring(15);
 
+	// spring for border radius transitions
+	let borderRadius = spring(999, {
+		stiffness: 0.2,
+		damping: 0.6
+	});
 
 	let isHovering = false;
-	const interactableTags = ['a', 'button', "img", "path", "rect", "circle"];
+	const interactableTags = ['a', 'button', 'img', 'path', 'rect', 'circle', 'svg', 'polygon', 'label', 'span', 'input'];
 
-	const isInteractable = e => {
-		return interactableTags.includes(e.toLowerCase());
+	const isInteractable = (element) => {
+		// check element and up to 3 parents for interactable tags
+		let current = element;
+		for (let i = 0; i < 4 && current; i++) {
+			if (current.tagName && interactableTags.includes(current.tagName.toLowerCase())) {
+				return true;
+			}
+			// check if element has pointer cursor or is clickable
+			if (current.style && window.getComputedStyle(current).cursor === 'pointer') {
+				return true;
+			}
+			current = current.parentElement;
+		}
+		return false;
 	}
 
 	const cursorMorph = event => {
-		isHovering = isInteractable(event.target.tagName);
+		const hovering = isInteractable(event.target);
+		isHovering = hovering;
+		borderRadius.set(hovering ? 0 : 999);
 	}
 
 	onMount(_ => {
@@ -58,24 +77,22 @@
 
 <svg class="cc w-full h-full z-50 fixed pointer-events-none fill-surface-500 stroke-surface-500 dark:fill-primary-500 dark:stroke-primary-500">
 	<rect
-		class="morph"
 		x={$coords1.x - $size}
 		y={$coords1.y - $size}
-		width={$size * 2}
-		height={$size * 2}
-		rx={isHovering ? 0 : $size}
-		ry={isHovering ? 0 : $size}
+		width={Math.max(0, $size * 2)}
+		height={Math.max(0, $size * 2)}
+		rx={Math.max(0, $borderRadius)}
+		ry={Math.max(0, $borderRadius)}
 		stroke-width="1"
 		fill-opacity="0"
 	/>
 	<rect
-		class="morph"
 		x={$coords2.x - $size / 4}
 		y={$coords2.y - $size / 4}
-		width={$size / 2}
-		height={$size / 2}
-		rx={isHovering ? 0 : $size / 4}
-		ry={isHovering ? 0 : $size / 4}
+		width={Math.max(0, $size / 2)}
+		height={Math.max(0, $size / 2)}
+		rx={Math.max(0, $borderRadius)}
+		ry={Math.max(0, $borderRadius)}
 	/>
 
 	<!-- original custom cursor (2 concentric circles) -->
@@ -84,19 +101,18 @@
 </svg>
 
 <style>
-	:global(body), :global(body):hover,
-	:global(a), :global(button), :global(input), :global(select), :global(textarea) {
+	:global(*) {
 		cursor: none !important;
 	}
 
-	.morph {
-		transition: rx 0.3s, ry 0.3s;
-	}
-
-	/* hide cursor if user is on mobile or touch-based device */
+	/* hide cursor if user is on mobile */
 	@media (hover: none) and (pointer: coarse) {
 		.cc {
 			display: none;
+		}
+
+		:global(*) {
+			cursor: auto !important;
 		}
 	}
 </style>

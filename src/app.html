@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
-		
+
 		<!-- pre-loading font -->
 		<link
 			rel="preload"
@@ -14,9 +14,15 @@
 		/>
 
 		<meta name="viewport" content="width=device-width" />
+
+		<!-- force dark mode -->
+		<script>
+			document.documentElement.classList.add('dark');
+		</script>
+
 		%sveltekit.head%
 	</head>
-	<body data-sveltekit-preload-data="hover" data-theme="minimalist">
+	<body data-sveltekit-preload-data="hover" data-theme="minimalist" class="dark">
 		<div style="display: contents">%sveltekit.body%</div>
 	</body>
 </html>
