@@ -1,5 +1,5 @@
 /**
- * Calculate reading time for a given text
+ * calculate reading time for a given text
  * @param {string} text - The text content
  * @returns {number} Estimated reading time in minutes
  */
@@ -11,7 +11,7 @@ export function calculateReadingTime(text) {
 }
 
 /**
- * Get all blog posts with their metadata
+ * get all blog posts with their metadata
  * @returns {Promise<Array>} Array of blog post objects
  */
 export async function getAllPosts() {
@@ -27,13 +27,12 @@ export async function getAllPosts() {
 			posts.push({
 				slug,
 				...module.metadata,
-				// Use readingTime from metadata, or default to 5 minutes
+				// use readingTime from metadata or default to 5 minutes
 				readingTime: module.metadata.readingTime || 5
 			});
 		}
 	}
-
-	// Sort by date, newest first
+	// sort by date, newest first
 	posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
 	return posts;

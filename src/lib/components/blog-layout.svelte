@@ -57,7 +57,7 @@
                 {/if}
             </header>
 
-            <!-- Blog content -->
+            <!-- blog content -->
             <div class="blog-content">
                 <slot />
             </div>
@@ -66,7 +66,7 @@
 </main>
 
 <style>
-    /* Blog content styling */
+    /* blog content styling */
     :global(.blog-content h2) {
         font-size: 1.875rem;
         font-weight: 700;
