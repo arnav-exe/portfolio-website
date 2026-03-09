@@ -27,9 +27,24 @@
 	});
 
 	let isHovering = false;
-	const interactableTags = ['a', 'button', 'img', 'path', 'rect', 'circle', 'svg', 'polygon', 'label', 'span', 'input'];
+	const interactableTags = [
+		'a',
+		'button',
+		'path',
+		'rect',
+		'circle',
+		'svg',
+		'polygon',
+		'label',
+		'span',
+		'input'
+	];
 
 	const isInteractable = (element) => {
+		if (element?.closest?.('[data-cursor-static]')) {
+			return false;
+		}
+
 		// check element and up to 3 parents for interactable tags
 		let current = element;
 		for (let i = 0; i < 4 && current; i++) {
@@ -43,39 +58,39 @@
 			current = current.parentElement;
 		}
 		return false;
-	}
+	};
 
-	const cursorMorph = event => {
+	const cursorMorph = (event) => {
 		const hovering = isInteractable(event.target);
 		isHovering = hovering;
 		borderRadius.set(hovering ? 0 : 999);
-	}
+	};
 
-	onMount(_ => {
+	onMount((_) => {
 		window.addEventListener('mousemove', cursorMorph);
 
-		return _ => {
+		return (_) => {
 			window.removeEventListener('mousemove', cursorMorph);
 		};
-	})
+	});
 </script>
 
-
-
 <svelte:window
-	on:mousemove={e => {
-		coords1.set({ x: e.clientX, y: e.clientY })
-		coords2.set({ x: e.clientX, y: e.clientY })
+	on:mousemove={(e) => {
+		coords1.set({ x: e.clientX, y: e.clientY });
+		coords2.set({ x: e.clientX, y: e.clientY });
 	}}
-	on:mousedown={_ => {
+	on:mousedown={(_) => {
 		size.set(30);
 	}}
-	on:mouseup={_ => {
+	on:mouseup={(_) => {
 		size.set(15);
 	}}
 />
 
-<svg class="cc w-full h-full z-50 fixed pointer-events-none fill-surface-500 stroke-surface-500 dark:fill-primary-500 dark:stroke-primary-500">
+<svg
+	class="cc w-full h-full z-50 fixed pointer-events-none fill-surface-500 stroke-surface-500 dark:fill-primary-500 dark:stroke-primary-500"
+>
 	<rect
 		x={$coords1.x - $size}
 		y={$coords1.y - $size}
