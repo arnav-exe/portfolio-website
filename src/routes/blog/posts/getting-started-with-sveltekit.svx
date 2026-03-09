@@ -1,0 +1,53 @@
+---
+title: "Getting Started with SvelteKit"
+description: "A comprehensive guide to building your first SvelteKit application from scratch"
+date: "2024-03-15"
+tags: ["Svelte", "SvelteKit", "Tutorial"]
+readingTime: 4
+---
+
+## Introduction
+
+SvelteKit is a powerful framework for building web applications with Svelte. It provides a complete solution for routing, server-side rendering, and more.
+
+## Why SvelteKit?
+
+SvelteKit offers several advantages:
+
+- **Performance**: Svelte compiles your code to highly efficient vanilla JavaScript
+- **Developer Experience**: Intuitive API and excellent tooling
+- **Flexibility**: Works for everything from static sites to full-stack applications
+- **Built-in Features**: Routing, SSR, and API routes out of the box
+
+## Getting Started
+
+First, create a new SvelteKit project:
+
+```bash
+npm create svelte@latest my-app
+cd my-app
+npm install
+npm run dev
+```
+
+## Project Structure
+
+A typical SvelteKit project looks like this:
+
+- `src/routes/` - Your application routes
+- `src/lib/` - Reusable components and utilities
+- `static/` - Static assets like images and fonts
+- `svelte.config.js` - SvelteKit configuration
+
+## Creating Your First Route
+
+Routes in SvelteKit are file-based. Create a new file at `src/routes/about/+page.svelte`:
+
+```svelte
+<h1>About Page</h1>
+<p>Welcome to my about page!</p>
+```
+
+## Conclusion
+
+SvelteKit is an excellent choice for modern web development. Its simplicity and performance make it perfect for projects of any size.
