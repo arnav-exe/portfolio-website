@@ -1,8 +1,8 @@
 ---
-title: "My £4500 AI Homeserver (and Why It Lives 4000 Miles Away)"
+title: "My £4500 AI Homeserver (and why it lives 4000 miles away)"
 description: "Inside my small-form-factor AI homeserver: why I built it, what’s inside it, and how I run it remotely."
-date: 2026-09-14
-tags: ["homeserver", "self-hosting", "pc"]
+date: 2025-09-14
+tags: ["homeserver", "self-hosting", "PC"]
 ---
 
 ---
@@ -15,7 +15,7 @@ The goal was a machine that could support enthusiast-level experimentation with 
 
 In total the build came to about £4500, which definitely makes it the most expensive computer I've ever owned (hopefully my parents don't read this blog post lol).
 
----
+
 
 ## The Goal: A Personal AI Playground
 
@@ -29,7 +29,7 @@ Cloud GPUs are great, but costs can add up very quickly when you're experimentin
 
 There is also something nice about having a machine that is completely yours to break, rebuild, and experiment on.
 
----
+
 
 ## Hardware Overview
 
@@ -37,7 +37,7 @@ I decided to build the system in a small form-factor Mini ITX case, mostly as I 
 
 Here are the specs:
 
-```bash
+```text
 Motherboard: ASRock B650I Mini-ITX  
 CPU: AMD Ryzen 9 7900X  
 GPU: Nvidia RTX A6000 (48GB GDDR6)  
@@ -53,13 +53,18 @@ Case Fans: 2x Noctua NF-A12x25
 
 The most expensive part of the system is definitely the GPU. The RTX A6000 alone cost £3000, though that was for a slightly used card. New ones were going for well over £6000 at the time, so it felt like a pretty good deal.
 
----
+
 
 ## Why the RTX A6000
 
 The GPU choice was by far the most important decision in the build.
 
-The main reason why I went with the RTX A6000 was because it has 48GB of VRAM. Most consumer GPUs top out much lower than that (the RTX 5090 contains 32GB). Having that much memory opens the door to a lot more experimentation and flexibility when working with large models.
+The main reason why I went with the RTX A6000 was because it has 48GB of VRAM. Most consumer GPUs top out much lower than that (the RTX 5090 contains 32GB), and as cool as these are, I wasn't super comfortable with the idea of buying a [modified RTX 4090D with 48GB of VRAM](https://www.tomshardware.com/tech-industry/artificial-intelligence/chinese-data-centers-refurbing-and-selling-rtx-4090s-due-to-overcapacity-48gb-models-sell-for-up-to-usd5-500). Hence why I settled on the RTX A6000. Having that much memory opens the door to a lot more experimentation and flexibility when working with large models.
+
+<figure>
+	<img src="/blog/ai-homeserver/PXL_20250823_072638591.jpg" alt="Closeup picture of GPU inside case" />
+	<figcaption>wow so cool!</figcaption>
+</figure>
 
 More VRAM means being able to run larger batch sizes during training, work with longer context windows during inference, and avoid relying on aggressive model quantization.
 
@@ -69,7 +74,7 @@ I also specifically wanted the full 48GB on a single GPU rather than combining m
 
 Finally, I happened to find a very good used deal on the card, which ultimately sealed the decision.
 
----
+
 
 ## The Build Process
 
@@ -77,17 +82,19 @@ Building the machine ended up being one of the most enjoyable parts of the whole
 
 The NR200P case is quite compact but extremely well designed. Every panel can be removed, which makes accessing the internals much easier than you might expect from a small case. Even so, fitting a workstation GPU, a 280mm AIO cooler, the power supply, and all of the cabling required some careful planning.
 
-![Build photo placeholder](./images/build1.jpg)
 
 There were several moments where I had to temporarily remove parts just to route a cable properly. At one point the power supply cables alone felt like they were taking up half the case!
 
-![Build photo placeholder](./images/build2.jpg)
+<figure>
+	<img src="/blog/ai-homeserver/PXL_20250818_122318335.jpg" alt="PC internals" />
+	<figcaption>look at that cable management! (but not too closely)</figcaption>
+</figure>
 
 Bending the tubes from the AIO cooler into place was also slightly nerve-wracking, but eventually everything fit together. Once the final panel went on, it was just a matter of pressing the power button and hoping nothing caught on fire.
 
 Fortunately, it booted on the first try.
 
----
+
 
 ## Why It Lives 4000 Miles Away
 
@@ -105,7 +112,7 @@ In practice the workflow is simple: I connect to the Raspberry Pi through TailSc
 
 The workstation itself stays powered off most of the time to save electricity.
 
----
+
 
 ## Closing Thoughts
 
@@ -116,3 +123,23 @@ Having a dedicated machine for experimentation makes it much easier to explore i
 There is also something oddly satisfying about having a small box sitting somewhere in the world that you can wake up remotely and start running experiments on.
 
 I'm sure the setup will evolve over time, but for now it serves perfectly as my personal AI playground.
+
+
+## Some more cool pictures
+
+<figure>
+	<img src="/blog/ai-homeserver/PXL_20250817_231313929.jpg" alt="Closeup picture of GPU inside case" />
+</figure>
+
+
+<figure>
+	<img src="/blog/ai-homeserver/PXL_20250818_025311750.jpg" alt="Closeup picture of GPU inside case" />
+</figure>
+
+<figure>
+	<img src="/blog/ai-homeserver/PXL_20250818_131214611.jpg" alt="Closeup picture of GPU inside case" />
+</figure>
+
+<figure>
+	<img src="/blog/ai-homeserver/PXL_20250823_072654759.NIGHT.jpg" alt="Closeup picture of GPU inside case" />
+</figure>
