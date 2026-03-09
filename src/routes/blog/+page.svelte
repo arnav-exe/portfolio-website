@@ -55,7 +55,7 @@
 	</div>
 
 	<div class="flex justify-center items-center h-full flex-col mx-auto w-[90%]">
-		<h1 class="h1 font-bold mt-8 mb-8">WELCOME TO MY DEV BLOG</h1>
+		<h1 class="h1 font-bold mt-8 mb-8 uppercase">Welcome To My Dev Blog</h1>
 
 		<!-- Search and Filter Section -->
 		<div class="w-full mb-8 space-y-4">
