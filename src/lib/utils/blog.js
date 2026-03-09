@@ -5,9 +5,20 @@
  */
 export function calculateReadingTime(text) {
 	const wordsPerMinute = 200;
+	if (!text || !text.trim()) return 0;
 	const words = text.trim().split(/\s+/).length;
 	const minutes = Math.ceil(words / wordsPerMinute);
 	return minutes;
+}
+
+/**
+ * Remove mdsvex frontmatter from a post source string
+ * @param {string} source
+ * @returns {string}
+ */
+function stripFrontmatter(source) {
+	if (!source) return '';
+	return source.replace(/^---[\s\S]*?---\s*/, '');
 }
 
 /**
@@ -16,19 +27,25 @@ export function calculateReadingTime(text) {
  */
 export async function getAllPosts() {
 	const modules = import.meta.glob('/src/routes/blog/posts/**/*.svx', { eager: true });
+	const rawModules = import.meta.glob('/src/routes/blog/posts/**/*.svx', {
+		eager: true,
+		query: '?raw',
+		import: 'default'
+	});
 
 	const posts = [];
 
 	for (const path in modules) {
 		const module = modules[path];
 		const slug = path.split('/').pop().replace('.svx', '');
+		const rawPost = rawModules[path] || '';
+		const readingTime = calculateReadingTime(stripFrontmatter(rawPost));
 
 		if (module.metadata) {
 			posts.push({
 				slug,
 				...module.metadata,
-				// use readingTime from metadata or default to 5 minutes
-				readingTime: module.metadata.readingTime || 5
+				readingTime
 			});
 		}
 	}
