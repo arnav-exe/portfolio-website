@@ -139,7 +139,3 @@ I'm sure the setup will evolve over time, but for now it serves perfectly as my 
 <figure>
 	<img src="/blog/ai-homeserver/PXL_20250818_131214611.jpg" alt="Closeup picture of GPU inside case" />
 </figure>
-
-<figure>
-	<img src="/blog/ai-homeserver/PXL_20250823_072654759.NIGHT.jpg" alt="Closeup picture of GPU inside case" />
-</figure>
