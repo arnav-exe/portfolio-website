@@ -19,4 +19,15 @@
 
 body { @apply bg-primary-500 dark:bg-surface-500; }
 
-::selection { @apply variant-ghost-surface dark:variant-ghost-primary }
+a {
+    transition: color 120ms ease-out;
+}
+
+a:hover {
+    color: rgb(var(--color-primary-700));
+}
+
+::selection {
+    background-color: rgba(232, 231, 226, 0.22);
+    color: inherit;
+}

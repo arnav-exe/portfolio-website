@@ -191,8 +191,8 @@
 		<div class="w-[90%]">
 			<!-- ABOUT ME -->
 			<div class="my-32">
-				<h2 class="h2 font-bold text-center mb-4">ABOUT ME</h2>
-				<div class="about-section">
+				<h2 class="h2 font-bold mb-4 flex items-center gap-8 whitespace-nowrap before:content-[''] before:flex-1 before:h-px before:bg-primary-500/15 after:content-[''] after:flex-1 after:h-px after:bg-primary-500/15">ABOUT ME</h2>
+				<div class="about-section border-primary-500/20 pl-7 flex flex-col gap-5">
 					<p class="translate-x-5">Hi, I'm a full-stack engineer, AI engineer, and cloud architect currently pursuing an MSc at the University of St Andrews. I'm also a recent first class with honours Computer Systems Engineering graduate from QMUL.</p>
 					<p class="translate-x-5">As a full-stack engineer, I craft sleek, powerful apps with Svelte, TypeScript, Node.js, and Tailwind. I also specialize in machine learning and data analysis using PyTorch, Hadoop, and Spark. Not to mention additional competencies in C, VHDL, and Java.</p>
 					<p class="translate-x-5">Furthermore, I excel in architecting resilient and scalable cloud-based solutions using AWS, backed by two AWS certifications: AWS Associate Developer and AWS Cloud Practitioner.</p>
@@ -203,7 +203,7 @@
 
 			<!-- SKILLS -->
 			<div class="my-32">
-				<h2 class="h2 font-bold text-center mb-4">SKILLS</h2>
+				<h2 class="h2 font-bold mb-4 flex items-center gap-8 whitespace-nowrap before:content-[''] before:flex-1 before:h-px before:bg-primary-500/15 after:content-[''] after:flex-1 after:h-px after:bg-primary-500/15">SKILLS</h2>
 				<div class="skills-section flex justify-center items-center flex-wrap gap-6">
 					<!-- single row of LOGOS of all languages/frameworks HERE: -->
 					{#each logos as [name, logo, url]}
@@ -226,14 +226,14 @@
 
 			<!-- PROJECTS -->
 			<div class="my-32">
-				<h2 class="h2 font-bold text-center mb-4">PROJECTS</h2>
+				<h2 class="h2 font-bold mb-4 flex items-center gap-8 whitespace-nowrap before:content-[''] before:flex-1 before:h-px before:bg-primary-500/15 after:content-[''] after:flex-1 after:h-px after:bg-primary-500/15">PROJECTS</h2>
 
 				<!-- project cards -->
                 <!-- TODO: change youtube+reddit logo such that it is an outline of the youtube and reddit logo in the primary colour instead of the actual youtube and reddit colours so that it is more inline with the other logos -->
 				<div class="projects-section grid sm:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-6 justify-items-center items-start">
 					{#each projects as project, i}
 						<div class="card-hover w-full max-w-sm">
-							<div class="project-card block rounded card-hover p-3 bg-secondary-500 dark:bg-surface-500">
+							<div class="project-card block rounded card-hover p-3 bg-secondary-500 dark:bg-[#1a1917]">
 								<a href="{project.link}">
 									<div class="w-full max-w-[180px] mx-auto">
 										<svelte:component this={imgs[i]} />
@@ -251,7 +251,7 @@
 
 			<!-- EXPERIENCE -->
 			<div class="my-32">
-				<h2 class="h2 font-bold text-center mb-4">EXPERIENCE</h2>
+				<h2 class="h2 font-bold mb-4 flex items-center gap-8 whitespace-nowrap before:content-[''] before:flex-1 before:h-px before:bg-primary-500/15 after:content-[''] after:flex-1 after:h-px after:bg-primary-500/15">EXPERIENCE</h2>
 				<!-- Timeline v1 -->
 				<!-- <Timeline>
 					<TimelineItem
@@ -299,7 +299,7 @@
 
 			<!-- CONTACT -->
 			<div class="mt-32 mb-32">
-				<h2 class="h2 font-bold text-center mb-4">CONTACT ME</h2>
+				<h2 class="h2 font-bold mb-4 flex items-center gap-8 whitespace-nowrap before:content-[''] before:flex-1 before:h-px before:bg-primary-500/15 after:content-[''] after:flex-1 after:h-px after:bg-primary-500/15">CONTACT ME</h2>
 
 				<div class="contact-section">
 					<Contact />
@@ -322,14 +322,14 @@
 		line-height: normal;
 	}
 
-	/* Skill logo fixes */
+	/* skill logo fixes */
 	.skill-logo-wrapper {
 		display: block;
 		width: 100%;
 		height: 100%;
 	}
 
-	/* Make SVG logos trigger hover on entire bounding box, not just filled areas */
+	/* make svg logos trigger hover on entire bounding box */
 	:global(.skill-logo-wrapper svg) {
 		pointer-events: bounding-box;
 		width: 100%;
@@ -337,8 +337,9 @@
 		display: block;
 	}
 
-	/* Ensure skill logos have consistent sizing */
+	/* ensure skill logos have consistent sizing */
 	.skill-logo-container {
 		flex-shrink: 0;
 	}
+
 </style>
