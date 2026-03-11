@@ -1,5 +1,14 @@
 <script>
 	import '../app.postcss';
+	import { afterNavigate } from '$app/navigation';
+
+	afterNavigate(() => {
+		if (typeof window?.goatcounter?.count === 'function') {
+			window.goatcounter.count({
+				path: location.pathname + location.search + location.hash
+			});
+		}
+	});
 
 	// logos for footer
 	import GitHub from "../lib/icons/GitHub.svelte";
