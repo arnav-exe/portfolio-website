@@ -86,11 +86,11 @@ The NR200P case is quite compact but extremely well designed. Every panel can be
 There were several moments where I had to temporarily remove parts just to route a cable properly. At one point the power supply cables alone felt like they were taking up half the case!
 
 <figure>
-	<img src="/blog/ai-homeserver/PXL_20250818_122318335.jpg" alt="PC internals" />
+	<img src="/blog/ai-homeserver/PXL_20250818_131214611.jpg" alt="Closeup picture of GPU inside case" />
 	<figcaption>look at that cable management! (but not too closely)</figcaption>
 </figure>
 
-Bending the tubes from the AIO cooler into place was also slightly nerve-wracking, but eventually everything fit together. Once the final panel went on, it was just a matter of pressing the power button and hoping nothing caught on fire.
+Bending the tubes from the AIO cooler into place was slightly terrifying, but eventually everything fit together. Once the final panel went on, it was just a matter of pressing the power button and hoping nothing caught on fire.
 
 Fortunately, it booted on the first try.
 
@@ -137,5 +137,5 @@ I'm sure the setup will evolve over time, but for now it serves perfectly as my 
 </figure>
 
 <figure>
-	<img src="/blog/ai-homeserver/PXL_20250818_131214611.jpg" alt="Closeup picture of GPU inside case" />
+	<img src="/blog/ai-homeserver/PXL_20250818_122318335.jpg" alt="PC internals" />
 </figure>
