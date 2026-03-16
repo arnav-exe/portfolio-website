@@ -111,23 +111,36 @@
 		tl.fromTo('.hero-text2', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1.5, delay: -1 });
 		tl.fromTo('.hero-text3', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1.5, delay: -1 });
 
-		gsap.set('.about-section', { y: 100, opacity: 0 });
-		gsap.set('.skills-section', { y: 100, opacity: 0 });
-		gsap.set('.projects-section', { y: 100, opacity: 0 });
+		gsap.set('.about-section p', { y: 35, opacity: 0 });
+		gsap.set('.skill-logo-container', { scale: 0, opacity: 0 });
+		gsap.set('.projects-section', { y: 40, opacity: 0 });
 		gsap.set('.timeline-card', { y: 100, opacity: 0 });
-		gsap.set('.contact-section', { y: 100, opacity: 0 });
+		gsap.set('.contact-section', { opacity: 0 });
 
-		gsap.to('.about-section', { opacity: 1, y: 0, duration: 1.5, scrollTrigger: '.about-section' });
-		gsap.to('.skills-section', {
+		gsap.to('.about-section p', {
 			opacity: 1,
 			y: 0,
-			duration: 1.5,
-			scrollTrigger: '.skills-section'
+			duration: 1.0,
+			ease: 'power3.out',
+			stagger: 0.15,
+			scrollTrigger: { trigger: '.about-section', start: 'top 75%' }
+		});
+		gsap.to('.skill-logo-container', {
+			scale: 1,
+			opacity: 1,
+			duration: 0.25,
+			ease: 'power2.out',
+			stagger: { each: 0.05, from: 'center' },
+			scrollTrigger: {
+				trigger: '.skills-section',
+				start: 'top 75%'
+			}
 		});
 		gsap.to('.projects-section', {
 			opacity: 1,
 			y: 0,
-			duration: 1.5,
+			duration: 1.0,
+			ease: 'power3.out',
 			scrollTrigger: '.projects-section'
 		});
 		gsap.to('.timeline-card', {
@@ -142,8 +155,8 @@
 		});
 		gsap.to('.contact-section', {
 			opacity: 1,
-			y: 0,
-			duration: 1.5,
+			duration: 1.2,
+			ease: 'power3.out',
 			scrollTrigger: '.contact-section'
 		});
 
