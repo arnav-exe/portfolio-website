@@ -132,8 +132,8 @@
 </script>
 
 <svelte:head>
-	<title>Arnav Jagetia | Full-Stack Developer, Cloud Architect & AI Engineer</title>
-	<meta name="description" content="Portfolio of Arnav Jagetia - Full-stack engineer, AI engineer, and AWS certified cloud architect. Specializing in Svelte, TypeScript, Node.js, PyTorch, and cloud solutions." />
+	<title>Arnav Jagetia | AI/ML Engineer, Full-Stack Developer, AWS Certified Cloud Architect</title>
+	<meta name="description" content="Portfolio of Arnav Jagetia - AI/ML engineer, full-stack developer, AWS certified cloud architect." />
 </svelte:head>
 
 <!-- custom cursor -->
@@ -151,9 +151,9 @@
 	<div class="w-full h-dvh flex flex-col -translate-y-32 justify-center items-center">
 		<h1 class="h1 hero-name leading-none mx-16 text-center font-bold title">ARNAV JAGETIA</h1>
 		<div class="flex flex-col translate-y-32 sm:flex-row">
-			<div class="text-xl text-center hero-text1">FULL-STACK DEVELOPER</div>
-			<div class="text-xl text-center mx-16 hero-text2">CLOUD ARCHITECT</div>
-			<div class="text-xl text-center hero-text3">BACHELOR OF ENGINEERING</div>
+			<div class="text-xl text-center hero-text1 uppercase">AI/ML Engineer</div>
+			<div class="text-xl text-center mx-16 hero-text2 uppercase">Full-Stack Developer</div>
+			<div class="text-xl text-center hero-text3 uppercase">Cloud Architect</div>
 		</div>
 
 		<!-- aws certifications -->
@@ -193,9 +193,10 @@
 			<div class="my-32">
 				<h2 class="h2 font-bold mb-4 flex items-center gap-8 whitespace-nowrap before:content-[''] before:flex-1 before:h-px before:bg-primary-500/15 after:content-[''] after:flex-1 after:h-px after:bg-primary-500/15">ABOUT ME</h2>
 				<div class="about-section border-primary-500/20 pl-7 flex flex-col gap-5">
-					<p class="translate-x-5">Hi, I'm a full-stack engineer, AI engineer, and cloud architect currently pursuing an MSc at the University of St Andrews. I'm also a recent first class with honours Computer Systems Engineering graduate from QMUL.</p>
-					<p class="translate-x-5">As a full-stack engineer, I craft sleek, powerful apps with Svelte, TypeScript, Node.js, and Tailwind. I also specialize in machine learning and data analysis using PyTorch, Hadoop, and Spark. Not to mention additional competencies in C, VHDL, and Java.</p>
-					<p class="translate-x-5">Furthermore, I excel in architecting resilient and scalable cloud-based solutions using AWS, backed by two AWS certifications: AWS Associate Developer and AWS Cloud Practitioner.</p>
+					<p class="translate-x-5">Hi! I am an AI/ML engineer, full-stack developer, and cloud architect with a strong passion for building end-to-end AI solutions. I am driven by the challenge of solving complex engineering problems where data, software systems, and cloud infrastructure intersect.</p>
+					<p class="translate-x-5">I enjoy working across the entire product lifecycle, from designing machine learning models to developing user-facing applications and deploying production solutions to the cloud.</p>
+					<p class="translate-x-5">With a Master's degree in Artificial Intelligence, 2 AWS certifications, and a strong software engineering background, I uniquely bring research depth and practical engineering experience to real-world problems.</p>
+					<p class="translate-x-5">I love reading about advances in AI research and tinkering with emerging tools and frameworks by building exploratory side projects. I also have a blog which I regularly update with my thoughts and opinions of various topics in the AI space, as well as my side-projects and other shenanigans that I get up to, which you can check out <a href="/blog" class="underline">here</a>!</p>
 				</div>
 			</div>
 
