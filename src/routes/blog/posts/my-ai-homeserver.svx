@@ -9,7 +9,7 @@ tags: ["homeserver", "self-hosting", "PC"]
 
 ## Background
 
-I recently graduated (thank god) and started my first job as an AI engineer. After getting my first couple of paychecks, I decided to do something slightly irresponsible but also very fun: I used them to fund a personal AI workstation.
+So I recently graduated (thank god) and started my first job as an AI engineer. Not too long after, I decided to buy the PC parts to build my own personal AI workstation!
 
 The goal was a machine that could support enthusiast-level experimentation with modern AI models. Something powerful enough to run real experiments locally, but still small enough to sit quietly in a corner.
 
