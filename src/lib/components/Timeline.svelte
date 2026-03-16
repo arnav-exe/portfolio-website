@@ -8,7 +8,7 @@
 			startDate: 'July 2025',
 			endDate: 'Present',
 			description:
-                ''
+                'Architected and shipped applied ML systems integrating ranking models, knowledge graphs, and multimodal retrieval pipelines under real-world data and reliability constraints. Implemented end-to-end ML infrastructure including feature pipelines, evaluation design, APIs, and cross-platform UIs. Created plug-and-play LLM safety middleware with layered redaction, monitoring, and scalable async processing.'
 		},
 		{
 			role: 'Lead front-end developer',
@@ -38,9 +38,9 @@
 			startDate: 'September 2024',
 			endDate: 'August 2025',
 			description:
-				'Focused on machine learning systems, deep learning, and applied NLP for production-ready AI applications.',
+				'Specialized in advanced artificial intelligence topics including machine learning, constraint programming, natural language computation, and large-scale data systems. Built practical expertise through AI system design coursework and a research-driven dissertation project. Strengthened theoretical grounding in intelligent reasoning, optimization, and production-oriented ML engineering.',
 			projectSummary:
-				"Dissertation: 'Efficient Retrieval-Augmented Generation Pipelines for Domain-Specific Knowledge Bases.'"
+				"Dissertation: 'Athenai AI Revision Assistant'"
 		},
 		{
 			institution: 'Queen Mary University of London',
@@ -49,9 +49,9 @@
 			startDate: 'September 2021',
 			endDate: 'May 2024',
 			description:
-				'Focused on machine learning systems, deep learning, and applied NLP for production-ready AI applications.',
+				'Built foundations across full-stack computing systems from low-level hardware and signal theory to software engineering and distributed data processing. Later specialized in machine learning topics including data mining and neural networks. Graduated with strong practical experience in systems design, embedded development, and performance-driven software.',
 			projectSummary:
-				"Dissertation: 'Efficient Retrieval-Augmented Generation Pipelines for Domain-Specific Knowledge Bases.'"
+				"Final Year Project: 'AI Powered News Platform'"
 		}
 	];
 
