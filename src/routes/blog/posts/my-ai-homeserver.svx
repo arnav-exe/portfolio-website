@@ -23,9 +23,7 @@ Most of my interest right now is around research and experimentation with langua
 
 Rather than targeting one specific workflow, the idea was to build a machine that could support a wide range of experiments. In practice that means running and evaluating language models locally, trying out new training or inference ideas, exploring agents and autonomous systems, and deploying models that power personal projects.
 
-More broadly, I wanted it to be a place where I could freely test ideas and prototype things without worrying too much about limits.
-
-Cloud GPUs are great, but costs can add up very quickly when you're experimenting. I also felt that usage-based pricing might make me overall more hesitant to run experiments and do things just to 'see what happens'. Having my own machine removes that friction. I can start jobs, break things, and try new ideas without thinking too much about the bill.
+Renting a cloud GPU was also another option, but costs can add up very quickly when experimenting. I also felt that usage-based pricing might make me overall more hesitant to run experiments and do things just to 'see what happens'. Having my own machine removes that friction. I can start jobs, break things, and try new ideas without thinking too much about the bill.
 
 There is also something nice about having a machine that is completely yours to break, rebuild, and experiment on.
 
@@ -38,16 +36,16 @@ I decided to build the system in a small form-factor Mini ITX case, mostly as I 
 Here are the specs:
 
 ```text
-Motherboard: ASRock B650I Mini-ITX  
-CPU: AMD Ryzen 9 7900X  
-GPU: Nvidia RTX A6000 (48GB GDDR6)  
-RAM: 96GB Corsair Vengeance DDR5 6000MHz (2x48GB)  
-Storage: Crucial P3 2TB Gen4 NVMe SSD  
+Motherboard: ASRock B650I Mini-ITX
+CPU: AMD Ryzen 9 7900X
+GPU: Nvidia RTX A6000 (48GB GDDR6)
+RAM: 96GB Corsair Vengeance DDR5 6000MHz (2x48GB)
+Storage: Crucial P3 2TB Gen4 NVMe SSD
 
-Case: Cooler Master MasterBox NR200P  
-Power Supply: Corsair SF750 80+ Platinum  
+Case: Cooler Master MasterBox NR200P
+Power Supply: Corsair SF750 80+ Platinum
 
-CPU Cooler: ARCTIC Liquid Freezer III Pro 280 AIO  
+CPU Cooler: ARCTIC Liquid Freezer III Pro 280 AIO
 Case Fans: 2x Noctua NF-A12x25
 ```
 
@@ -80,7 +78,7 @@ Finally, I happened to find a very good used deal on the card, which ultimately 
 
 Building the machine ended up being one of the most enjoyable parts of the whole project. Small form-factor builds always feel a bit like solving a puzzle, where every component has to fit just right and the order of installation actually matters.
 
-The NR200P case is quite compact but extremely well designed. Every panel can be removed, which makes accessing the internals much easier than you might expect from a small case. Even so, fitting a workstation GPU, a 280mm AIO cooler, the power supply, and all of the cabling required some careful planning.
+The NR200P case is quite compact but extremely well designed. Every panel can be removed, which makes accessing the internals much easier than you might expect from a small case. That being said, fitting a workstation GPU, a 280mm AIO cooler, the power supply, and all of the cabling still required some careful planning.
 
 
 There were several moments where I had to temporarily remove parts just to route a cable properly. At one point the power supply cables alone felt like they were taking up half the case!
@@ -108,7 +106,7 @@ To make this possible, I set up a Raspberry Pi 5 on the same home network as the
 
 Both devices are connected through the same [TailScale](https://tailscale.com/) tailnet, which allows me to securely reach them from anywhere in the world.
 
-In practice the workflow is simple: I connect to the Raspberry Pi through TailScale, send a Wake-on-LAN packet, wait for the workstation to power up, and then SSH in to start running experiments. I have also setup [Sunshine](https://app.lizardbyte.dev/Sunshine/)/[Moonlight](https://moonlight-stream.org/) so that I can stream a remote desktop when needed.
+In practice the workflow is simple: I connect to the Raspberry Pi through [TailScale](https://tailscale.com/), send a Wake-on-LAN packet, wait for the workstation to power up, and then SSH in to start running experiments. I have also setup [Sunshine](https://app.lizardbyte.dev/Sunshine/)/[Moonlight](https://moonlight-stream.org/) so that I can stream a remote desktop when needed.
 
 The workstation itself stays powered off most of the time to save electricity.
 

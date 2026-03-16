@@ -8,22 +8,18 @@
 	import { TextPlugin } from "gsap/dist/TextPlugin";
 	import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
+    // components
 	import Cursor from "../lib/components/Cursor.svelte";
-
-	// timeline v1 imports [legacy]
-	// import Timeline from "../lib/Timeline-old/Timeline.svelte"
-	// import TimelineItem from "../lib/Timeline-old/TimelineItem.svelte"
-
-	import TL from "../lib/components/Timeline.svelte"
+	import Timeline from "../lib/components/Timeline.svelte"
 	import Contact from "../lib/components/Contact.svelte"
 	import Mouse from "../lib/components/Mouse.svelte";
 	import DownChevron from "../lib/components/DownChevron.svelte";
 
-	// imgs
-	import placeholder from "../lib/images/placeholder.png";
+	// aws certs
 	import developer from "../lib/images/developer.png";
 	import practitioner from "../lib/images/practitioner.png";
 	
+    // project logos
 	import CssbattleMinifier from "../lib/icons/projects/cssbattle-minifier.svelte";
 	import NewsPlatform from "../lib/icons/projects/news-platform.svelte";
 	import Polyboard from "../lib/icons/projects/polyboard.svelte";
@@ -31,15 +27,17 @@
 	import RedditToVideo from "../lib/icons/projects/reddit-to-video.svelte";
 
 	// skills logos
-	import Svelte from "../lib/icons/Svelte.svelte";
-	import Node from "../lib/icons/Node.svelte";
-	import JSLogo from "../lib/icons/JSLogo.svelte"
-	import Tailwind from "../lib/icons/Tailwind.svelte";
-	import Python from "../lib/icons/Python.svelte";
-	import Pytorch from "../lib/icons/Pytorch.svelte";
-	import Pandas from "../lib/icons/Pandas.svelte";
-	import aws from "../lib/icons/AWS.svelte";
-	import Git from "../lib/icons/Git.svelte";
+	import Python from "../lib/icons/skills/Python.svelte";
+	import Pytorch from "../lib/icons/skills/Pytorch.svelte";
+	import Tensorflow from "../lib/icons/skills/Tensorflow.svelte";
+	import Langchain from "../lib/icons/skills/Langchain.svelte";
+	import Javascript from "../lib/icons/skills/Javascript.svelte"
+	import Typescript from "../lib/icons/skills/Typescript.svelte"
+	import Node from "../lib/icons/skills/Node.svelte";
+	import Svelte from "../lib/icons/skills/Svelte.svelte";
+	import Aws from "../lib/icons/skills/AWS.svelte";
+    import Docker from "../lib/icons/skills/Docker.svelte";
+	import Git from "../lib/icons/skills/Git.svelte";
 
 	// socials logos
 	import GitHub from "../lib/icons/GitHub.svelte";
@@ -52,14 +50,16 @@
 	let page = 0;
 
 	const logos = [
-		["Svelte", Svelte, "https://svelte.dev/"],
-		["Node.js", Node, "https://nodejs.org/"],
-		["JavaScript", JSLogo, "https://v8.dev/"],
-		["Tailwind CSS", Tailwind, "https://tailwindcss.com/"],
 		["Python", Python, "https://www.python.org/"],
 		["PyTorch", Pytorch, "https://pytorch.org/"],
-		["Pandas", Pandas, "https://pandas.pydata.org/"],
-		["AWS", aws, "https://aws.amazon.com/"],
+		["TensorFlow", Tensorflow, "https://www.tensorflow.org/"],
+		["LangChain", Langchain, "https://www.langchain.com/"],
+		["JavaScript", Javascript, "https://v8.dev/"],
+		["TypeScript", Typescript, "https://www.typescriptlang.org/"],
+		["Node.js", Node, "https://nodejs.org/"],
+		["Svelte", Svelte, "https://svelte.dev/"],
+		["AWS", Aws, "https://aws.amazon.com/"],
+		["Docker", Docker, "https://www.docker.com/"],
 		["Git", Git, "https://git-scm.com/"]
 	];
 
@@ -107,13 +107,13 @@
 		gsap.set(".about-section", { y: 100, opacity: 0 });
 		gsap.set(".skills-section", { y: 100, opacity: 0 });
 		gsap.set(".projects-section", { y: 100, opacity: 0 });
-		gsap.set(".experience-section", { y: 100, opacity: 0 });
+		gsap.set(".edu-and-exp-section", { y: 100, opacity: 0 });
 		gsap.set(".contact-section", { y: 100, opacity: 0 });
 
 		gsap.to(".about-section", {opacity: 1, y: 0, duration: 1.5, scrollTrigger: ".about-section"})
 		gsap.to(".skills-section", {opacity: 1, y: 0, duration: 1.5, scrollTrigger: ".skills-section"})
 		gsap.to(".projects-section", {opacity: 1, y: 0, duration: 1.5, scrollTrigger: ".projects-section"})
-		gsap.to(".experience-section", {opacity: 1, y: 0, duration: 1.5, scrollTrigger: ".experience-section"})
+		gsap.to(".edu-and-exp-section", {opacity: 1, y: 0, duration: 1.5, scrollTrigger: ".edu-and-exp-section"})
 		gsap.to(".contact-section", {opacity: 1, y: 0, duration: 1.5, scrollTrigger: ".contact-section"})
 
 		let proxy = { skew: 0 },
@@ -252,49 +252,10 @@
 
 			<!-- EXPERIENCE -->
 			<div class="my-32">
-				<h2 class="h2 font-bold mb-4 flex items-center gap-8 whitespace-nowrap before:content-[''] before:flex-1 before:h-px before:bg-primary-500/15 after:content-[''] after:flex-1 after:h-px after:bg-primary-500/15">EXPERIENCE</h2>
-				<!-- Timeline v1 -->
-				<!-- <Timeline>
-					<TimelineItem
-						title="Lead front-end developer @ DSEU"
-						startDate="July 2022"
-						endDate="September 2022"
-						description="Designed and developed online marketplace bbmart.in. Used HTML, CSS, JS, jQuery, Bootstrap to a create a fluid app with a modern design, responsive on all platforms; Led a team of 10+ content writers."
-						badgeText="Latest"
-					/>
-
-					<TimelineItem
-						title="Automation developer @ Tiltlabs"
-						startDate="June 2022"
-						endDate="August 2022"
-						description="Developed internal automation tools and macros in Python (OpenCV, Pynput, Pillow) to speed up Illustrator workflows and enable batch rendering; designed NFT assets for a client limoverse.io and game assets for blockchain based farm game in Photoshop and Illustrator."
-					/>
-
-					<TimelineItem
-						title="Front-end developer @ LBR Technology"
-						startDate="November 2021"
-						endDate="July 2022"
-						description="Designed a responsive corporate website for lithium battery recycling company; used HTML, CSS, JS and Bootstrap for the front-end, SQL for the back-end; Adobe Illustrator, Photoshop and DaVinci Resolve for images, graphics, logos and animation."
-					/>
-
-					<TimelineItem
-						title="Intern @ Rightbot"
-						startDate="November 2021"
-						endDate="May 2022"
-						description="Application of AI in the field of warehouse automation; produced field reports on use of robotics technology, competing company profiles and investment profiles."
-					/>
-					
-					<TimelineItem
-						title="Intern @ Daiko FHO"
-						startDate="August 2020"
-						endDate="November 2020"
-						description="Worked for clients Gourmet Passport and Wattpad; designed digital adverts and posters that were used by the client for digital advertising using Adobe Photoshop and Adobe Illustrator."
-					/>
-					</Timeline> -->
-
-				<!-- Timeline v2 -->
-				<div class="experience-section">
-					<TL />
+				<h2 class="h2 font-bold mb-4 flex items-center gap-8 whitespace-nowrap before:content-[''] before:flex-1 before:h-px before:bg-primary-500/15 after:content-[''] after:flex-1 after:h-px after:bg-primary-500/15">EDUCATION &amp; EXPERIENCE</h2>
+				<!-- Timeline -->
+				<div class="edu-and-exp-section">
+					<Timeline />
 				</div>
 			</div>
 
