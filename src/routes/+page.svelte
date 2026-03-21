@@ -99,20 +99,17 @@
 		},
 		{
 			title: 'AI News Platform',
-			description:
-				'A responsive, modern news platform that leverages LLMs to deliver high-quality article summaries to readers, allowing them to get up-to-date on current affairs in a fraction of the time',
+			description: 'A responsive, modern news platform that leverages LLMs to deliver high-quality article summaries to readers, allowing them to get up-to-date on current affairs in a fraction of the time',
 			link: 'https://github.com/arnav-exe/ai-news-platform'
 		},
 		{
 			title: 'CSSBattle Minifier',
-			description:
-				'A Python script built to intelligently minify your code for the online code golfing game CSSBattle.dev',
+			description: 'A Python script built to intelligently minify your code for the online code golfing game CSSBattle.dev',
 			link: 'https://github.com/arnav-exe/cssbattle-minifier'
 		},
 		{
 			title: 'Polyboard - Multiple Clipboards',
-			description:
-				'A lightweight Python applet that provides the user with upto 10 additional clipboards to store/retrieve text-based data from',
+			description: 'A lightweight Python applet that provides the user with upto 10 additional clipboards to store/retrieve text-based data from',
 			link: 'https://github.com/arnav-exe/polyboard'
 		}
 	];
