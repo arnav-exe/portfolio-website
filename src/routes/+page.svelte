@@ -78,29 +78,29 @@
 	const projects = [
 		{
 			title: 'AI Jewelry Finder',
-			description: '',
+			description: 'An intelligent jewelry search system that converts user sketches and selected design details into targeted product queries, then ranks results using both visual similarity and keyword matching to find closely matching pieces and present shopping links to the user.',
 			incomplete: true,
 			link: ''
 		},
 		{
 			title: 'Instant Context MCP Server',
-			description: '',
+			description: 'An MCP server that discovers and indexes llms*.txt documentation sources for libraries and frameworks, so an LLM can query them directly for grounded context during coding workflows',
 			link: 'https://github.com/arnav-exe/instant-context-mcp'
 		},
 		{
 			title: 'Product Notifier',
-			description: '',
+			description: 'An intelligent, pluggable multi-source product monitoring engine that tracks stock and pricing across retailers, normalizes live data, and sends instant ntfy alerts when your purchase conditions are met.',
 			link: 'https://github.com/arnav-exe/product-notifier'
 		},
 		{
 			title: 'Athena - AI Revision Assistant',
-			description: '',
-			link: 'https://github.com/arnav-exe/athena-revision-assistant/tree/studres'
+			description: 'A RAG-powered LLM revision assistant that semantically searches a large student resources repository to deliver accurate, context-aware answers with source page citations, images, and related material suggestions.',
+			link: 'https://github.com/arnav-exe/athena-revision-assistant'
 		},
 		{
 			title: 'AI News Platform',
 			description:
-				'A responsive, modern news platform that leverages Natural Language Processing (NLP) to deliver high-quality article summaries to readers, allowing them to get up-to-date on current affairs in a fraction of the time',
+				'A responsive, modern news platform that leverages LLMs to deliver high-quality article summaries to readers, allowing them to get up-to-date on current affairs in a fraction of the time',
 			link: 'https://github.com/arnav-exe/ai-news-platform'
 		},
 		{
@@ -382,7 +382,7 @@
 									class="card p-3 site-tooltip"
 									data-popup={'popupProjectUnderConstruction-' + i}
 								>
-									<p class="text-center">under construction!</p>
+									<p class="text-center">Under Construction!</p>
 									<div class="arrow site-tooltip-arrow" />
 								</div>
 							{:else}
