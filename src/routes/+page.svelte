@@ -20,11 +20,13 @@
 	import practitioner from '../lib/images/practitioner.png';
 
 	// project logos
-	import CssbattleMinifier from '../lib/icons/projects/cssbattle-minifier.svelte';
-	import NewsPlatform from '../lib/icons/projects/news-platform.svelte';
-	import Polyboard from '../lib/icons/projects/polyboard.svelte';
-	import PortfolioWebsite from '../lib/icons/projects/portfolio-website.svelte';
-	import RedditToVideo from '../lib/icons/projects/reddit-to-video.svelte';
+	import JewelryFinder from '../lib/icons/projects/JewelryFinder.svelte';
+	import InstantContextMCP from '../lib/icons/projects/InstantContextMCP.svelte';
+	import ProductNotifier from '../lib/icons/projects/ProductNotifier.svelte';
+	import AthenaRevision from '../lib/icons/projects/AthenaRevision.svelte';
+	import AiNewsPlatform from '../lib/icons/projects/AiNewsPlatform.svelte';
+	import CssbattleMinifier from '../lib/icons/projects/CssbattleMinifier.svelte';
+	import Polyboard from '../lib/icons/projects/Polyboard.svelte';
 
 	// skills logos
 	import Python from '../lib/icons/skills/Python.svelte';
@@ -63,20 +65,43 @@
 		['Git', Git, 'https://git-scm.com/']
 	];
 
-	const imgs = [NewsPlatform, PortfolioWebsite, CssbattleMinifier, Polyboard, RedditToVideo];
+	const project_imgs = [
+		JewelryFinder,
+		InstantContextMCP,
+		ProductNotifier,
+		AthenaRevision,
+		AiNewsPlatform,
+		CssbattleMinifier,
+		Polyboard
+	];
 
 	const projects = [
 		{
-			title: 'AI-Powered News Platform',
+			title: 'AI Jewelry Finder',
+			description: '',
+			incomplete: true,
+			link: ''
+		},
+		{
+			title: 'Instant Context MCP Server',
+			description: '',
+			link: 'https://github.com/arnav-exe/instant-context-mcp'
+		},
+		{
+			title: 'Product Notifier',
+			description: '',
+			link: 'https://github.com/arnav-exe/product-notifier'
+		},
+		{
+			title: 'Athena - AI Revision Assistant',
+			description: '',
+			link: 'https://github.com/arnav-exe/athena-revision-assistant/tree/studres'
+		},
+		{
+			title: 'AI News Platform',
 			description:
 				'A responsive, modern news platform that leverages Natural Language Processing (NLP) to deliver high-quality article summaries to readers, allowing them to get up-to-date on current affairs in a fraction of the time',
 			link: 'https://github.com/arnav-exe/ai-news-platform'
-		},
-		{
-			title: 'Portfolio Website',
-			description:
-				'My revamped portfolio website built using SvelteKit, TailwindCSS, SkeletonUI and gsap',
-			link: 'https://github.com/arnav-exe/portfolio-website'
 		},
 		{
 			title: 'CSSBattle Minifier',
@@ -89,12 +114,6 @@
 			description:
 				'A lightweight Python applet that provides the user with upto 10 additional clipboards to store/retrieve text-based data from',
 			link: 'https://github.com/arnav-exe/polyboard'
-		},
-		{
-			title: 'Reddit Post-to-Video Creator',
-			description:
-				'A program that scrapes Reddit posts for their title, content, and x number of top comments and compiles that into a video complete with visuals and text-to-speech narration',
-			link: 'https://github.com/arnav-exe/reddit-video-narrator'
 		}
 	];
 
@@ -317,12 +336,9 @@
 							</a>
 						</div>
 						<!-- toolip -->
-						<div
-							class="card p-4 variant-filled-secondary dark:variant-filled-tertiary"
-							data-popup="popupHover-{name}"
-						>
-							<p class="text-center text-surface-500 dark:text-primary-500">{name}</p>
-							<div class="arrow variant-filled-secondary dark:variant-filled-tertiary" />
+						<div class="card p-3 site-tooltip" data-popup="popupHover-{name}">
+							<p class="text-center">{name}</p>
+							<div class="arrow site-tooltip-arrow" />
 						</div>
 					{/each}
 				</div>
@@ -343,19 +359,46 @@
 				>
 					{#each projects as project, i}
 						<div class="card-hover w-full max-w-sm">
-							<div
-								class="project-card block rounded card-hover p-3 bg-secondary-500 dark:bg-[#1a1917]"
-							>
-								<a href={project.link}>
+							{#if project.incomplete}
+								<div
+									class="project-card project-card-under-construction block rounded card-hover p-3 bg-secondary-500 dark:bg-[#1a1917]"
+									use:popup={{
+										event: 'hover',
+										target: 'popupProjectUnderConstruction-' + i,
+										placement: 'top'
+									}}
+									aria-disabled="true"
+								>
+									<div class="under-construction-badge">Under construction</div>
 									<div class="w-full max-w-[180px] mx-auto">
-										<svelte:component this={imgs[i]} />
+										<svelte:component this={project_imgs[i]} />
+									</div>
+									<div class="mt-3">
+										<p class="text-center font-bold mt-4">{project.title}</p>
+										<p class="text-left mb-4">{project.description}</p>
+									</div>
+								</div>
+								<div
+									class="card p-3 site-tooltip"
+									data-popup={'popupProjectUnderConstruction-' + i}
+								>
+									<p class="text-center">under construction!</p>
+									<div class="arrow site-tooltip-arrow" />
+								</div>
+							{:else}
+								<a
+									href={project.link}
+									class="project-card block rounded card-hover p-3 bg-secondary-500 dark:bg-[#1a1917]"
+								>
+									<div class="w-full max-w-[180px] mx-auto">
+										<svelte:component this={project_imgs[i]} />
 									</div>
 									<div class="mt-3">
 										<p class="text-center font-bold mt-4">{project.title}</p>
 										<p class="text-left mb-4">{project.description}</p>
 									</div>
 								</a>
-							</div>
+							{/if}
 						</div>
 					{/each}
 				</div>
@@ -419,5 +462,99 @@
 	/* ensure skill logos have consistent sizing */
 	.skill-logo-container {
 		flex-shrink: 0;
+	}
+
+	.project-card-under-construction {
+		position: relative;
+		cursor: not-allowed;
+		border: 1px dashed rgb(var(--color-surface-400) / 0.45);
+		box-shadow: inset 0 0 0 1px rgb(var(--color-surface-500) / 0.08);
+		opacity: 0.92;
+	}
+
+	.project-card-under-construction::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: 0.5rem;
+		pointer-events: none;
+		background: repeating-linear-gradient(
+			-45deg,
+			rgb(var(--color-surface-500) / 0.02),
+			rgb(var(--color-surface-500) / 0.02) 8px,
+			transparent 8px,
+			transparent 16px
+		);
+	}
+
+	.under-construction-badge {
+		position: absolute;
+		top: 0.55rem;
+		left: 0.55rem;
+		z-index: 2;
+		font-size: 0.66rem;
+		line-height: 1;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		padding: 0.35rem 0.45rem;
+		border-radius: 0.375rem;
+		background: rgb(var(--color-surface-500) / 0.08);
+		border: 1px solid rgb(var(--color-surface-500) / 0.18);
+		color: rgb(var(--color-surface-500));
+	}
+
+	:global(.dark) .project-card-under-construction {
+		border-color: rgb(var(--color-primary-500) / 0.35);
+		box-shadow: inset 0 0 0 1px rgb(var(--color-primary-500) / 0.1);
+	}
+
+	:global(.dark) .project-card-under-construction::after {
+		background: repeating-linear-gradient(
+			-45deg,
+			rgb(var(--color-primary-500) / 0.04),
+			rgb(var(--color-primary-500) / 0.04) 8px,
+			transparent 8px,
+			transparent 16px
+		);
+	}
+
+	:global(.dark) .under-construction-badge {
+		background: rgb(var(--color-primary-500) / 0.12);
+		border-color: rgb(var(--color-primary-500) / 0.3);
+		color: rgb(var(--color-primary-500));
+	}
+
+	.site-tooltip {
+		background: rgb(33 34 37 / 0.95);
+		border: 1px solid rgb(84 86 92 / 0.8);
+		box-shadow: 0 10px 24px rgb(0 0 0 / 0.25);
+	}
+
+	.site-tooltip :global(p) {
+		font-size: 0.9rem;
+		line-height: 1.2;
+		color: rgb(244 245 246);
+	}
+
+	.site-tooltip-arrow {
+		background: rgb(33 34 37 / 0.95);
+		border: 1px solid rgb(84 86 92 / 0.8);
+		border-color: rgb(84 86 92 / 0.8);
+	}
+
+	:global(.dark) .site-tooltip {
+		background: rgb(20 20 22 / 0.96);
+		border-color: rgb(107 110 118 / 0.72);
+		box-shadow: 0 12px 28px rgb(0 0 0 / 0.45);
+	}
+
+	:global(.dark) .site-tooltip :global(p) {
+		color: rgb(237 238 241);
+	}
+
+	:global(.dark) .site-tooltip-arrow {
+		background: rgb(20 20 22 / 0.96);
+		border: 1px solid rgb(107 110 118 / 0.72);
+		border-color: rgb(107 110 118 / 0.72);
 	}
 </style>
