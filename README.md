@@ -5,3 +5,4 @@
  * TailwindCSS
  * SkeletonUI
  * gsap
+ * mdsvex
