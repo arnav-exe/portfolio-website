@@ -8,7 +8,7 @@
 			startDate: 'July 2025',
 			endDate: 'Present',
 			description:
-                'Architected and shipped applied ML systems integrating ranking models, knowledge graphs, and multimodal retrieval pipelines under real-world data and reliability constraints. Implemented end-to-end ML infrastructure including feature pipelines, evaluation design, APIs, and cross-platform UIs. Created plug-and-play LLM safety middleware with layered redaction, monitoring, and scalable async processing.'
+				'Architected and shipped applied ML systems integrating ranking models, knowledge graphs, and multimodal retrieval pipelines under real-world data and reliability constraints. Implemented end-to-end ML infrastructure including feature pipelines, evaluation design, APIs, and cross-platform UIs. Created plug-and-play LLM safety middleware with layered redaction, monitoring, and scalable async processing.'
 		},
 		{
 			role: 'Lead front-end developer',
@@ -27,7 +27,7 @@
 			endDate: 'August 2022',
 			description:
 				'Developed internal automation tools and macros in Python (OpenCV, Pynput, Pillow) to speed up Illustrator workflows and enable batch rendering; designed NFT and game assets in Photoshop and Illustrator.'
-		},
+		}
 	];
 
 	const education = [
@@ -39,8 +39,7 @@
 			endDate: 'August 2025',
 			description:
 				'Specialized in advanced artificial intelligence topics including machine learning, constraint programming, natural language computation, and large-scale data systems. Built practical expertise through AI system design coursework and a research-driven dissertation project. Strengthened theoretical grounding in intelligent reasoning, optimization, and production-oriented ML engineering.',
-			projectSummary:
-				"Dissertation: 'Athenai AI Revision Assistant'"
+			projectSummary: "Dissertation: 'Athenai AI Revision Assistant'"
 		},
 		{
 			institution: 'Queen Mary University of London',
@@ -50,8 +49,7 @@
 			endDate: 'May 2024',
 			description:
 				'Built foundations across full-stack computing systems from low-level hardware and signal theory to software engineering and distributed data processing. Later specialized in machine learning topics including data mining and neural networks. Graduated with strong practical experience in systems design, embedded development, and performance-driven software.',
-			projectSummary:
-				"Final Year Project: 'AI Powered News Platform'"
+			projectSummary: "Final Year Project: 'AI Powered News Platform'"
 		}
 	];
 
@@ -129,11 +127,7 @@
 			}
 
 			return rows;
-		})
-		.map((row, index) => ({
-			...row,
-			mobileSide: index % 2 === 0 ? 'left' : 'right'
-		}));
+		});
 </script>
 
 <div class="timeline-wrap mx-auto max-w-6xl">
@@ -164,7 +158,7 @@
 					</div>
 
 					<div class="md:hidden">
-						{#if row.educationEntry && row.experienceEntry}
+						{#if row.educationEntry}
 							<article class="timeline-card timeline-card-edu mr-2">
 								<p class="timeline-date">
 									{row.educationEntry.startDate} - {row.educationEntry.endDate}
@@ -173,27 +167,6 @@
 								<h3 class="timeline-title">{row.educationEntry.institution}</h3>
 								<p class="timeline-subtitle">{row.educationEntry.degree}</p>
 							</article>
-						{:else if row.mobileSide === 'left'}
-							{#if row.educationEntry}
-								<article class="timeline-card timeline-card-edu mr-2">
-									<p class="timeline-date">
-										{row.educationEntry.startDate} - {row.educationEntry.endDate}
-									</p>
-									<p class="timeline-tag">Education</p>
-									<h3 class="timeline-title">{row.educationEntry.institution}</h3>
-									<p class="timeline-subtitle">{row.educationEntry.degree}</p>
-								</article>
-							{:else if row.experienceEntry}
-								<article class="timeline-card timeline-card-exp mr-2">
-									<p class="timeline-date">
-										{row.experienceEntry.startDate} - {row.experienceEntry.endDate}
-									</p>
-									<p class="timeline-tag">Experience</p>
-									<h3 class="timeline-title">
-										{row.experienceEntry.role} @ {row.experienceEntry.organization}
-									</h3>
-								</article>
-							{/if}
 						{/if}
 					</div>
 				</div>
@@ -229,7 +202,7 @@
 					</div>
 
 					<div class="md:hidden">
-						{#if row.educationEntry && row.experienceEntry}
+						{#if row.experienceEntry}
 							<article class="timeline-card timeline-card-exp ml-2">
 								<p class="timeline-date">
 									{row.experienceEntry.startDate} - {row.experienceEntry.endDate}
@@ -239,27 +212,6 @@
 									{row.experienceEntry.role} @ {row.experienceEntry.organization}
 								</h3>
 							</article>
-						{:else if row.mobileSide === 'right'}
-							{#if row.experienceEntry}
-								<article class="timeline-card timeline-card-exp ml-2">
-									<p class="timeline-date">
-										{row.experienceEntry.startDate} - {row.experienceEntry.endDate}
-									</p>
-									<p class="timeline-tag">Experience</p>
-									<h3 class="timeline-title">
-										{row.experienceEntry.role} @ {row.experienceEntry.organization}
-									</h3>
-								</article>
-							{:else if row.educationEntry}
-								<article class="timeline-card timeline-card-edu ml-2">
-									<p class="timeline-date">
-										{row.educationEntry.startDate} - {row.educationEntry.endDate}
-									</p>
-									<p class="timeline-tag">Education</p>
-									<h3 class="timeline-title">{row.educationEntry.institution}</h3>
-									<p class="timeline-subtitle">{row.educationEntry.degree}</p>
-								</article>
-							{/if}
 						{/if}
 					</div>
 				</div>
