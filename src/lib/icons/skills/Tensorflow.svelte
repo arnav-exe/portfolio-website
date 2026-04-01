@@ -44,7 +44,7 @@
 			y2="134.33"
 			xlink:href="#linear-gradient"
 		/></defs
-	><title>FullColorPrimary Icon</title><g class="cls-2"
+	><g class="cls-2"
 		><rect class="dark:fill-logosurface" x="60.08" y="58.47" width="158.31" height="151.72" /></g
 	><g class="cls-4"><rect class="dark:fill-logosurface" x="59" y="58.47" width="158.31" height="151.72" /></g></svg
 >
