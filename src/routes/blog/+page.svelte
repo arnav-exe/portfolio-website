@@ -12,8 +12,24 @@
 
 	// Format date
 	const formatDate = (dateString) => {
+		const raw =
+			typeof dateString === 'string'
+				? dateString
+				: dateString instanceof Date
+					? dateString.toISOString()
+					: String(dateString || '');
+		const parts = raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
 		const options = { year: 'numeric', month: 'long', day: 'numeric' };
-		return new Date(dateString).toLocaleDateString('en-US', options);
+
+		if (parts) {
+			const [, year, month, day] = parts;
+			return new Date(Number(year), Number(month) - 1, Number(day)).toLocaleDateString(
+				'en-US',
+				options
+			);
+		}
+
+		return new Date(raw).toLocaleDateString('en-US', options);
 	};
 
 	// Reactive filtering and pagination

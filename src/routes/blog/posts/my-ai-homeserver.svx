@@ -2,7 +2,7 @@
 title: "My £4500 AI Homeserver (and why it lives 4000 miles away)"
 description: "Inside my small-form-factor AI homeserver: why I built it, what’s inside it, and how I run it remotely."
 date: 2025-09-14
-tags: ["homeserver", "self-hosting", "PC"]
+tags: ["homeserver", "self-hosting"]
 ---
 
 ---
