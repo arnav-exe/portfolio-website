@@ -78,38 +78,45 @@
 	const projects = [
 		{
 			title: 'AI Jewelry Finder',
-			description: 'An intelligent jewelry search system that converts user sketches and selected design details into targeted product queries, then ranks results using both visual similarity and keyword matching to find closely matching pieces and present shopping links to the user.',
+			description:
+				'An intelligent jewelry search system that converts user sketches and selected design details into targeted product queries, then ranks results using both visual similarity and keyword matching to find closely matching pieces and present shopping links to the user.',
 			incomplete: true,
 			link: ''
 		},
 		{
 			title: 'Instant Context MCP Server',
-			description: 'An MCP server that discovers and indexes llms*.txt documentation sources for libraries and frameworks, so an LLM can query them directly for grounded context during coding workflows',
+			description:
+				'An MCP server that discovers and indexes llms*.txt documentation sources for libraries and frameworks, so an LLM can query them directly for grounded context during coding workflows',
 			link: 'https://github.com/arnav-exe/instant-context-mcp'
 		},
 		{
 			title: 'Product Notifier',
-			description: 'An intelligent, pluggable multi-source product monitoring engine that tracks stock and pricing across retailers, normalizes live data, and sends instant ntfy alerts when your purchase conditions are met.',
+			description:
+				'An intelligent, pluggable multi-source product monitoring engine that tracks stock and pricing across retailers, normalizes live data, and sends instant ntfy alerts when your purchase conditions are met.',
 			link: 'https://github.com/arnav-exe/product-notifier'
 		},
 		{
 			title: 'Athena - AI Revision Assistant',
-			description: 'A RAG-powered LLM revision assistant that semantically searches a large student resources repository to deliver accurate, context-aware answers with source page citations, images, and related material suggestions.',
+			description:
+				'A RAG-powered LLM revision assistant that semantically searches a large student resources repository to deliver accurate, context-aware answers with source page citations, images, and related material suggestions.',
 			link: 'https://github.com/arnav-exe/athena-revision-assistant'
 		},
 		{
 			title: 'AI News Platform',
-			description: 'A responsive, modern news platform that leverages LLMs to deliver high-quality article summaries to readers, allowing them to get up-to-date on current affairs in a fraction of the time',
+			description:
+				'A responsive, modern news platform that leverages LLMs to deliver high-quality article summaries to readers, allowing them to get up-to-date on current affairs in a fraction of the time',
 			link: 'https://github.com/arnav-exe/ai-news-platform'
 		},
 		{
 			title: 'CSSBattle Minifier',
-			description: 'A Python script built to intelligently minify your code for the online code golfing game CSSBattle.dev',
+			description:
+				'A Python script built to intelligently minify your code for the online code golfing game CSSBattle.dev',
 			link: 'https://github.com/arnav-exe/cssbattle-minifier'
 		},
 		{
 			title: 'Polyboard - Multiple Clipboards',
-			description: 'A lightweight Python applet that provides the user with upto 10 additional clipboards to store/retrieve text-based data from',
+			description:
+				'A lightweight Python applet that provides the user with upto 10 additional clipboards to store/retrieve text-based data from',
 			link: 'https://github.com/arnav-exe/polyboard'
 		}
 	];
@@ -282,7 +289,7 @@
 				>
 					ABOUT ME
 				</h2>
-				<div class="about-section border-primary-500/20 pl-7 flex flex-col gap-5">
+				<div class="about-section border-primary-500/20 flex flex-col gap-5">
 					<p class="translate-x-5">
 						Hi! I am an AI/ML engineer, full-stack developer, and cloud architect with a strong
 						passion for building end-to-end AI solutions. I am driven by the challenge of solving
@@ -404,7 +411,7 @@
 			<!-- EXPERIENCE -->
 			<div class="my-32">
 				<h2
-					class="h2 font-bold mb-4 flex items-center gap-8 whitespace-nowrap before:content-[''] before:flex-1 before:h-px before:bg-primary-500/15 after:content-[''] after:flex-1 after:h-px after:bg-primary-500/15"
+					class="h2 font-bold mb-4 flex items-center gap-4 sm:gap-8 text-center whitespace-normal sm:whitespace-nowrap before:content-[''] before:flex-1 before:h-px before:bg-primary-500/15 after:content-[''] after:flex-1 after:h-px after:bg-primary-500/15"
 				>
 					EDUCATION &amp; EXPERIENCE
 				</h2>
@@ -415,7 +422,7 @@
 			</div>
 
 			<!-- CONTACT -->
-			<div class="mt-32 mb-32">
+			<div class="mt-32 mb-12 md:mb-20">
 				<h2
 					class="h2 font-bold mb-4 flex items-center gap-8 whitespace-nowrap before:content-[''] before:flex-1 before:h-px before:bg-primary-500/15 after:content-[''] after:flex-1 after:h-px after:bg-primary-500/15"
 				>
