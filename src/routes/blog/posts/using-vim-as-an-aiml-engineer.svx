@@ -1,0 +1,104 @@
+---
+title: "How it feels to be the only AI/ML engineer using Vim"
+description: "A brief look at my Vim workflow and experience using it professionally."
+date: 2025-12-13
+tags: ["rambles", "vim"]
+---
+
+---
+
+There is a very specific type of experience that comes with being the only person on your team using Vim. It sits somewhere between quiet productivity, mild confusion from coworkers, and the occasional feeling that you are part of a small travelling exhibit.
+
+
+
+## What even is Vim?
+
+At its core, Vim is a text editor built around a very simple philosophy: your hands should never leave the keyboard.
+
+Everything is done through motions, modes, and short commands. You stop thinking in terms of characters and start thinking in terms of content structure.
+
+For me, this translated directly into productivity gains. A lot of my day-to-day tasks involve jumping between logs, editing markdown files, modifying configs, and throwing together experiments. All of which nessecitate the need to move *blazingly fast*, which I am legally required to say.
+
+
+
+## Taking the Red Pill
+
+I first heard about Neovim at university from a very particular kind of guy. I'm talking about that guy who swears by Arch linux (btw), makes all their notes in markdown, and lives inside the terminal.
+
+Naturally, I ignored his advice.
+
+For most of my degree, I was perfectly happy using VS Code (gross).
+
+Then everything changed over the winter break as my curiosity started to creep in a bit more seriously. I had seen enough people swear by it that I had to see for myself what all the fuss was about.
+
+Switching to Neovim was by no means a clean and straightforward transition.
+
+The first week was rough. My editing speed dropped dramatically, simple actions felt impossible to do, and I constantly had to think about what mode I was in and why pressing certain keys was suddenly doing something completely different.
+
+But over time, things started to settle.
+
+The biggest shift for me was realizing that Neovim isn’t really about typing faster, it’s about moving and editing with intent. Once you start thinking in terms of "what am I trying to operate on" instead of "how do I move my cursor there," a lot of it begins to click in a way that’s hard to explain until you’ve felt it yourself.
+
+Once the muscle memory started forming, the efficiency increase was very noticeable. Navigation became faster, edits became more fluid, and I stopped relying on the mouse and started trusting the almighty Vim motions.
+
+And after that point, going back to VS Code felt wrong.
+
+
+
+## Life of a NeoVimmer
+
+At this point, Neovim is just what I use for pretty much everything.
+
+I use it for work, for side projects, and everything in between. I even used it to write my master’s dissertation, which saying out loud sounds slightly ridiculous but it actually worked surprisingly well. There’s just something nice about having one environment that you’re completely comfortable in and familiar with, where everything behaves exactly how you expect it to.
+
+Also, it is, of course, *blazingly fast*. The Vim motions are a genuine gamechanger. Now I look down on everyone else who performs text manipulation with their mouse.
+
+Every once a while, at work someone will see my screen and do a double take, and there’s usually a short conversation that follows where I try to explain that yes, this is my actual workflow.
+
+It’s always a small reminder that this setup is still a bit outside the norm, especially in AI/ML circles where most people are living inside notebooks or more traditional editors.
+
+
+
+## My Favourite Vim Motions
+
+There are a lot of big ideas people talk about when it comes to Vim: modal editing, composability, and so on, but honestly some of my favorite parts are the smaller details.
+
+One of the weirdest ones I’ve grown attached to is `<C-a>` and `<C-x>` for incrementing and decrementing numbers. It’s kind of unnecessary, and I don’t think I would have ever asked for it, but the fact that it exists and works as smoothly as it does is oddly satisfying. It’s a tiny thing, but it’s also a perfect example of how much thought has gone into these little interactions.
+
+An extension of these motions that I will go out of my way to use is `g<C-a>` and `g<C-x>`, which when used in visual mode will incrementally increment or decrement all highlighted numbers (so clean).
+
+
+
+## Some Cool Neovim Plugins
+
+A curated list of my favourite Neovim plugins from yours truly.
+
+- **kdheepak/lazygit.nvim** — integrates Lazygit directly into Neovim. Makes managing git branches, commits and diffs much smoother without leaving the editor.
+
+- **tamton-aquib/duck.nvim** — spawns a duck that walks around your screen (essential for emotional support).
+
+- **iamcco/markdown-preview.nvim** — live preview for markdown files. Very useful when writing documentation or reading reports and notes.
+
+- **lervag/vimtex** — full LaTeX support (I used this to write my Master's dissertation in vim lol)
+
+- **wintermute-cell/gitignore.nvim** — quickly generates `.gitignore` templates. Saves time when starting new experiments or repositories.
+
+- **folke/snacks.nvim** — a collection of quality of life enhancements that make the editor feel more polished and pleasant to use.
+
+
+
+## Should You Take the Red Pill?
+
+Yes.
+
+I do actually think more people should give Vim (or Neovim) a proper try, especially if you spend a large chunk of your day writing code or working with text.
+
+There’s definitely an upfront cost, and you will feel slower at first, but once you get past that initial phase, the payoff is very real. Being able to move, edit, and reshape code without constantly breaking your flow or reaching for the mouse adds up in a way that’s hard to appreciate until you’ve experienced it over a longer period of time.
+
+It's time you take the red pill and switch to Vim. If you stick with it long enough to get comfortable, it’s very hard to go back to anything else without feeling like you’ve lost a bit of that control.
+
+<br>
+
+I'm almost certainly not the only AI/ML engineer using Vim.
+
+But it does feel like it sometimes, and at this point I’m kind of used to that. So worth it though.
