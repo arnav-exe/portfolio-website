@@ -7,8 +7,24 @@
 
 	// Format date
 	const formatDate = (dateString) => {
+		const raw =
+			typeof dateString === 'string'
+				? dateString
+				: dateString instanceof Date
+					? dateString.toISOString()
+					: String(dateString || '');
+		const parts = raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
 		const options = { year: 'numeric', month: 'long', day: 'numeric' };
-		return new Date(dateString).toLocaleDateString('en-US', options);
+
+		if (parts) {
+			const [, year, month, day] = parts;
+			return new Date(Number(year), Number(month) - 1, Number(day)).toLocaleDateString(
+				'en-US',
+				options
+			);
+		}
+
+		return new Date(raw).toLocaleDateString('en-US', options);
 	};
 </script>
 
@@ -40,13 +56,10 @@
 				<h1 class="h1 font-bold mb-4">{title}</h1>
 
 				{#if description}
-					<p class="text-xl mb-4 text-surface-400 dark:text-secondary-700">{description}</p>
+					<p class="text-xl mb-4 blog-header-muted">{description}</p>
 				{/if}
 
-				<div
-					data-cursor-static
-					class="flex flex-wrap items-center gap-4 text-sm text-surface-400 dark:text-secondary-700"
-				>
+				<div data-cursor-static class="flex flex-wrap items-center gap-4 text-sm blog-header-muted">
 					{#if date}
 						<span>{formatDate(date)}</span>
 					{/if}
@@ -62,7 +75,7 @@
 						{#each tags as tag}
 							<span
 								data-cursor-static
-								class="badge bg-secondary-500 dark:bg-tertiary-500 text-surface-500 dark:text-primary-500 px-3 py-1"
+								class="badge bg-surface-500 dark:bg-primary-500 text-primary-500 dark:text-surface-500 px-2 py-1 text-xs"
 							>
 								{tag}
 							</span>
@@ -81,9 +94,14 @@
 
 <style>
 	/* blog content styling */
+	.blog-header-muted {
+		color: rgb(104 104 104);
+	}
+
 	:global(.blog-content h2) {
 		font-size: 1.875rem;
 		font-weight: 700;
+		line-height: 1.25;
 		margin-top: 2rem;
 		margin-bottom: 1rem;
 		color: rgb(17 17 17);
@@ -92,6 +110,7 @@
 	:global(.blog-content h3) {
 		font-size: 1.5rem;
 		font-weight: 700;
+		line-height: 1.25;
 		margin-top: 1.5rem;
 		margin-bottom: 0.75rem;
 		color: rgb(17 17 17);
@@ -99,7 +118,7 @@
 
 	:global(.blog-content p) {
 		margin-bottom: 1rem;
-		color: rgb(88 88 88);
+		color: rgb(104 104 104);
 		line-height: 1.75;
 	}
 
@@ -107,8 +126,8 @@
 	:global(.blog-content ol) {
 		margin-top: 1rem;
 		margin-bottom: 1rem;
-		margin-left: 1.5rem;
-		color: rgb(88 88 88);
+		margin-left: 1.75rem;
+		color: rgb(104 104 104);
 		font-size: inherit;
 		line-height: inherit;
 	}
@@ -128,7 +147,9 @@
 	}
 
 	:global(.blog-content li::marker) {
-		color: rgb(88 88 88);
+		color: rgb(47 47 47);
+		font-weight: 700;
+		font-size: 1.08em;
 	}
 
 	:global(.blog-content hr) {
@@ -158,6 +179,9 @@
 	:global(.blog-content pre code) {
 		background-color: transparent;
 		padding: 0;
+		white-space: pre-wrap;
+		word-break: break-word;
+		overflow-wrap: anywhere;
 	}
 
 	:global(.blog-content a) {
@@ -174,6 +198,25 @@
 		padding-left: 1rem;
 		font-style: italic;
 		margin: 1rem 0;
+	}
+
+	:global(.blog-content q) {
+		font-style: italic;
+		color: rgb(47 47 47);
+	}
+
+	:global(.blog-content q::before),
+	:global(.blog-content q::after) {
+		font-style: normal;
+		font-weight: 700;
+		font-size: 1.08em;
+		line-height: inherit;
+		color: rgb(47 47 47);
+	}
+
+	:global(.blog-content p > q:only-child) {
+		display: block;
+		margin-bottom: 1rem;
 	}
 
 	:global(.blog-content figure) {
@@ -202,12 +245,60 @@
 		border-radius: 0;
 	}
 
+	:global(.blog-content table) {
+		display: block;
+		width: 100%;
+		overflow-x: auto;
+		margin: 1.25rem 0;
+		border: 1px solid rgb(var(--color-secondary-700) / 0.45);
+		border-radius: 0.75rem;
+		background-color: rgb(var(--color-surface-500) / 0.9);
+		border-collapse: separate;
+		border-spacing: 0;
+	}
+
+	:global(.blog-content thead) {
+		background-color: rgb(var(--color-surface-400) / 0.2);
+	}
+
+	:global(.blog-content th),
+	:global(.blog-content td) {
+		padding: 0.75rem 0.9rem;
+		text-align: left;
+		white-space: normal;
+		word-break: break-word;
+		overflow-wrap: anywhere;
+	}
+
+	:global(.blog-content th) {
+		font-weight: 700;
+		color: rgb(17 17 17);
+		border-bottom: 1px solid rgb(var(--color-secondary-700) / 0.45);
+	}
+
+	:global(.blog-content td) {
+		color: rgb(104 104 104);
+		border-bottom: 1px solid rgb(var(--color-secondary-700) / 0.28);
+	}
+
+	:global(.blog-content tbody tr:nth-child(even)) {
+		background-color: rgb(var(--color-surface-400) / 0.12);
+	}
+
+	:global(.blog-content tbody tr:last-child td) {
+		border-bottom: 0;
+	}
+
 	:global(.blog-content img) {
 		border-radius: 0.5rem;
 		margin: 1rem 0;
 	}
 
 	/* Dark mode styles */
+	:global([data-theme='minimalist'].dark) .blog-header-muted {
+		color: rgb(183 176 157);
+	}
+
 	:global([data-theme='minimalist'].dark .blog-content h2),
 	:global([data-theme='minimalist'].dark .blog-content h3) {
 		color: rgb(237 229 209);
@@ -216,11 +307,11 @@
 	:global([data-theme='minimalist'].dark .blog-content p),
 	:global([data-theme='minimalist'].dark .blog-content ul),
 	:global([data-theme='minimalist'].dark .blog-content ol) {
-		color: rgb(159 151 131);
+		color: rgb(183 176 157);
 	}
 
 	:global([data-theme='minimalist'].dark .blog-content li::marker) {
-		color: rgb(159 151 131);
+		color: rgb(225 217 198);
 	}
 
 	:global([data-theme='minimalist'].dark .blog-content hr) {
@@ -228,7 +319,11 @@
 	}
 
 	:global([data-theme='minimalist'].dark .blog-content code) {
-		background-color: rgb(8 8 8);
+		background-color: rgb(var(--color-surface-400) / 0.22);
+	}
+
+	:global([data-theme='minimalist'].dark .blog-content pre code) {
+		background-color: transparent;
 	}
 
 	:global([data-theme='minimalist'].dark .blog-content pre) {
@@ -246,6 +341,41 @@
 		background-color: rgb(var(--color-surface-300) / 0.22);
 	}
 
+	:global([data-theme='minimalist'].dark .blog-content table) {
+		background-color: rgb(var(--color-surface-400) / 0.2);
+		border-color: rgb(var(--color-primary-500) / 0.18);
+	}
+
+	:global([data-theme='minimalist'].dark .blog-content thead) {
+		background-color: rgb(var(--color-surface-300) / 0.22);
+	}
+
+	:global([data-theme='minimalist'].dark .blog-content th) {
+		color: rgb(237 229 209);
+		border-bottom-color: rgb(var(--color-primary-500) / 0.18);
+	}
+
+	:global([data-theme='minimalist'].dark .blog-content td) {
+		color: rgb(183 176 157);
+		border-bottom-color: rgb(var(--color-primary-500) / 0.12);
+	}
+
+	:global([data-theme='minimalist'].dark .blog-content tbody tr:nth-child(even)) {
+		background-color: rgb(var(--color-surface-300) / 0.15);
+	}
+
+	@media (max-width: 767px) {
+		:global(.blog-content th),
+		:global(.blog-content td) {
+			padding: 0.6rem 0.7rem;
+			white-space: normal;
+			word-break: break-word;
+			overflow-wrap: anywhere;
+			font-size: 0.9rem;
+			line-height: 1.45;
+		}
+	}
+
 	:global([data-theme='minimalist'].dark .blog-content a) {
 		color: rgb(212 201 174);
 	}
@@ -256,5 +386,14 @@
 
 	:global([data-theme='minimalist'].dark .blog-content blockquote) {
 		border-left-color: rgb(237 229 209);
+	}
+
+	:global([data-theme='minimalist'].dark .blog-content q) {
+		color: rgb(225 217 198);
+	}
+
+	:global([data-theme='minimalist'].dark .blog-content q::before),
+	:global([data-theme='minimalist'].dark .blog-content q::after) {
+		color: rgb(225 217 198);
 	}
 </style>
