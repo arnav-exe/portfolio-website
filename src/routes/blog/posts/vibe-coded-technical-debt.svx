@@ -1,0 +1,310 @@
+---
+title: "Technical Debt in the Age of AI-Assisted Code"
+description: ""
+date: 2026-2-20
+tags: []
+---
+
+---
+
+There was a time when writing code was the bottleneck.
+
+You had an idea, and the limiting factor was your ability to translate that idea into working software. Syntax, APIs, and edge cases were what slowed you down just enough to force you to think.
+
+That constraint is gone.
+
+Today's tools like Claude Code, Cursor, Codex, and newer agentic IDEs have completely flipped this on its head. You can generate entire features in minutes, and in some cases, entire systems through iterative loops of prompting, execution, and refinement with agentic IDEs.
+
+But the result of AI-assisted code, and the increased 'productivity' and shipping velocity that comes with it have not eliminated technical debt, rather they've just changed its shape.
+
+
+## Technical Debt Under a New Guise
+
+Nine times out of ten, modern coding agents output syntatically correct code that builds on the first try, and is usually better than what the average developer could write under the same time constraints. However that doesn't mean much anymore, as code correctness at the local level doesn’t guarantee coherence at the system level.
+
+As a result, what has emerged is still technical debt, just in a multitude of new flavours.
+
+
+### Comprehension Debt
+
+You didn’t hand-write this code. You prompted an agent, reviewed its output, and maybe tweaked a few lines. As a result, your depth of understanding of the codebase is, well, not as deep. There’s a growing gap between what the system does and what the developer can confidently explain.
+
+This gap is what I call comprehension debt.
+
+I've witnessed this myself, where I received a codebase to work on and sat through a handover meeting that was supposed to give me a mental model of the system.
+
+It didn't.
+
+Reading through the actual code, I realised that many of the developer's explanations did not match what was happening. Either that or their explanations were very colloqiual/surface-level. They went through the whole sofware development lifecycle as expected, however at some point their mental model had quietly drifted from reality.
+
+The comprehension gap doesn’t hurt while things are working. It surfaces when they aren’t, and since the context needed to diagnose the problem was never yours to begin with, now it's suddenly a much bigger problem to address.
+
+
+
+### Consistency Debt
+
+AI is very good at solving the immediate problem, but it is not inherently good at maintaining a unified philosophy across an entire codebase.
+
+Consequences of this include:
+- Multiple design patterns for handling the same concern
+- Slightly different abstractions solving identical problems
+- Gradual shift in naming conventions/structure
+
+Collectively, this results in the system losing coherence over time, with regular efforts being required to keep the AI on the same 'design track'.
+
+---
+
+### Over-Engineering
+
+Over-engineering is a very classical trait of AI-driven code generation that I have observed. I've seen it go as far as write its own from-scratch implementation of a particular package/library.
+
+I suppose it makes sense, because this is a bit of a pattern recognition game, which 
+
+AI has seen every design pattern ever written. And it tends to use them. A lot.
+
+You ask for a simple feature, and you get:
+- An interface
+- A factory
+- A strategy pattern
+- A layer of indirection that no one explicitly needed
+
+None of it is incorrect. It’s just unnecessary.
+
+Over-engineering used to be an occasional oopsy-daisy, but now it seems to be the default option.
+
+---
+
+### Hidden Dependency Debt
+
+AI will happily introduce libraries to solve narrow problems.
+
+Parsing, validation, formatting — there’s always a dependency available, and it will often be used without much scrutiny.
+
+Over time:
+- Build complexity increases
+- Upgrade paths become fragile
+- The system becomes harder to reason about
+
+The coupling is subtle, until it isn’t.
+
+---
+
+## “Vibe Coding” and the Illusion of Progress
+
+There’s a new development loop that feels incredibly efficient.
+
+You describe what you want. The system generates it. You refine it. It works.
+
+Repeat.
+
+It feels like flow. It feels like momentum.
+
+It feels like progress.
+
+But it’s easy to confuse *output* with *understanding*.
+
+When the feedback loop is that fast, you stop questioning decisions. You stop evaluating tradeoffs. You stop asking whether the approach is correct — because it already produces results. That coupled with the tone of confidence in which these LLMs describe their approaches, and it quickly becomes a bloated, sub-optimal codebase that will now require major refactoring.
+
+Speed doesn’t just accelerate development. It compresses doubt.
+
+And doubt is where good engineering decisions come from.
+
+---
+
+## Agentic IDEs Don’t Remove Debt — They Amortize It
+
+Modern agentic IDEs push this even further.
+
+They can:
+- Scan and “understand” your codebase (`/init`)
+- Generate tests automatically
+- Execute code and observe outputs
+- Iterate in closed loops until things pass
+
+At first glance, this looks like a solution to many of the problems above.
+
+Consistency improves. Tests exist. Feedback loops are tighter.
+
+And to be fair, these tools *do* raise the baseline quality of what gets produced.
+
+But they introduce a different dynamic.
+
+The system can now be:
+- internally consistent
+- well-tested
+- continuously self-correcting
+
+...without you fully understanding it.
+
+The debt hasn’t disappeared. It has been externalized.
+
+> AI can maintain systems you don’t understand — and that’s a fundamentally new kind of risk.
+
+Agentic loops are excellent at optimizing within a system.
+
+They are much weaker at questioning whether the system itself is well-designed.
+
+They don’t decide:
+- whether a dependency should exist
+- whether an abstraction is justified
+- whether the architecture is appropriate long-term
+
+They operate within the frame you give them.
+
+If that frame is wrong, they will reinforce it — efficiently.
+
+---
+
+## The Compression of Design Time
+
+Friction used to be a forcing function.
+
+When something was hard to implement, you naturally spent more time thinking about whether it was worth building that way.
+
+AI removes that friction.
+
+Now, complexity doesn’t hurt upfront. You can generate a complex abstraction as easily as a simple one.
+
+So you do.
+
+The result is a system that accumulates complexity faster than it accumulates understanding.
+
+Design used to be constrained by effort.
+
+Now it’s constrained by discipline.
+
+---
+
+## The Ownership Gap
+
+There’s a shift happening in how developers relate to their systems.
+
+We are moving from builders to curators.
+
+Instead of constructing systems piece by piece, we assemble them from generated outputs. We review, edit, and accept.
+
+But ownership doesn’t come from approval. It comes from construction.
+
+When you’ve wrestled with a problem, you understand its edges. You remember the tradeoffs. You know where it will break.
+
+When you haven’t, the system feels external.
+
+Even if you wrote the prompt.
+
+That gap matters.
+
+Because when things go wrong, responsibility doesn’t disappear. It just becomes harder to act on.
+
+---
+
+## Redefining Senior Engineering
+
+AI has raised the floor.
+
+A junior engineer with the right prompts can produce output that looks like senior-level code.
+
+But the ceiling hasn’t moved.
+
+If anything, it has become more important.
+
+The value of a senior engineer is no longer in writing better code.
+
+It’s in deciding what should exist at all.
+
+That means:
+- Defining system boundaries
+- Enforcing architectural consistency
+- Setting constraints that guide implementation
+- Evaluating tradeoffs before they are encoded into the system
+
+The skill is shifting from *how to code* to *what to build*.
+
+And that is a harder problem.
+
+---
+
+## Managing AI-Driven Technical Debt
+
+You don’t fix this by avoiding AI.
+
+You fix it by being more deliberate in how you use it.
+
+### Enforce Architectural Constraints
+
+If you don’t define structure, the system will drift.
+
+Be explicit about:
+- Patterns
+- Layer boundaries
+- Naming conventions
+
+In practice, this often means encoding constraints directly into how you use your tools — whether that’s prompt templates, reusable “skills”, or system-level guidelines.
+
+AI will follow constraints well.
+
+It will not invent them.
+
+---
+
+### Require Explanation, Not Just Output
+
+Don’t just accept code. Ask for reasoning.
+
+- Why this approach?
+- What tradeoffs were considered?
+- What assumptions are being made?
+
+If the explanation is weak, the implementation probably is too.
+
+---
+
+### Run Coherence Audits
+
+Periodically step back and look at the system as a whole.
+
+Not file-by-file. System-wide.
+
+Ask:
+- Does this feel like one cohesive system?
+- Are similar problems solved in similar ways?
+- Is there a clear architectural story?
+
+If not, you’re accumulating debt — even if everything works.
+
+---
+
+### Be Intentional About Slowing Down
+
+Not everything should be fast.
+
+Some decisions deserve friction.
+
+If something introduces:
+- A new abstraction
+- A new dependency
+- A new pattern
+
+That’s a signal to pause.
+
+Speed is a tool. Not a default.
+
+---
+
+## Closing Thoughts
+
+AI has made code cheap.
+
+It has not made good systems cheap.
+
+If anything, it has made them more expensive — because the limiting factor is no longer effort, but judgment.
+
+The risk isn’t that we generate bad code.
+
+The risk is that we generate systems that are internally consistent, well-tested, and still fundamentally misaligned.
+
+Technical debt used to be visible.
+
+Now it can be maintained, reinforced, and hidden — all at the same time.
+
+And that’s a much harder thing to refactor.
+
