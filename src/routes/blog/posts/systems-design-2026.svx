@@ -1,0 +1,104 @@
+---
+title: "Why System Design Knowledge is Mandatory in 2026"
+description: "As coding becomes cheap, the real challenge is deciding what to build and how it holds together over time. This is a case for treating system design as a foundational skill, not a senior-level extra."
+date: 2026-2-20
+tags: [vibe code, systems design, thoughts]
+---
+
+---
+
+There was a time when writing code was the bottleneck.
+
+You had an idea, and the limiting factor was your ability to translate that into working software. Syntax, APIs, and edge cases were what slowed you down just enough to force you to think. That constraint forced a level of discipline during development, as you had to first think hard about your approach before implementation because implementation had a cost.
+
+That constraint is gone.
+
+Today, you can describe a feature in plain English, iterate on it in a tight loop, and end up with something that works in minutes. In some cases, entire systems can be assembled this way. Furthermore, it feels like progress, because of its iterative nature and typically functional end result, but something more fundamental has changed in how we build software.
+
+
+## Traditional Software Development is Dying
+
+I describe the modern day development loop as having taken the form of a pseudo-declarative paradigm, where you now just describe intent, and a coding agent generates an implementation. You iterate over your ideas and description with the agent until the output matches what you had in mind. However, the reason why I call it 'pseudo-declarative' and not declarative is because it is missing a key aspect of this paradigm: constraints.
+
+In traditional declarative systems, you describe what you want within a well-defined model and a series of constraints, such that the system knows the boundaries, invariants, and the tradeoffs it needs to respect. With AI-assisted and AI-driven coding, those boundaries don’t exist by default. You must explicitly provide them.
+
+So ultimately what a vibe coder ends up with is a kind of pseudo-declarative workflow:
+ - coder's intent at a high level
+ - low level execution from the agent
+ - very little enforced structure in between
+
+And that gap is where systems start to fall apart.
+
+
+## AI is Locally Correct, Not Systemically Coherent
+
+Most AI-generated code is... fine. It compiles, it runs, and it (usually) solves the problem you asked it to solve.
+
+But that’s not the hard part anymore. The hard part is whether the solution:
+ - fits into the rest of the system
+ - respects existing abstractions
+ - scales with future changes
+ - preserves the underlying architecture
+
+Don't get me wrong, coding agents are very good at optimizing within a given frame, but they are much worse at questioning whether the frame itself makes sense. Meaning, if your prompt implies the wrong abstractions, patterns, or boundaries, you don't get errors or architecture breakages anymore. Instead, you get a clean, confident implementation of a bad idea, followed by a summary statement congratulaing you on your 'excellent ideas'. And because the feedback loop is so fast, you rarely stop to question it.
+
+
+## The Real Bottleneck Has Moved
+
+As stated earlier, with agentic coding the cost of implementation (particularly time-wise) has shrunk orders of magnitude. A complex abstraction can be generated just as easily as a simple one. You can refactor entire features with a few iterations. You can rapidly explore multiple approaches (sometimes in parallel). However, removing friction from implementation doesn’t remove complexity, it just moves it. The bottleneck is no longer writing code, it’s deciding what code should exist in the first place.
+
+Decisions such as:
+ - Where are the boundaries?
+ - How would this interact with other components (including future ones) of the system
+ - What should be a service vs a module?
+ - What deserves an abstraction, and what doesn’t?
+ - How does this evolve 6 months from now?
+
+Are even more important today.
+
+Those questions used to be partially answered by the cost of implementation. Now they are answered entirely by your judgment.
+
+
+## Why This Fails Without System Design
+
+AI cannot compensate for you not having a strong mental model of the system you are trying to build.
+
+You start exploring ideas in a conversational loop:
+ - "What if we structure it like this?"
+ - "What if we add this layer?"
+ - "What if we switch to this pattern?"
+
+At each turn of the conversation, the AI will produce something plausible (and compliment you for your genius idea).
+
+But 'plausible' is not the same as 'correct'.
+
+Without a clear sense of:
+ - how the system should behave under load
+ - how components should interact
+ - where state should live
+ - what needs to remain stable over time
+
+You end up navigating by vibes, and AI is very good at making vibes feel like fact-based, grounded decisions. This is where people fall into rabbit holes, iterating on increasingly complex solutions that work, but don’t actually solve the right problem in a clean or durable way.
+
+
+## A Gradual Shift in Refactors from Extension to Replacement
+
+One pattern that I've noticed shows up a lot in AI-assisted workflows is this:
+
+Instead of extending an existing system, parts of it just get re-written, because it’s easy. Instead of carefully threading that change through existing abstractions, refactoring a feature nowadays frequently involves:
+ - regenerating a chunk of the system
+ - reshaping the logic
+ - replacing what was there before
+
+This works, oftentimes quickly as well, but over time this erodes modularity. You end up with systems that are inflexible, harder to reason about, contain less consistent components, and are more expensive to change in the long run
+
+Now AI cannot be blamed for being 'bad' at modularity, because modularity is a design decision, not an implementation detail. And design is the part that you still own.
+
+
+## Closing Thoughts
+
+AI removed the parts of 'good engineering' that were easiest to measure. Clean syntax, working code, and passing tests are all now par for the course in AI driven development.
+
+AI has also made code cheap, but it has not made good systems cheap. If anything, it has made them more expensive because the limiting factor is no longer effort, but judgment. You can generate almost anything now. The question is whether you know what's worth generating. That's why I believe that, in 2026, system design isn’t a 'senior-level' skill, it's the baseline.
+
+Without this crucial skill, system will still get built, just poorly.
