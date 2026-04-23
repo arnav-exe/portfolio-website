@@ -2,7 +2,7 @@
 title: "Why System Design Knowledge is Mandatory in 2026"
 description: "As coding becomes cheap, the real challenge is deciding what to build and how it holds together over time. This is a case for treating system design as a foundational skill, not a senior-level extra."
 date: 2026-2-20
-tags: [vibe code, systems design, thoughts]
+tags: ["vibe code", "systems design", "rambles"]
 ---
 
 ---
