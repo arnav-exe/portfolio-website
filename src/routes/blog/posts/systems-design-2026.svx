@@ -18,14 +18,11 @@ Today, you can describe a feature in plain English, iterate on it in a tight loo
 
 ## Traditional Software Development is Dying
 
-I describe the modern day development loop as having taken the form of a pseudo-declarative paradigm, where you now just describe intent, and a coding agent generates an implementation. You iterate over your ideas and description with the agent until the output matches what you had in mind. However, the reason why I call it 'pseudo-declarative' and not declarative is because it is missing a key aspect of this paradigm: constraints.
+I describe the modern day software development loop as having taken the form of a pseudo-declarative paradigm, where you now just describe intent, and a coding agent generates an implementation. You iterate over your ideas and description with the agent until the output matches what you had in mind. However, the reason why I call it 'pseudo-declarative' and not just 'declarative' is because it is missing a key aspect of this paradigm: constraints.
 
 In traditional declarative systems, you describe what you want within a well-defined model and a series of constraints, such that the system knows the boundaries, invariants, and the tradeoffs it needs to respect. With AI-assisted and AI-driven coding, those boundaries don’t exist by default. You must explicitly provide them.
 
-So ultimately what a vibe coder ends up with is a kind of pseudo-declarative workflow:
- - coder's intent at a high level
- - low level execution from the agent
- - very little enforced structure in between
+So ultimately what a vibe coder ends up with is a kind of pseudo-declarative workflow consisting of the coder's intent at a high level, low level execution from the agent, and very little enforced structure in between.
 
 And that gap is where systems start to fall apart.
 
@@ -40,7 +37,7 @@ But that’s not the hard part anymore. The hard part is whether the solution:
  - scales with future changes
  - preserves the underlying architecture
 
-Don't get me wrong, coding agents are very good at optimizing within a given frame, but they are much worse at questioning whether the frame itself makes sense. Meaning, if your prompt implies the wrong abstractions, patterns, or boundaries, you don't get errors or architecture breakages anymore. Instead, you get a clean, confident implementation of a bad idea, followed by a summary statement congratulaing you on your 'excellent ideas'. And because the feedback loop is so fast, you rarely stop to question it.
+Don't get me wrong, coding agents are very good at optimizing within a given frame, but they are much worse at questioning whether the frame itself makes sense. Meaning, if your prompt implies the wrong abstractions, patterns, or boundaries, you don't get errors or architecture breakages anymore. Instead, you get a clean, confident implementation of a bad idea, followed by a summary statement congratulaing you on your 'excellent idea'. And because the feedback loop is so fast, you rarely stop to question it.
 
 
 ## The Real Bottleneck Has Moved
@@ -92,7 +89,9 @@ Instead of extending an existing system, parts of it just get re-written, becaus
 
 This works, oftentimes quickly as well, but over time this erodes modularity. You end up with systems that are inflexible, harder to reason about, contain less consistent components, and are more expensive to change in the long run
 
-Now AI cannot be blamed for being 'bad' at modularity, because modularity is a design decision, not an implementation detail. And design is the part that you still own.
+Now AI cannot be blamed for being 'bad' at modularity, because modularity is a design decision, not an implementation detail.
+
+And design is the part that you still own.
 
 
 ## Closing Thoughts
