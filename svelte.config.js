@@ -2,13 +2,16 @@ import adapter from '@sveltejs/adapter-auto';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import path from "node:path";
 import { fileURLToPath } from 'node:url';
-import { mdsvex } from "mdsvex";
+import { mdsvex, code_highlighter } from "mdsvex";
 
 const dir = path.resolve(fileURLToPath(import.meta.url), "../");
 
 const mdsvexOptions = {
 	extensions: [".md", ".svx"],
-	highlight: {}
+	highlight: {
+		// mdsvex only escapes \t \r \n in template literal, other backslash (like \b \d \w) get reinterpreted. fix by escape all remaining backslashes
+		highlighter: (code, lang, meta) => code_highlighter(code, lang, meta).replace(/\\/g, '&#92;')
+	}
 }
 
 /** @type {import('@sveltejs/kit').Config} */
