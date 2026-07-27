@@ -48,7 +48,9 @@
 		// check element and up to 3 parents for interactable tags
 		let current = element;
 		for (let i = 0; i < 4 && current; i++) {
-			if (current.tagName && interactableTags.includes(current.tagName.toLowerCase())) {
+			const tag = current.tagName && current.tagName.toLowerCase();
+			// Prism wraps syntax-highlighted tokens in <span>s that aren't clickable
+			if (tag && interactableTags.includes(tag) && !(tag === 'span' && current.closest?.('pre'))) {
 				return true;
 			}
 			// check if element has pointer cursor or is clickable
