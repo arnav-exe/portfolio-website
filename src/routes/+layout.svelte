@@ -1,5 +1,7 @@
 <script>
 	import '../app.postcss';
+	// import 'prism-themes/themes/prism-coldark-dark.css';
+	import 'prism-themes/themes/prism-one-dark.css';
 	import { afterNavigate } from '$app/navigation';
 
 	afterNavigate(() => {
