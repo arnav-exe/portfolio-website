@@ -7,7 +7,8 @@ import { mdsvex } from "mdsvex";
 const dir = path.resolve(fileURLToPath(import.meta.url), "../");
 
 const mdsvexOptions = {
-	extensions: [".md", ".svx"]
+	extensions: [".md", ".svx"],
+	highlight: {}
 }
 
 /** @type {import('@sveltejs/kit').Config} */
