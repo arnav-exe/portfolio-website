@@ -79,7 +79,7 @@ A curated list of my favourite Neovim plugins from yours truly.
 
 - **iamcco/markdown-preview.nvim** — live preview for markdown files. Very useful when writing documentation or reading reports and notes.
 
-- **lervag/vimtex** — full LaTeX support (I used this to write my Master's dissertation in vim lol)
+- **lervag/vimtex** — full LaTeX support (wrote my Master's dissertation with this lol)
 
 - **wintermute-cell/gitignore.nvim** — quickly generates `.gitignore` templates. Saves time when starting new experiments or repositories.
 
@@ -101,4 +101,4 @@ It's time you take the red pill and switch to Vim. If you stick with it long eno
 
 I'm almost certainly not the only AI/ML engineer using Vim.
 
-But it does feel like it sometimes, and at this point I’m kind of used to that. So worth it though.
+But it does feel like it sometimes, and at this point I’m kind of used to that. Worth it though.
