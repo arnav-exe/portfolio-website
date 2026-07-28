@@ -1,15 +1,15 @@
 ---
-title: "The F*** Index: What Claude Code's Telemetry Tells Us About Measuring AI Performance"
-description: "Inside the profanity detector, the 'keep going' flag, and the surprisingly difficult problem of deciding whether an AI coding agent is actually doing a good job."
+title: "The F*** Index - How Claude Code Tracks User Satisfaction"
+description: "TODO"
 date: 2026-07-27
 tags: ['claude code', 'ai agents', 'telemetry', 'systems design']
 ---
 
 ---
 
-For those blissfully unaware, the source code for popular coding agent Claude Code got leaked in March of this year because a JavaScript source map was accidentally published to their npm package (whoops). This file contained a reference to a storage bucket containing over 500,000 lines of unobfuscated code, revealing in broad detail the inner workings of Claude Code.
+For those blissfully unaware, the source code for popular coding agent Claude Code got leaked in March of this year because a JavaScript source map was accidentally published to their npm package (whoops). Enclosed in this file was a reference to a storage bucket containing over 500,000 lines of unobfuscated code, revealing in broad detail the inner workings of Claude Code.
 
-Amongst everything I found in the codebase, this gem of a function stood out to me most:
+Amongst everything I found in the codebase, this gem of a function stood out to me the most:
 
 ```TypeScript
 export function matchesNegativeKeyword(input: string): boolean {
@@ -24,6 +24,8 @@ export function matchesNegativeKeyword(input: string): boolean {
 I have unofficially dubbed this: **The F\*\*\* Index&trade;**
 
 Apparently, somebody thought it would be useful to know when the user started swearing at Claude, and honestly it kind of makes sense.
+
+# *needs some more content here I think. Ends with 2 sweeping statements which flows poorly*
 
 Agent performance telemetry via regex-based sentiment analysis is a sentence I never thought I would say, and yet here we are.
 
@@ -44,16 +46,37 @@ The sole purpose of this function is to capture and log user satisfaction analyt
     })
 ```
 
-The exact language use doesn't even matter as it gets reduced down to a `true`/`false` value by the time it gets logged. This whole flow is almost weirdly low-tech given who this codebase belongs to.
+The exact profanity used doesn't even matter as it gets reduced down to a `true`/`false` value by the time it gets logged. This whole flow is almost weirdly low-tech given who this codebase belongs to.
 
+# *maybe one more paragraph here about something?*
 
 
 ## Regex? In This Economy?
 
+My immediate reaction to seeing regex being used to match profanities was "wow I can make this so much more sophisticated, they should hire me", but in retrospect, this actually quite a sensible, intentional engineering decision.
 
+Right off the bat, there is no non-determinism with regex. It's cheap, fast, doesn't need to make an intermediate inference call, and doesn't consume any precious tokens. 
 
 
 
 ## Keep Going Claude
 
-You will notice in the above code snippet another function called `matchesKeepGoingKeyword`
+You will notice in the above code snippet another function called `matchesKeepGoingKeyword`, which looks like this:
+
+
+```TypeScript
+export function matchesKeepGoingKeyword(input: string): boolean {
+    const lowerInput = input.toLowerCase().trim()
+
+    // Match "continue" only if it's the entire prompt
+    if (lowerInput === 'continue') {
+        return true
+    }
+
+    // Match "keep going" or "go on" anywhere in the input
+    const keepGoingPattern = /\b(keep going|go on)\b/
+    return keepGoingPattern.test(lowerInput)
+}
+```
+
+
