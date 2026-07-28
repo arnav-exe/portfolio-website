@@ -1,0 +1,139 @@
+---
+title: "The F*** Index - How Claude Code Tracks User Satisfaction"
+description: "TODO"
+date: 2026-07-27
+tags: ['claude code', 'ai agents', 'telemetry', 'systems design']
+---
+
+---
+
+For those blissfully unaware, the source code for popular coding agent Claude Code got leaked in March of this year because a JavaScript source map was accidentally published to their npm package (whoops). Enclosed in this file was a reference to a storage bucket containing over 500,000 lines of unobfuscated code, revealing in broad detail the inner workings of Claude Code.
+
+Amongst everything I found in the codebase, this gem of a function stood out to me the most:
+
+```TypeScript
+export function matchesNegativeKeyword(input: string): boolean {
+    const lowerInput = input.toLowerCase()
+    const negativePattern =
+        /\b(wtf|wth|ffs|omfg|shit(ty|tiest)?|dumbass|horrible|awful|piss(ed|ing)? off|piece of (shit|crap|junk)|what the (fuck|hell)|fucking? (broken|useless|terrible|awful|horrible)|fuck you|screw (this|you)|so frustrating|this sucks|damn it)\b/
+
+    return negativePattern.test(lowerInput)
+}
+```
+
+I have unofficially dubbed this: **The F\*\*\* Index&trade;**
+
+Claude Code can navigate repositories, edit files, run commands, commission large scale workflows, summon sub-agents, and yet, somewhere inside all of that is a small utility trying to answer a much older engineering question:
+
+ > Did the user just swear at us?
+
+Agent performance telemetry via regex-based sentiment analysis is a sentence I never thought I would say, and yet here we are.
+
+Even more surprisingly, this approach kind of makes sense.
+
+The actual implementation is quite interesting, because it leads into a problem that every AI product eventually encounters: how do you know whether the AI is doing a good job?
+
+
+## Does This Mean I Can't Swear at Claude Anymore?
+
+No. By all means, continue to swear your heart out.
+
+The sole purpose of this function is to capture and log user satisfaction analytics. The function itself returns a boolean and is tied to an analytics event:
+
+```TypeScript
+    const isNegative = matchesNegativeKeyword(userPromptText)
+    const isKeepGoing = matchesKeepGoingKeyword(userPromptText)
+
+    logEvent('tengu_input_prompt', {
+        is_negative: isNegative,
+        is_keep_going: isKeepGoing,
+    })
+```
+
+The exact profanity used doesn't even matter as it gets reduced down to a `true`/`false` value by the time it gets logged. This whole flow is almost weirdly low-tech given who this codebase belongs to.
+
+# *maybe one more paragraph here about something?*
+
+
+## Regex? In This Economy?
+
+My immediate reaction to seeing regex being used to match profanities was "wow I can make this so much more sophisticated, they should totally hire me", but in retrospect, this actually quite a sensible engineering decision.
+
+This could have easily hooked this up to a custom sentiment analysis model to classify user intent, which could have scrutinized everything to account for the smallest of edge cases.
+
+Instead, they used regex.
+
+Right off the bat, there is no non-determinism with regex. It's cheap, fast, doesn't need to make an intermediate inference call, doesn't consume any precious tokens, and can't suddenly decide that the word 'awful' feels positive today. By traversing this and similar code paths, we can infer that the goal is to collect a rough behaviour signal, for which invoking another LLM would have been a really expensive way to answer this simple yes-no question.
+
+That being said, due to the rudimentary nature of this function, there may be problems deciding what the boolean output means.
+
+A user might swear because Claude broke something, or Claude pleasantly surprised them, or maybe they were just having a bad day. Some people swear constantly. Others remain exceptionally polite while watching an agent completely dismantle their codebase one line at a time.
+
+Hence, this detector records observable facts, but does not really capture the full story.
+
+
+## Keep Going Claude
+
+You will notice in the above code snippet another function called `matchesKeepGoingKeyword`, which also produces a similar boolean event:
+
+
+```TypeScript
+export function matchesKeepGoingKeyword(input: string): boolean {
+    const lowerInput = input.toLowerCase().trim()
+
+    // Match "continue" only if it's the entire prompt
+    if (lowerInput === 'continue') {
+        return true
+    }
+
+    // Match "keep going" or "go on" anywhere in the input
+    const keepGoingPattern = /\b(keep going|go on)\b/
+    return keepGoingPattern.test(lowerInput)
+}
+```
+
+This function detects three forms of continuation:
+
+ 1. A prompt containing only the word `continue`
+ 1. A prompt containing the phrase `keep going` anywhere inside it
+ 1. A prompt containing the phrase `go on` anywhere inside it
+ 
+Curiously, the strict regex rules mean that `continue!` followed by an exclamation point, or any punctuation for that matter will not trigger a match because `continue` must be the entire trimmed input.
+
+It's safe to assume this is an autonomy metric.
+
+
+
+```plaintext
+ROUGH THOUGHTS FOR THIS SECTION:
+
+want to say somthing like "autonomoy is tracked with the goal being to reduce the amount of dependence on a human in the loop (HITL)"
+
+'how am I supposed to keep my job now?' I hear you ask, and it is a very valid concern, but imagine this scenario with two different coding agents:
+
+The first receives a task, inspects the repository, calls some tools, edits the relevant files, runs the tests and returns with a completed result.
+
+The second inspects the repository, then waits
+
+The user types:
+
+`continue`
+
+It makes the necessary edits, and then pauses again
+
+`continue`
+
+It runs the test suite, then waits again
+
+`continue`
+
+Eventually, it completes the same task, just several conversation turns later.
+
+Both agents technically succeeded, but they did not provide the same experience. One completed the workflow autonomously, while the other required the user to stand behind it with a cattle prod.
+
+As workflows get larger and more complex, lessening the dependence on HITL is ...
+
+```
+
+
+
