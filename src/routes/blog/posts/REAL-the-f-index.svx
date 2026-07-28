@@ -32,8 +32,7 @@ Agent performance telemetry via regex-based sentiment analysis is a sentence I n
 
 No. By all means, continue to swear your heart out.
 
-The purpose of this function is that 
-
+The sole purpose of this function is to capture and log user satisfaction analytics. The function itself returns a boolean and is tied to an analytics event:
 
 ```TypeScript
     const isNegative = matchesNegativeKeyword(userPromptText)
@@ -44,6 +43,14 @@ The purpose of this function is that
         is_keep_going: isKeepGoing,
     })
 ```
+
+The exact language use doesn't even matter as it gets reduced down to a `true`/`false` value by the time it gets logged. This whole flow is almost weirdly low-tech given who this codebase belongs to.
+
+
+
+## Regex? In This Economy?
+
+
 
 
 
