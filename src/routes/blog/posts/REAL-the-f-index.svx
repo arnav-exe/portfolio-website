@@ -7,7 +7,7 @@ tags: ['claude code', 'ai agents', 'telemetry', 'systems design']
 
 ---
 
-For those blissfully unaware, the source code for popular coding agent Claude Code got leaked in March of this year because a JavaScript source map was accidentally published to their npm package (oh jeepers). This file contained a reference to a storage bucket containing over 500,000 lines of unobfuscated code, revealing in broad detail the inner workings of Claude Code.
+For those blissfully unaware, the source code for popular coding agent Claude Code got leaked in March of this year because a JavaScript source map was accidentally published to their npm package (whoops). This file contained a reference to a storage bucket containing over 500,000 lines of unobfuscated code, revealing in broad detail the inner workings of Claude Code.
 
 Amongst everything I found in the codebase, this gem of a function stood out to me most:
 
@@ -21,12 +21,11 @@ export function matchesNegativeKeyword(input: string): boolean {
 }
 ```
 
-I have unofficially dubbed this: "**The F\*\*\* Index**&trade;"
-
-Agent performance telemetry via regex-based sentiment analysis is a sentence I never thought I would say, and yet here we are.
+I have unofficially dubbed this: **The F\*\*\* Index&trade;**
 
 Apparently, somebody thought it would be useful to know when the user started swearing at Claude, and honestly it kind of makes sense.
 
+Agent performance telemetry via regex-based sentiment analysis is a sentence I never thought I would say, and yet here we are.
 
 
 ## Does This Mean I Can't Swear at Claude Anymore?
