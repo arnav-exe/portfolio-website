@@ -23,11 +23,11 @@ export function matchesNegativeKeyword(input: string): boolean {
 
 I have unofficially dubbed this: **The F\*\*\* Index&trade;**
 
-Claude Code can navigate repositories, edit files, run commands, commission large scale workflows, summon sub-agents, and yet, somewhere inside all of that is a small utility function whose sole goal is to answer the question:
+Claude Code can navigate repositories, edit files, run commands, commission large scale workflows, summon sub-agents, and yet, somewhere inside all of that is a small regex utility function whose sole goal is to answer the question:
 
- > Did the user just swear at us?
+ > Did the user just swear at me?
 
-Agent performance telemetry via regex-based sentiment analysis is a sentence I never thought I would say, and yet here we are.
+Agent performance telemetry via regex-based sentiment analysis is a sentence I never thought I would say, and yet here we are. Worse still, it kind of makes sense?
 
 
 ## Does This Mean I Can't Swear at Claude Anymore?
@@ -57,7 +57,9 @@ The exact profanity used doesn't even matter as it gets reduced down to a `true`
 
 My immediate reaction to seeing regex being used to match profanities was "wow I can make this so much more sophisticated, they should totally hire me", but in retrospect, this actually a sensible engineering decision.
 
-Right off the bat, there is no non-determinism with regex. It's cheap, fast, doesn't need to make intermediate inference calls, doesn't consume any precious tokens, and can't suddenly decide that the word 'awful' feels positive today. By traversing this and similar code paths, we can infer that the goal is to collect a rough behaviour signal, for which invoking another LLM would have been a really expensive way to answer this simple yes-no question.
+Right off the bat, there is no non-determinism with regex. It's cheap, fast, doesn't require intermediate inference calls, doesn't consume any precious tokens, and can't suddenly decide that the word 'awful' feels positive today.
+
+From traversing this and similar code paths, we can infer that the goal is to collect a rough behaviour signal, for which invoking another LLM would have been a really expensive way to answer this simple yes-no question.
 
 That being said, due to the rudimentary nature of this function, there may be problems deciding what the boolean output means.
 
@@ -111,33 +113,53 @@ Eventually, it completes the same task, just several conversation turns later.
 
 Both agents technically succeeded, but they did not provide the same experience. One completed the workflow autonomously, while the other required the user to stand behind it with a rolled up newspaper.
 
-As workflows get larger and more complex, lessening the dependence on HITL is a crucial step for successful task execution and completion. However, this shouldn't be taken to the opposite extreme, where agents start handling important design and architectural decisions without consulting the user (see my [other blog post](https://arnavjagetia.com/blog/systems-design-2026) on this matter)
+As workflows get larger and more complex, lessening the dependence on HITL is a crucial step for successful task execution and completion. However, this shouldn't be taken to the opposite extreme, where agents start handling important design and architectural decisions without consulting the user (see my [other blog post](https://arnavjagetia.com/blog/systems-design-2026) on this matter).
 
 Therefore, a balance must be struck between autonomy and control, and this serves as a reasonable proxy to measure that. 
 
 
-## How to Measure an Agent's Success
+## How Can You Measure an Agent's Success
+## Why Operational Metrics Aren't Enough To Measure an Agent's Success
 
-This ambiguity appears throughout Claude Code’s telemetry.
+Claude Code's system records plenty of conventional operational data. API calls have success and error events. Retries have attempts and delays. Tool calls have durations, result sizes and failure states. Sessions accumulate token use, cost, elapsed time, lines changed. Etc.
 
-The system records plenty of conventional operational data. API calls have success and error events. Retries have attempts and delays. Tool calls have durations, result sizes and failure states. Sessions accumulate token use, cost, elapsed time, lines changed. Etc.
+Even the reason for terminating the user-query loop is logged:
 
-While all of this is useful, none of it proves that the users' desired end goal was achieved.
+```TypeScript
+/** Terminal transition — the query loop returned. */
+export type Terminal = {
+    reason:
+    | 'completed'
+    | 'blocking_limit'
+    | 'image_error'
+    | 'model_error'
+    | 'aborted_streaming'
+    | 'aborted_tools'
+    | 'prompt_too_long'
+    | 'stop_hook_prevented'
+    | 'hook_stopped'
+    | 'max_turns'
+    | (string & {})
+    error?: unknown
+}
+```
 
-The query loop has terminal reasons including `completed`, `model_error`, `aborted_tools` and `max_turns`. The SDK can also return a structured success result containing duration, turns, cost, usage, stop reason and permission denials.
+But while all of this is useful, none of it proves that the users' desired end goal was achieved.
 
-But `isResultSuccessful` primarily determines success from the shape of the final message or an `end_turn` stop reason.
-
-In other words, "success" here means the execution loop reached a valid ending.
-
-It does not mean the architecture is good or the user is happy.
-
-This is where short of dedicated benchmarks and evaluation pipelines, measuring the performance of an AI agent is difficult. An API endpoint can often be judged by whether it returned the expected response, but an agent can return a perfectly valid response, modify several files, execute every command successfully and still not solve the problem.
+This is where, short of dedicated benchmarks and evaluation pipelines, measuring the performance of an AI agent is difficult. An API endpoint can often be judged by whether it returned the expected response, but an agent can return a perfectly valid response, modify several files, execute every command successfully and still not solve the problem.
 
 
 ## Mo Telemetry Mo Problems
 
+Properly collecting telemetry at scale is only half of the challenge. A data lake of **F\*\*\* Index&trade;** events is just data. To turn that data into insightful information that drives decisions requires considerable processing and analysis. An increase in `is_negative` across a set period of time is not a deep enough analytic, and on its own could be explained by a million different reasons.
 
+There will never be a single metric strong enough to say whether an AI agent did a good job or not. Instead, Claude Code, and other similar production systems make use of dozens of partial signals: completions, retries, failures, corrections, interruptions, permission decisions, surveys, continuation prompts and moments when the user’s vocabulary becomes noticeably more 'colourful'.
+
+Sometimes measuring intelligent systems requires sophisticated evaluation frameworks, model-based graders and carefully designed benchmarks.
+
+And sometimes it starts by checking whether somebody typed:
+
+ > wtf
 
 ## Converting Logs into Useful Insights
 
