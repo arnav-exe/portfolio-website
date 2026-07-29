@@ -1,7 +1,7 @@
 ---
-title: "The F*** Index - How Claude Code Tracks User Satisfaction"
+title: "The F*** Index - Claude Code's Interesting Approach to User Telemetry"
 description: "TODO"
-date: 2026-07-27
+date: 2026-04-15
 tags: ['claude code', 'ai agents', 'telemetry', 'systems design']
 ---
 
@@ -23,22 +23,20 @@ export function matchesNegativeKeyword(input: string): boolean {
 
 I have unofficially dubbed this: **The F\*\*\* Index&trade;**
 
-Claude Code can navigate repositories, edit files, run commands, commission large scale workflows, summon sub-agents, and yet, somewhere inside all of that is a small utility trying to answer a much older engineering question:
+Claude Code can navigate repositories, edit files, run commands, commission large scale workflows, summon sub-agents, and yet, somewhere inside all of that is a small utility function whose sole goal is to answer the question:
 
  > Did the user just swear at us?
 
 Agent performance telemetry via regex-based sentiment analysis is a sentence I never thought I would say, and yet here we are.
-
-Even more surprisingly, this approach kind of makes sense.
-
-The actual implementation is quite interesting, because it leads into a problem that every AI product eventually encounters: how do you know whether the AI is doing a good job?
 
 
 ## Does This Mean I Can't Swear at Claude Anymore?
 
 No. By all means, continue to swear your heart out.
 
-The sole purpose of this function is to capture and log user satisfaction analytics. The function itself returns a boolean and is tied to an analytics event:
+The sole purpose of this function is to capture cheap user satisfaction analytics, and the actual implementation is quite interesting, because it leads into a problem that every AI product eventually encounters: how do you know whether the AI is doing a good job?
+
+The function itself returns a boolean and is tied to an analytics event:
 
 ```TypeScript
     const isNegative = matchesNegativeKeyword(userPromptText)
@@ -57,25 +55,20 @@ The exact profanity used doesn't even matter as it gets reduced down to a `true`
 
 ## Regex? In This Economy?
 
-My immediate reaction to seeing regex being used to match profanities was "wow I can make this so much more sophisticated, they should totally hire me", but in retrospect, this actually quite a sensible engineering decision.
+My immediate reaction to seeing regex being used to match profanities was "wow I can make this so much more sophisticated, they should totally hire me", but in retrospect, this actually a sensible engineering decision.
 
-This could have easily hooked this up to a custom sentiment analysis model to classify user intent, which could have scrutinized everything to account for the smallest of edge cases.
-
-Instead, they used regex.
-
-Right off the bat, there is no non-determinism with regex. It's cheap, fast, doesn't need to make an intermediate inference call, doesn't consume any precious tokens, and can't suddenly decide that the word 'awful' feels positive today. By traversing this and similar code paths, we can infer that the goal is to collect a rough behaviour signal, for which invoking another LLM would have been a really expensive way to answer this simple yes-no question.
+Right off the bat, there is no non-determinism with regex. It's cheap, fast, doesn't need to make intermediate inference calls, doesn't consume any precious tokens, and can't suddenly decide that the word 'awful' feels positive today. By traversing this and similar code paths, we can infer that the goal is to collect a rough behaviour signal, for which invoking another LLM would have been a really expensive way to answer this simple yes-no question.
 
 That being said, due to the rudimentary nature of this function, there may be problems deciding what the boolean output means.
 
-A user might swear because Claude broke something, or Claude pleasantly surprised them, or maybe they were just having a bad day. Some people swear constantly. Others remain exceptionally polite while watching an agent completely dismantle their codebase one line at a time.
+A user might swear at Claude because it broke something, or because Claude pleasantly surprised them, or maybe they were just having a bad day. Some people swear constantly. Others remain exceptionally polite while watching an agent completely dismantle their codebase one line at a time.
 
 Hence, this detector records observable facts, but does not really capture the full story.
 
 
-## Keep Going Claude
+## Keep Going, Claude
 
 You will notice in the above code snippet another function called `matchesKeepGoingKeyword`, which also produces a similar boolean event:
-
 
 ```TypeScript
 export function matchesKeepGoingKeyword(input: string): boolean {
@@ -94,46 +87,60 @@ export function matchesKeepGoingKeyword(input: string): boolean {
 
 This function detects three forms of continuation:
 
- 1. A prompt containing only the word `continue`
+ 1. A prompt exclusively containing the word `continue`
  1. A prompt containing the phrase `keep going` anywhere inside it
  1. A prompt containing the phrase `go on` anywhere inside it
  
 Curiously, the strict regex rules mean that `continue!` followed by an exclamation point, or any punctuation for that matter will not trigger a match because `continue` must be the entire trimmed input.
 
-It's safe to assume this is an autonomy metric.
+My intuition tells me this as a metric to track agent autonomy, with the goal being to reduce the amount of dependence on a human in the loop (HITL), however without visibility into the analytics processing backend, we cannot say for sure.
 
-
-
-```plaintext
-ROUGH THOUGHTS FOR THIS SECTION:
-
-want to say somthing like "autonomoy is tracked with the goal being to reduce the amount of dependence on a human in the loop (HITL)"
-
-'how am I supposed to keep my job now?' I hear you ask, and it is a very valid concern, but imagine this scenario with two different coding agents:
+Why would agent autonomy need to be tracked and optimized? Well, imagine this scenario with two different coding agents:
 
 The first receives a task, inspects the repository, calls some tools, edits the relevant files, runs the tests and returns with a completed result.
 
 The second inspects the repository, then waits
 
-The user types:
+The user types: `continue`
 
-`continue`
+It makes the necessary edits, and then pauses again: `continue`
 
-It makes the necessary edits, and then pauses again
-
-`continue`
-
-It runs the test suite, then waits again
-
-`continue`
+It runs the test suite, then waits again: `continue`
 
 Eventually, it completes the same task, just several conversation turns later.
 
-Both agents technically succeeded, but they did not provide the same experience. One completed the workflow autonomously, while the other required the user to stand behind it with a cattle prod.
+Both agents technically succeeded, but they did not provide the same experience. One completed the workflow autonomously, while the other required the user to stand behind it with a rolled up newspaper.
 
-As workflows get larger and more complex, lessening the dependence on HITL is ...
+As workflows get larger and more complex, lessening the dependence on HITL is a crucial step for successful task execution and completion. However, this shouldn't be taken to the opposite extreme, where agents start handling important design and architectural decisions without consulting the user (see my [other blog post](https://arnavjagetia.com/blog/systems-design-2026) on this matter)
 
-```
+Therefore, a balance must be struck between autonomy and control, and this serves as a reasonable proxy to measure that. 
 
+
+## How to Measure an Agent's Success
+
+This ambiguity appears throughout Claude Code’s telemetry.
+
+The system records plenty of conventional operational data. API calls have success and error events. Retries have attempts and delays. Tool calls have durations, result sizes and failure states. Sessions accumulate token use, cost, elapsed time, lines changed. Etc.
+
+While all of this is useful, none of it proves that the users' desired end goal was achieved.
+
+The query loop has terminal reasons including `completed`, `model_error`, `aborted_tools` and `max_turns`. The SDK can also return a structured success result containing duration, turns, cost, usage, stop reason and permission denials.
+
+But `isResultSuccessful` primarily determines success from the shape of the final message or an `end_turn` stop reason.
+
+In other words, "success" here means the execution loop reached a valid ending.
+
+It does not mean the architecture is good or the user is happy.
+
+This is where short of dedicated benchmarks and evaluation pipelines, measuring the performance of an AI agent is difficult. An API endpoint can often be judged by whether it returned the expected response, but an agent can return a perfectly valid response, modify several files, execute every command successfully and still not solve the problem.
+
+
+## Mo Telemetry Mo Problems
+
+
+
+## Converting Logs into Useful Insights
+
+# *paragraph(s) about how collecting logs at scale is 1 part of the problem, what you do with those logs (EG: what insights you derive, what computatoin you apply to them. etc. to generate valueable data (could maybe even say to convert data to informatoin) is a whole new problem*
 
 
