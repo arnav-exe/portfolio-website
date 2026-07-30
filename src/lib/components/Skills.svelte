@@ -119,11 +119,11 @@
 		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 0.14em;
-		color: rgb(var(--color-tertiary-700));
+		color: rgb(var(--color-secondary-700));
 	}
 
 	:global(.dark) .skill-category-label {
-		color: rgb(var(--color-tertiary-500));
+		color: rgb(var(--color-secondary-500));
 	}
 
 	.skill-list {
