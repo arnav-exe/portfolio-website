@@ -92,6 +92,9 @@
 	.skills-manifest {
 		display: flex;
 		flex-direction: column;
+		width: fit-content;
+		max-width: 100%;
+		margin: 0 auto;
 	}
 
 	.skill-category-row {
