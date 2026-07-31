@@ -11,6 +11,7 @@
 	// components
 	import Cursor from '../lib/components/Cursor.svelte';
 	import Timeline from '../lib/components/Timeline.svelte';
+	import Skills from '../lib/components/Skills.svelte';
 	import Contact from '../lib/components/Contact.svelte';
 	import Mouse from '../lib/components/Mouse.svelte';
 	import DownChevron from '../lib/components/DownChevron.svelte';
@@ -28,19 +29,6 @@
 	import CssbattleMinifier from '../lib/icons/projects/CssbattleMinifier.svelte';
 	import Polyboard from '../lib/icons/projects/Polyboard.svelte';
 
-	// skills logos
-	import Python from '../lib/icons/skills/Python.svelte';
-	import Pytorch from '../lib/icons/skills/Pytorch.svelte';
-	import Tensorflow from '../lib/icons/skills/Tensorflow.svelte';
-	import Langchain from '../lib/icons/skills/Langchain.svelte';
-	import Javascript from '../lib/icons/skills/Javascript.svelte';
-	import Typescript from '../lib/icons/skills/Typescript.svelte';
-	import Node from '../lib/icons/skills/Node.svelte';
-	import Svelte from '../lib/icons/skills/Svelte.svelte';
-	import Aws from '../lib/icons/skills/AWS.svelte';
-	import Docker from '../lib/icons/skills/Docker.svelte';
-	import Git from '../lib/icons/skills/Git.svelte';
-
 	// socials logos
 	import GitHub from '../lib/icons/GitHub.svelte';
 	import Linkedin from '../lib/icons/Linkedin.svelte';
@@ -50,20 +38,6 @@
 	gsap.registerPlugin(ScrollTrigger);
 
 	let page = 0;
-
-	const logos = [
-		['Python', Python, 'https://www.python.org/'],
-		['PyTorch', Pytorch, 'https://pytorch.org/'],
-		['TensorFlow', Tensorflow, 'https://www.tensorflow.org/'],
-		['LangChain', Langchain, 'https://www.langchain.com/'],
-		['JavaScript', Javascript, 'https://v8.dev/'],
-		['TypeScript', Typescript, 'https://www.typescriptlang.org/'],
-		['Node.js', Node, 'https://nodejs.org/'],
-		['Svelte', Svelte, 'https://svelte.dev/'],
-		['AWS', Aws, 'https://aws.amazon.com/'],
-		['Docker', Docker, 'https://www.docker.com/'],
-		['Git', Git, 'https://git-scm.com/']
-	];
 
 	const project_imgs = [
 		JewelryFinder,
@@ -135,7 +109,7 @@
 		tl.fromTo('.hero-text3', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1.5, delay: -1 });
 
 		gsap.set('.about-section p', { y: 35, opacity: 0 });
-		gsap.set('.skill-logo-container', { scale: 0, opacity: 0 });
+		gsap.set('.skill-category-row', { y: 20, opacity: 0 });
 		gsap.set('.projects-section', { y: 40, opacity: 0 });
 		gsap.set('.timeline-card', { y: 100, opacity: 0 });
 		gsap.set('.contact-section', { opacity: 0 });
@@ -148,12 +122,12 @@
 			stagger: 0.15,
 			scrollTrigger: { trigger: '.about-section', start: 'top 75%' }
 		});
-		gsap.to('.skill-logo-container', {
-			scale: 1,
+		gsap.to('.skill-category-row', {
+			y: 0,
 			opacity: 1,
-			duration: 0.25,
-			ease: 'power2.out',
-			stagger: { each: 0.05, from: 'center' },
+			duration: 0.6,
+			ease: 'power3.out',
+			stagger: 0.12,
 			scrollTrigger: {
 				trigger: '.skills-section',
 				start: 'top 75%'
@@ -325,26 +299,8 @@
 				>
 					SKILLS
 				</h2>
-				<div class="skills-section flex justify-center items-center flex-wrap gap-6">
-					<!-- single row of LOGOS of all languages/frameworks HERE: -->
-					{#each logos as [name, logo, url]}
-						<div class="w-16 sm:w-20 skill-logo-container">
-							<a href={url} target="_blank" class="block">
-								<div
-									use:popup={{ event: 'hover', target: 'popupHover-' + name, placement: 'bottom' }}
-									class="skill-logo-wrapper"
-								>
-									<!-- skill logo -->
-									<svelte:component this={logo} />
-								</div>
-							</a>
-						</div>
-						<!-- toolip -->
-						<div class="card p-3 site-tooltip" data-popup="popupHover-{name}">
-							<p class="text-center">{name}</p>
-							<div class="arrow site-tooltip-arrow" />
-						</div>
-					{/each}
+				<div class="skills-section">
+					<Skills />
 				</div>
 			</div>
 
@@ -446,26 +402,6 @@
 	:global(p) {
 		font-size: 1.25rem;
 		line-height: normal;
-	}
-
-	/* skill logo fixes */
-	.skill-logo-wrapper {
-		display: block;
-		width: 100%;
-		height: 100%;
-	}
-
-	/* make svg logos trigger hover on entire bounding box */
-	:global(.skill-logo-wrapper svg) {
-		pointer-events: bounding-box;
-		width: 100%;
-		height: auto;
-		display: block;
-	}
-
-	/* ensure skill logos have consistent sizing */
-	.skill-logo-container {
-		flex-shrink: 0;
 	}
 
 	.project-card-under-construction {
