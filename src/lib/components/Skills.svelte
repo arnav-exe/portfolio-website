@@ -115,7 +115,7 @@
 
 	.skill-category-label {
 		flex: 0 0 10rem;
-		font-size: 0.7rem;
+		font-size: 0.8rem;
 		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 0.14em;
@@ -131,7 +131,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		font-size: 1.05rem;
+		font-size: 1.35rem;
 		line-height: 1.9;
 	}
 
@@ -156,7 +156,7 @@
 	}
 
 	.skill-mono {
-		font-size: 0.68rem;
+		font-size: 0.82rem;
 		font-weight: 700;
 		letter-spacing: 0.02em;
 		color: rgb(var(--color-secondary-700));
