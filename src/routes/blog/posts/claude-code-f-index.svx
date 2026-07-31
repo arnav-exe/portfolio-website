@@ -1,6 +1,6 @@
 ---
 title: "The F*** Index - Claude Code's Interesting Approach to User Telemetry"
-description: "TODO"
+description: "A peek behind the curtains at how Claude Code collects user telemetry, and how that data can be transformed into meaningful performance metrics."
 date: 2026-04-15
 tags: ['claude code', 'ai agents', 'telemetry', 'systems design']
 ---
@@ -21,9 +21,9 @@ export function matchesNegativeKeyword(input: string): boolean {
 }
 ```
 
-I have unofficially dubbed this: **The F\*\*\* Index&trade;**
+I have unofficially dubbed this: ***The F\*\*\* Index&trade;***
 
-Claude Code can navigate repositories, edit files, run commands, commission large scale workflows, summon sub-agents, and yet, somewhere inside all of that is a small regex utility function whose sole goal is to answer the question:
+You're telling me Claude can navigate repositories, edit files, run commands, commission large scale workflows, summon sub-agents, and yet, somewhere inside all of that is a small regex utility function whose sole goal is to answer the question:
 
  > Did the user just swear at me?
 
@@ -34,7 +34,7 @@ Agent performance telemetry via regex-based sentiment analysis is a sentence I n
 
 No. By all means, continue to swear your heart out.
 
-The sole purpose of this function is to capture cheap user satisfaction analytics, and the actual implementation is quite interesting, because it leads into a problem that every AI product eventually encounters: how do you know whether the AI is doing a good job?
+The sole purpose of this function is to capture cheap user satisfaction analytics, which sheds light on a problem that every AI product eventually encounters, yet one that few people fully appreciate: how do you know whether the AI is doing a good job?
 
 The function itself returns a boolean and is tied to an analytics event:
 
@@ -48,9 +48,7 @@ The function itself returns a boolean and is tied to an analytics event:
     })
 ```
 
-The exact profanity used doesn't even matter as it gets reduced down to a `true`/`false` value by the time it gets logged. This whole flow is almost weirdly low-tech given who this codebase belongs to.
-
-# *maybe one more paragraph here about something?*
+The exact profanity used doesn't even matter as it gets reduced down to a `true`/`false` value by the time it gets logged, making this whole flow feel almost weirdly low-tech given who this codebase belongs to.
 
 
 ## Regex? In This Economy?
@@ -59,11 +57,13 @@ My immediate reaction to seeing regex being used to match profanities was "wow I
 
 Right off the bat, there is no non-determinism with regex. It's cheap, fast, doesn't require intermediate inference calls, doesn't consume any precious tokens, and can't suddenly decide that the word 'awful' feels positive today.
 
-From traversing this and similar code paths, we can infer that the goal is to collect a rough behaviour signal, for which invoking another LLM would have been a really expensive way to answer this simple yes-no question.
+From traversing this and similar code paths, we can infer that the goal is to collect a rough behaviour signal, for which invoking another LLM would have been a pretty expensive means of doing so.
 
 That being said, due to the rudimentary nature of this function, there may be problems deciding what the boolean output means.
 
-A user might swear at Claude because it broke something, or because Claude pleasantly surprised them, or maybe they were just having a bad day. Some people swear constantly. Others remain exceptionally polite while watching an agent completely dismantle their codebase one line at a time.
+A user might swear at Claude because it broke something, or because Claude pleasantly surprised them, or maybe they were just having a bad day.
+
+Some people swear constantly. Others remain exceptionally polite while watching an agent completely dismantle their codebase one line at a time.
 
 Hence, this detector records observable facts, but does not really capture the full story.
 
@@ -113,15 +113,14 @@ Eventually, it completes the same task, just several conversation turns later.
 
 Both agents technically succeeded, but they did not provide the same experience. One completed the workflow autonomously, while the other required the user to stand behind it with a rolled up newspaper.
 
-As workflows get larger and more complex, lessening the dependence on HITL is a crucial step for successful task execution and completion. However, this shouldn't be taken to the opposite extreme, where agents start handling important design and architectural decisions without consulting the user (see my [other blog post](https://arnavjagetia.com/blog/systems-design-2026) on this matter).
+As workflows get larger and more complex, lessening the dependence on HITL is a crucial step for successful task execution. However, this shouldn't be taken to the opposite extreme, where agents start handling important design and architectural decisions without consulting the user (see my [other blog post](https://arnavjagetia.com/blog/systems-design-2026) on this matter).
 
 Therefore, a balance must be struck between autonomy and control, and this serves as a reasonable proxy to measure that. 
 
 
-## How Can You Measure an Agent's Success
 ## Why Operational Metrics Aren't Enough To Measure an Agent's Success
 
-Claude Code's system records plenty of conventional operational data. API calls have success and error events. Retries have attempts and delays. Tool calls have durations, result sizes and failure states. Sessions accumulate token use, cost, elapsed time, lines changed. Etc.
+Claude Code's system records plenty of conventional operational data. Their API calls have success and error events, tool calls have durations, result sizes and failure states, sessions accumulate token use, cost, elapsed time, lines changed. Etc.
 
 Even the reason for terminating the user-query loop is logged:
 
@@ -151,18 +150,26 @@ This is where, short of dedicated benchmarks and evaluation pipelines, measuring
 
 ## Mo Telemetry Mo Problems
 
-Properly collecting telemetry at scale is only half of the challenge. A data lake of **F\*\*\* Index&trade;** events is just data. To turn that data into insightful information that drives decisions requires considerable processing and analysis. An increase in `is_negative` across a set period of time is not a deep enough analytic, and on its own could be explained by a million different reasons.
+Properly collecting telemetry at scale is only half of the challenge. A data lake full of ***F\*\*\* Index&trade;*** events is still just data. Turning that data into useful information that can drive decisions requires an entirely separate layer of processing and analysis.
 
-There will never be a single metric strong enough to say whether an AI agent did a good job or not. Instead, Claude Code, and other similar production systems make use of dozens of partial signals: completions, retries, failures, corrections, interruptions, permission decisions, surveys, continuation prompts and moments when the user’s vocabulary becomes noticeably more 'colourful'.
+An increase in `is_negative` events over a given period is not a particularly deep insight, and on its own could be explained by a million different things.
 
-Sometimes measuring intelligent systems requires sophisticated evaluation frameworks, model-based graders and carefully designed benchmarks.
+There is unlikely to be a single metric strong enough to say whether an AI agent did a good job or not. Instead, Claude Code and similar production systems collect dozens of partial signals: completions, retries, failures, corrections, interruptions, permission decisions, surveys, continuation prompts, and moments when the user’s vocabulary becomes noticeably more 'colourful'.
 
-And sometimes it starts by checking whether somebody typed:
+Once the collated data is cleaned, normalized and validated, more sophisticated techniques can then be layered on top, for example, anomaly detection to identify unexpected changes, statistical analysis to separate actual shifts from random noise, and predictive models to estimate qualities that cannot be observed directly.
 
- > wtf
+The original events are slowly transformed into higher level metrics that attempt to describe things such as reliability, autonomy and user satisfaction.
 
-## Converting Logs into Useful Insights
+However, this transformation from data into information is straightforward, as key decisions have to be made about which events to include, how they are grouped and normalized, and what period they are measured across. The outcomes of which can completely change the story that the data tells.
 
-# *paragraph(s) about how collecting logs at scale is 1 part of the problem, what you do with those logs (EG: what insights you derive, what computatoin you apply to them. etc. to generate valueable data (could maybe even say to convert data to informatoin) is a whole new problem*
+The same collection of logs can support many different conclusions, and can be shaped to make analyses all paint a certain picture, either intentionally or unintentionally.
 
+Both of these keyword detectors therefore, don't directly measure Claude's performance. Instead, they produce one small input into a much larger analytical system.
 
+Their value depends on everything that happens afterwards; the quality of the data pipeline, the computations ran, the assumptions behind those computations and, ultimately, the judgement of the people interpreting the results.
+
+Sometimes, measuring intelligent systems requires sophisticated evaluation frameworks, model-based graders and carefully designed benchmarks.
+
+And other times, it starts by checking whether someone typed:
+
+ > *wtf*
