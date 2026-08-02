@@ -28,7 +28,10 @@
 				{ name: 'LangChain', icon: Langchain, url: 'https://www.langchain.com/' },
 				{ name: 'LangGraph', url: 'https://www.langchain.com/langgraph' },
 				{ name: 'Google ADK', url: 'https://google.github.io/adk-docs/' },
-				{ name: 'LiteLLM', url: 'https://www.litellm.ai/' }
+				{ name: 'LiteLLM', url: 'https://www.litellm.ai/' },
+				{ name: 'Weaviate', url: 'https://weaviate.io/' },
+				{ name: 'LangFuse', url: 'https://langfuse.com/' },
+				{ name: 'RAGFlow', url: 'https://ragflow.io/' },
 			]
 		},
 		{
