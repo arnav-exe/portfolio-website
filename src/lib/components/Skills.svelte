@@ -10,6 +10,7 @@
 	import Aws from '../icons/skills/AWS.svelte';
 	import Docker from '../icons/skills/Docker.svelte';
 	import Git from '../icons/skills/Git.svelte';
+	import Temporal from '../icons/skills/Temporal.svelte';
 
 	const SKILL_GROUPS = [
 		{
@@ -32,6 +33,7 @@
 				{ name: 'Weaviate', url: 'https://weaviate.io/' },
 				{ name: 'LangFuse', url: 'https://langfuse.com/' },
 				{ name: 'RAGFlow', url: 'https://ragflow.io/' },
+				{ name: 'Temporal', icon: Temporal, url: 'https://temporal.io/' },
 			]
 		},
 		{
