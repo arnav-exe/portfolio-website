@@ -89,26 +89,6 @@
 			ease: 'power3.out',
 			scrollTrigger: '.contact-section'
 		});
-
-		let proxy = { skew: 0 },
-			skewSetter = gsap.quickSetter('.project-card', 'skewY', 'deg'),
-			clamp = gsap.utils.clamp(-10, 10); // restricts skew to +- 10 degrees
-
-		ScrollTrigger.create({
-			onUpdate: (self) => {
-				let skew = clamp(self.getVelocity() / -300);
-				if (Math.abs(skew) > Math.abs(proxy.skew)) {
-					proxy.skew = skew;
-					gsap.to(proxy, {
-						skew: 0,
-						duration: 0.8,
-						ease: 'power3',
-						overwrite: true,
-						onUpdate: () => skewSetter(proxy.skew)
-					});
-				}
-			}
-		});
 	});
 </script>
 
@@ -282,99 +262,5 @@
 	:global(p) {
 		font-size: 1.25rem;
 		line-height: normal;
-	}
-
-	.project-card-under-construction {
-		position: relative;
-		cursor: not-allowed;
-		border: 1px dashed rgb(var(--color-surface-400) / 0.45);
-		box-shadow: inset 0 0 0 1px rgb(var(--color-surface-500) / 0.08);
-		opacity: 0.92;
-	}
-
-	.project-card-under-construction::after {
-		content: '';
-		position: absolute;
-		inset: 0;
-		border-radius: 0.5rem;
-		pointer-events: none;
-		background: repeating-linear-gradient(
-			-45deg,
-			rgb(var(--color-surface-500) / 0.02),
-			rgb(var(--color-surface-500) / 0.02) 8px,
-			transparent 8px,
-			transparent 16px
-		);
-	}
-
-	.under-construction-badge {
-		position: absolute;
-		top: 0.55rem;
-		left: 0.55rem;
-		z-index: 2;
-		font-size: 0.66rem;
-		line-height: 1;
-		letter-spacing: 0.05em;
-		text-transform: uppercase;
-		padding: 0.35rem 0.45rem;
-		border-radius: 0.375rem;
-		background: rgb(var(--color-surface-500) / 0.08);
-		border: 1px solid rgb(var(--color-surface-500) / 0.18);
-		color: rgb(var(--color-surface-500));
-	}
-
-	:global(.dark) .project-card-under-construction {
-		border-color: rgb(var(--color-primary-500) / 0.35);
-		box-shadow: inset 0 0 0 1px rgb(var(--color-primary-500) / 0.1);
-	}
-
-	:global(.dark) .project-card-under-construction::after {
-		background: repeating-linear-gradient(
-			-45deg,
-			rgb(var(--color-primary-500) / 0.04),
-			rgb(var(--color-primary-500) / 0.04) 8px,
-			transparent 8px,
-			transparent 16px
-		);
-	}
-
-	:global(.dark) .under-construction-badge {
-		background: rgb(var(--color-primary-500) / 0.12);
-		border-color: rgb(var(--color-primary-500) / 0.3);
-		color: rgb(var(--color-primary-500));
-	}
-
-	.site-tooltip {
-		background: rgb(33 34 37 / 0.95);
-		border: 1px solid rgb(84 86 92 / 0.8);
-		box-shadow: 0 10px 24px rgb(0 0 0 / 0.25);
-	}
-
-	.site-tooltip :global(p) {
-		font-size: 0.9rem;
-		line-height: 1.2;
-		color: rgb(244 245 246);
-	}
-
-	.site-tooltip-arrow {
-		background: rgb(33 34 37 / 0.95);
-		border: 1px solid rgb(84 86 92 / 0.8);
-		border-color: rgb(84 86 92 / 0.8);
-	}
-
-	:global(.dark) .site-tooltip {
-		background: rgb(20 20 22 / 0.96);
-		border-color: rgb(107 110 118 / 0.72);
-		box-shadow: 0 12px 28px rgb(0 0 0 / 0.45);
-	}
-
-	:global(.dark) .site-tooltip :global(p) {
-		color: rgb(237 238 241);
-	}
-
-	:global(.dark) .site-tooltip-arrow {
-		background: rgb(20 20 22 / 0.96);
-		border: 1px solid rgb(107 110 118 / 0.72);
-		border-color: rgb(107 110 118 / 0.72);
 	}
 </style>
