@@ -176,8 +176,8 @@
 		transform: scale(0.92);
 		pointer-events: none;
 		/* dissolve the top-left edge so the mark bleeds in instead of showing its own box */
-		-webkit-mask-image: linear-gradient(135deg, transparent 10%, #000 62%);
-		mask-image: linear-gradient(135deg, transparent 10%, #000 62%);
+		-webkit-mask-image: linear-gradient(135deg, transparent 22%, #000 78%);
+		mask-image: linear-gradient(135deg, transparent 22%, #000 78%);
 		transition:
 			opacity 340ms ease,
 			transform 340ms ease;
@@ -282,8 +282,8 @@
 	.cell-more {
 		flex-direction: row;
 		align-items: center;
-		justify-content: space-between;
-		gap: 1rem;
+		justify-content: center;
+		gap: 0.7rem;
 		font-size: 0.85rem;
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
