@@ -73,7 +73,6 @@
 			class="project-cell"
 			href={project.link || undefined}
 		>
-			<!-- the project's own artwork, blooming off the bottom-right corner on hover -->
 			<span class="cell-ghost" aria-hidden="true">
 				<svelte:component this={project.icon} />
 			</span>
@@ -173,17 +172,17 @@
 	.cell-ghost {
 		position: absolute;
 		right: -12%;
-		bottom: -18%;
+		top: 50%;
 		z-index: 0;
 		display: block;
 		width: 62%;
 		aspect-ratio: 1;
 		opacity: 0;
-		transform: scale(0.92);
+		transform: translateY(-50%) scale(0.92);
 		pointer-events: none;
-		/* dissolve the top-left edge so the mark bleeds in instead of showing its own box */
-		-webkit-mask-image: linear-gradient(135deg, transparent 22%, #000 78%);
-		mask-image: linear-gradient(135deg, transparent 22%, #000 78%);
+		/* dissolve left edge */
+		-webkit-mask-image: linear-gradient(100deg, transparent 20%, #000 72%);
+		mask-image: linear-gradient(100deg, transparent 20%, #000 72%);
 		transition:
 			opacity 340ms ease,
 			transform 340ms ease;
@@ -198,7 +197,7 @@
 	a.project-cell:hover .cell-ghost,
 	a.project-cell:focus-visible .cell-ghost {
 		opacity: 0.07;
-		transform: scale(1);
+		transform: translateY(-50%) scale(1);
 	}
 
 	.cell-top,
@@ -345,7 +344,6 @@
 		.cell-ghost {
 			width: 48%;
 			right: -8%;
-			bottom: -14%;
 		}
 	}
 
