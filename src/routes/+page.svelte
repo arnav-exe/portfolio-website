@@ -1,8 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
 
-	import { popup } from '@skeletonlabs/skeleton';
-
 	// gsap
 	import { gsap } from 'gsap';
 	import { TextPlugin } from 'gsap/dist/TextPlugin';
@@ -13,6 +11,7 @@
 	import NavSwitch from '../lib/components/NavSwitch.svelte';
 	import Timeline from '../lib/components/Timeline.svelte';
 	import Skills from '../lib/components/Skills.svelte';
+	import Projects from '../lib/components/Projects.svelte';
 	import Contact from '../lib/components/Contact.svelte';
 	import Mouse from '../lib/components/Mouse.svelte';
 	import DownChevron from '../lib/components/DownChevron.svelte';
@@ -21,15 +20,6 @@
 	import developer from '../lib/images/developer.png';
 	import practitioner from '../lib/images/practitioner.png';
 
-	// project logos
-	import JewelryFinder from '../lib/icons/projects/JewelryFinder.svelte';
-	import InstantContextMCP from '../lib/icons/projects/InstantContextMCP.svelte';
-	import ProductNotifier from '../lib/icons/projects/ProductNotifier.svelte';
-	import AthenaRevision from '../lib/icons/projects/AthenaRevision.svelte';
-	import AiNewsPlatform from '../lib/icons/projects/AiNewsPlatform.svelte';
-	import CssbattleMinifier from '../lib/icons/projects/CssbattleMinifier.svelte';
-	import Polyboard from '../lib/icons/projects/Polyboard.svelte';
-
 	// socials logos
 	import GitHub from '../lib/icons/GitHub.svelte';
 	import Linkedin from '../lib/icons/Linkedin.svelte';
@@ -37,62 +27,6 @@
 	// gsap plugin registering
 	gsap.registerPlugin(TextPlugin);
 	gsap.registerPlugin(ScrollTrigger);
-
-	const project_imgs = [
-		JewelryFinder,
-		InstantContextMCP,
-		ProductNotifier,
-		AthenaRevision,
-		AiNewsPlatform,
-		CssbattleMinifier,
-		Polyboard
-	];
-
-	const projects = [
-		{
-			title: 'AI Jewelry Finder',
-			description:
-				'An intelligent jewelry search system that converts user sketches and selected design details into targeted product queries, then ranks results using both visual similarity and keyword matching to find closely matching pieces and present shopping links to the user.',
-			incomplete: true,
-			link: ''
-		},
-		{
-			title: 'Instant Context MCP Server',
-			description:
-				'An MCP server that discovers and indexes llms*.txt documentation sources for libraries and frameworks, so an LLM can query them directly for grounded context during coding workflows',
-			link: 'https://github.com/arnav-exe/instant-context-mcp'
-		},
-		{
-			title: 'Product Notifier',
-			description:
-				'An intelligent, pluggable multi-source product monitoring engine that tracks stock and pricing across retailers, normalizes live data, and sends instant ntfy alerts when your purchase conditions are met.',
-			link: 'https://github.com/arnav-exe/product-notifier'
-		},
-		{
-			title: 'Athena - AI Revision Assistant',
-			description:
-				'A RAG-powered LLM revision assistant that semantically searches a large student resources repository to deliver accurate, context-aware answers with source page citations, images, and related material suggestions.',
-			link: 'https://github.com/arnav-exe/athena-revision-assistant'
-		},
-		{
-			title: 'AI News Platform',
-			description:
-				'A responsive, modern news platform that leverages LLMs to deliver high-quality article summaries to readers, allowing them to get up-to-date on current affairs in a fraction of the time',
-			link: 'https://github.com/arnav-exe/ai-news-platform'
-		},
-		{
-			title: 'CSSBattle Minifier',
-			description:
-				'A Python script built to intelligently minify your code for the online code golfing game CSSBattle.dev',
-			link: 'https://github.com/arnav-exe/cssbattle-minifier'
-		},
-		{
-			title: 'Polyboard - Multiple Clipboards',
-			description:
-				'A lightweight Python applet that provides the user with upto 10 additional clipboards to store/retrieve text-based data from',
-			link: 'https://github.com/arnav-exe/polyboard'
-		}
-	];
 
 	// gsap animations
 	onMount(() => {
@@ -303,55 +237,9 @@
 					PROJECTS
 				</h2>
 
-				<!-- project cards -->
 				<!-- TODO: change youtube+reddit logo such that it is an outline of the youtube and reddit logo in the primary colour instead of the actual youtube and reddit colours so that it is more inline with the other logos -->
-				<div
-					class="projects-section grid sm:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-6 justify-items-center items-start"
-				>
-					{#each projects as project, i}
-						<div class="card-hover w-full max-w-sm">
-							{#if project.incomplete}
-								<div
-									class="project-card project-card-under-construction block rounded card-hover p-3 bg-secondary-500 dark:bg-[#1a1917]"
-									use:popup={{
-										event: 'hover',
-										target: 'popupProjectUnderConstruction-' + i,
-										placement: 'top'
-									}}
-									aria-disabled="true"
-								>
-									<div class="under-construction-badge">Under construction</div>
-									<div class="w-full max-w-[180px] mx-auto">
-										<svelte:component this={project_imgs[i]} />
-									</div>
-									<div class="mt-3">
-										<p class="text-center font-bold mt-4">{project.title}</p>
-										<p class="text-left mb-4">{project.description}</p>
-									</div>
-								</div>
-								<div
-									class="card p-3 site-tooltip"
-									data-popup={'popupProjectUnderConstruction-' + i}
-								>
-									<p class="text-center">Under Construction!</p>
-									<div class="arrow site-tooltip-arrow" />
-								</div>
-							{:else}
-								<a
-									href={project.link}
-									class="project-card block rounded card-hover p-3 bg-secondary-500 dark:bg-[#1a1917]"
-								>
-									<div class="w-full max-w-[180px] mx-auto">
-										<svelte:component this={project_imgs[i]} />
-									</div>
-									<div class="mt-3">
-										<p class="text-center font-bold mt-4">{project.title}</p>
-										<p class="text-left mb-4">{project.description}</p>
-									</div>
-								</a>
-							{/if}
-						</div>
-					{/each}
+				<div class="projects-section">
+					<Projects />
 				</div>
 			</div>
 
