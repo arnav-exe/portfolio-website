@@ -1,0 +1,343 @@
+<script>
+	import JewelryFinder from '../icons/projects/JewelryFinder.svelte';
+	import InstantContextMCP from '../icons/projects/InstantContextMCP.svelte';
+	import ProductNotifier from '../icons/projects/ProductNotifier.svelte';
+	import AthenaRevision from '../icons/projects/AthenaRevision.svelte';
+	import AiNewsPlatform from '../icons/projects/AiNewsPlatform.svelte';
+	import CssbattleMinifier from '../icons/projects/CssbattleMinifier.svelte';
+	import Polyboard from '../icons/projects/Polyboard.svelte';
+
+	// `stack` renders as a `tech / tech / tech` line under the description, in the same
+	// idiom as the skills manifest. Left empty until the real tags are filled in.
+	const PROJECTS = [
+		{
+			title: 'AI Jewelry Finder',
+			description: 'Turns a sketch and a few design details into a ranked product search.',
+			stack: [],
+			icon: JewelryFinder,
+			link: '',
+			incomplete: true
+		},
+		{
+			title: 'Instant Context MCP Server',
+			description: 'Indexes llms*.txt docs so an LLM can pull grounded context mid-task.',
+			stack: [],
+			icon: InstantContextMCP,
+			link: 'https://github.com/arnav-exe/instant-context-mcp'
+		},
+		{
+			title: 'Product Notifier',
+			description:
+				'Watches retailers for stock and price, then pings ntfy when your conditions are met.',
+			stack: [],
+			icon: ProductNotifier,
+			link: 'https://github.com/arnav-exe/product-notifier'
+		},
+		{
+			title: 'Athena - AI Revision Assistant',
+			description: 'Answers revision questions from a resource library, with source citations.',
+			stack: [],
+			icon: AthenaRevision,
+			link: 'https://github.com/arnav-exe/athena-revision-assistant'
+		},
+		{
+			title: 'AI News Platform',
+			description: "Summarises the day's articles so catching up takes a fraction of the time.",
+			stack: [],
+			icon: AiNewsPlatform,
+			link: 'https://github.com/arnav-exe/ai-news-platform'
+		},
+		{
+			title: 'CSSBattle Minifier',
+			description: 'Minifies your code for the online code-golfing game CSSBattle.dev.',
+			stack: [],
+			icon: CssbattleMinifier,
+			link: 'https://github.com/arnav-exe/cssbattle-minifier'
+		},
+		{
+			title: 'Polyboard - Multiple Clipboards',
+			description: 'Ten extra clipboards to stash and retrieve text from, one keystroke each.',
+			stack: [],
+			icon: Polyboard,
+			link: 'https://github.com/arnav-exe/polyboard'
+		}
+	];
+
+	const GITHUB_PROFILE = 'https://github.com/arnav-exe/';
+</script>
+
+<div class="projects-grid">
+	{#each PROJECTS as project}
+		<svelte:element
+			this={project.link ? 'a' : 'div'}
+			class="project-cell"
+			href={project.link || undefined}
+		>
+			<!-- the project's own artwork, blooming off the bottom-right corner on hover -->
+			<span class="cell-ghost" aria-hidden="true">
+				<svelte:component this={project.icon} />
+			</span>
+
+			<span class="cell-top">
+				<span class="cell-mark"><svelte:component this={project.icon} /></span>
+				{#if project.incomplete}
+					<span class="cell-flag">In progress</span>
+				{/if}
+			</span>
+
+			<span class="cell-name">{project.title}</span>
+			<span class="cell-desc">{project.description}</span>
+
+			{#if project.stack.length}
+				<span class="cell-stack">
+					{#each project.stack as tech, i}{tech}{#if i < project.stack.length - 1}<span
+								class="cell-sep">/</span
+							>{/if}{/each}
+				</span>
+			{/if}
+		</svelte:element>
+	{/each}
+
+	<!-- fills the eighth slot, so the 2-column grid never ends on an empty cell -->
+	<a class="project-cell cell-more" href={GITHUB_PROFILE}>
+		<span>All repositories</span>
+		<span class="cell-more-arrow">&#8599;</span>
+	</a>
+</div>
+
+<style>
+	/* the 1px gaps let the container colour through, so every rule is shared rather than
+	   doubled, and they reflow on their own when the column count changes */
+	.projects-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1px;
+		background: rgb(var(--color-surface-500) / 0.15);
+		width: 100%;
+	}
+
+	:global(.dark) .projects-grid {
+		background: rgb(var(--color-primary-500) / 0.15);
+	}
+
+	/* must match the page ground exactly, or the gap colour bleeds through the cells */
+	.project-cell {
+		position: relative;
+		isolation: isolate;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		padding: 1.6rem 1.75rem;
+		background: rgb(var(--color-primary-500));
+		color: inherit;
+		text-decoration: none;
+	}
+
+	:global(.dark) .project-cell {
+		background: rgb(var(--color-surface-500));
+	}
+
+	/* a wash rather than a background swap, since the cell fill has to stay opaque */
+	.project-cell::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		background: rgb(var(--color-surface-500) / 0.045);
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 200ms ease;
+	}
+
+	:global(.dark) .project-cell::before {
+		background: rgb(var(--color-secondary-500) / 0.05);
+	}
+
+	a.project-cell:hover::before,
+	a.project-cell:focus-visible::before {
+		opacity: 1;
+	}
+
+	.project-cell:focus-visible {
+		outline: 2px solid rgb(var(--color-tertiary-500));
+		outline-offset: -2px;
+	}
+
+	.cell-ghost {
+		position: absolute;
+		right: -12%;
+		bottom: -18%;
+		z-index: 0;
+		display: block;
+		width: 62%;
+		aspect-ratio: 1;
+		opacity: 0;
+		transform: scale(0.92);
+		pointer-events: none;
+		/* dissolve the top-left edge so the mark bleeds in instead of showing its own box */
+		-webkit-mask-image: linear-gradient(135deg, transparent 10%, #000 62%);
+		mask-image: linear-gradient(135deg, transparent 10%, #000 62%);
+		transition:
+			opacity 340ms ease,
+			transform 340ms ease;
+	}
+
+	:global(.cell-ghost svg) {
+		width: 100%;
+		height: 100%;
+		display: block;
+	}
+
+	a.project-cell:hover .cell-ghost,
+	a.project-cell:focus-visible .cell-ghost {
+		opacity: 0.07;
+		transform: scale(1);
+	}
+
+	.cell-top,
+	.cell-name,
+	.cell-desc,
+	.cell-stack {
+		position: relative;
+		z-index: 1;
+	}
+
+	.cell-top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-bottom: 0.15rem;
+	}
+
+	.cell-mark {
+		display: block;
+		width: 1.9rem;
+		height: 1.9rem;
+		flex-shrink: 0;
+		transition: transform 260ms ease;
+	}
+
+	:global(.cell-mark svg) {
+		width: 100%;
+		height: 100%;
+		display: block;
+	}
+
+	a.project-cell:hover .cell-mark {
+		transform: scale(1.12);
+	}
+
+	.cell-flag {
+		font-size: 0.68rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		white-space: nowrap;
+		color: rgb(var(--color-tertiary-700));
+	}
+
+	:global(.dark) .cell-flag {
+		color: rgb(var(--color-tertiary-500));
+	}
+
+	.cell-name {
+		font-size: 1.2rem;
+		line-height: 1.25;
+		font-weight: 700;
+		color: rgb(var(--color-surface-500));
+	}
+
+	:global(.dark) .cell-name {
+		color: rgb(var(--color-primary-500));
+	}
+
+	.cell-desc {
+		font-size: 0.95rem;
+		line-height: 1.45;
+		color: rgb(var(--color-surface-400));
+	}
+
+	:global(.dark) .cell-desc {
+		color: rgb(var(--color-secondary-700));
+	}
+
+	.cell-stack {
+		margin-top: auto;
+		padding-top: 0.6rem;
+		font-size: 0.8rem;
+		letter-spacing: 0.04em;
+		color: rgb(var(--color-secondary-800));
+	}
+
+	:global(.dark) .cell-stack {
+		color: rgb(var(--color-secondary-500));
+	}
+
+	.cell-sep {
+		opacity: 0.45;
+		margin: 0 0.4rem;
+	}
+
+	.cell-more {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		font-size: 0.85rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: rgb(var(--color-secondary-800));
+	}
+
+	:global(.dark) .cell-more {
+		color: rgb(var(--color-secondary-500));
+	}
+
+	.cell-more-arrow {
+		display: inline-block;
+		transition: transform 200ms ease;
+	}
+
+	.cell-more:hover .cell-more-arrow {
+		transform: translate(3px, -3px);
+	}
+
+	@media (max-width: 767px) {
+		.projects-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.project-cell {
+			padding: 1.25rem 1.15rem;
+		}
+
+		.cell-name {
+			font-size: 1.05rem;
+		}
+
+		.cell-desc {
+			font-size: 0.9rem;
+		}
+
+		.cell-mark {
+			width: 1.6rem;
+			height: 1.6rem;
+		}
+
+		.cell-ghost {
+			width: 48%;
+			right: -8%;
+			bottom: -14%;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.cell-ghost,
+		.cell-mark,
+		.cell-more-arrow,
+		.project-cell::before {
+			transition: none;
+		}
+	}
+</style>
