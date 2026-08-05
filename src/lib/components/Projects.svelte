@@ -106,21 +106,20 @@
 </div>
 
 <style>
-	/* the 1px gaps let the container colour through, so every rule is shared rather than
-	   doubled, and they reflow on their own when the column count changes */
 	.projects-grid {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
-		gap: 1px;
-		background: rgb(var(--color-surface-500) / 0.15);
 		width: 100%;
+		/* same hairline the skills rows and section headings use */
+		--rule: rgb(var(--color-surface-500) / 0.15);
 	}
 
 	:global(.dark) .projects-grid {
-		background: rgb(var(--color-primary-500) / 0.15);
+		--rule: rgb(var(--color-primary-500) / 0.15);
 	}
 
-	/* must match the page ground exactly, or the gap colour bleeds through the cells */
+	/* cells stay transparent so the section always sits on the page's own ground, whatever
+	   that is — each cell draws only its right and bottom edge, so rules are never doubled */
 	.project-cell {
 		position: relative;
 		isolation: isolate;
@@ -129,16 +128,23 @@
 		flex-direction: column;
 		gap: 0.5rem;
 		padding: 1.6rem 1.75rem;
-		background: rgb(var(--color-primary-500));
+		border-right: 1px solid var(--rule);
+		border-bottom: 1px solid var(--rule);
 		color: inherit;
 		text-decoration: none;
 	}
 
-	:global(.dark) .project-cell {
-		background: rgb(var(--color-surface-500));
+	/* right-hand column and final row lose their outer edge, so the grid is ruled on the
+	   inside only — the same way the skills manifest drops its last border-bottom */
+	.project-cell:nth-child(2n) {
+		border-right: none;
 	}
 
-	/* a wash rather than a background swap, since the cell fill has to stay opaque */
+	.project-cell:nth-last-child(-n + 2) {
+		border-bottom: none;
+	}
+
+	/* the only fill in the section — the cells themselves never paint a background */
 	.project-cell::before {
 		content: '';
 		position: absolute;
@@ -310,6 +316,17 @@
 
 		.project-cell {
 			padding: 1.25rem 1.15rem;
+			border-right: none;
+		}
+
+		/* single column, so the old final row is mid-list now and needs its rule back.
+		   both of these have to out-specify the two-column rules above, not just follow them */
+		.project-cell:nth-last-child(-n + 2) {
+			border-bottom: 1px solid var(--rule);
+		}
+
+		.project-cell:last-child {
+			border-bottom: none;
 		}
 
 		.cell-name {
