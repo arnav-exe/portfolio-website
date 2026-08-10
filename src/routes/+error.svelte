@@ -5,13 +5,14 @@
 	const oneLiners = [
 		"Page not found. Confidence: 97.3%.",
 		"Don't worry. A VC is already raising $50M to fix this.",
-		"Context limit reached. Page not included.",
-		"AI was used to cut development time in half. Looks like you found the missing half.",
-		"The AI wrote 500 unit tests for this page. None of them checked if it exists.",
+        "Test suite said 94% pass. Looks like you found the other 6%",
 		"Deadline moved up because of AI. This page didn't make the sprint.",
-		"The AI was certain this page existed. It was also certain Sydney is the capital of Australia.",
-		"Ran out of tokens. Page not rendered.",
-		"The context window closed before I could finish building thi",
+        "Quantized slightly too aggressively.",
+        "Deprecated. Please migrate to /.",
+        "Early stopping kicked in just before this page.",
+        "Softmaxed to zero.",
+        "The gradient vanished, and so did the page.",
+        "Evicted from the KV cache.",
 	];
 
 	const oneLiner = oneLiners[Math.floor(Math.random() * oneLiners.length)];
