@@ -1,6 +1,6 @@
 <svg
 	version="1.1"
-	class="fill-logoprimary dark:fill-logosurface"
+	class="fill-logosurface dark:fill-logomuted"
 	id="Layer_1"
 	xmlns="http://www.w3.org/2000/svg"
 	xmlns:xlink="http://www.w3.org/1999/xlink"

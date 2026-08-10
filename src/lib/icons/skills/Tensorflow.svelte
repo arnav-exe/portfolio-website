@@ -1,5 +1,5 @@
 <svg
-	class="dark:fill-logosurface"
+	class="dark:fill-logomuted"
 	id="Artwork"
 	xmlns="http://www.w3.org/2000/svg"
 	xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -45,6 +45,6 @@
 			xlink:href="#linear-gradient"
 		/></defs
 	><g class="cls-2"
-		><rect class="dark:fill-logosurface" x="60.08" y="58.47" width="158.31" height="151.72" /></g
-	><g class="cls-4"><rect class="dark:fill-logosurface" x="59" y="58.47" width="158.31" height="151.72" /></g></svg
+		><rect class="dark:fill-logomuted" x="60.08" y="58.47" width="158.31" height="151.72" /></g
+	><g class="cls-4"><rect class="dark:fill-logomuted" x="59" y="58.47" width="158.31" height="151.72" /></g></svg
 >

@@ -143,14 +143,14 @@
 	.skill-item {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.45rem;
+		gap: 0.5rem;
 		color: inherit;
 	}
 
 	.skill-icon {
 		display: inline-flex;
 		align-items: center;
-		height: 1.05em;
+		height: 1.3em;
 		flex-shrink: 0;
 	}
 
