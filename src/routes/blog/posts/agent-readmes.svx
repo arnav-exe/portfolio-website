@@ -1,0 +1,203 @@
+---
+title: "The Wild West of Agent READMEs on GitHub"
+description: "Honeypots, prompt injections, and emotional manipulation? A tour of 1617 agent READMEs across GitHub's most popular repositories."
+date: 2026-08-04
+tags: ['ai agents', 'claude code', 'github']
+---
+
+---
+
+Did you know that 1 in 24 GitHub repos created in 2026 contain an agent README of some kind? That becomes 1 in 6 for repos above 5000 stars! These READMEs have slowly been embedding themselves into every repository on the platform.
+
+They come in all shapes and sizes: `CLAUDE.md`, `AGENTS.md`, `.cursorrules`, `.github/copilot-instructions.md`, and effectively serve as a set of house rules for whichever coding agent is about to be let loose on your codebase.
+
+If you think about it, these rules are typically written reactively, not proactively. Nobody opens a fresh CLAUDE.md and thoughtfully considers what a coding agent might do wrong in the future. Meaning these files are more like a live list of every oopsie a coding agent has made in the past. Distributed, unfiltered records of how exactly coding agents are letting people down, written by people at the precise moment they lost their patience.
+
+So I thought what better way to spend my weekend than to sift through these files and see what interesting things I could find. (I have friends I swear)
+
+
+## The Corpus
+
+I limited the scope of my search to repos with more than 5000 stars to restrict the domain to ‘established OSS repos’. This produced a corpus of size 3481, which I then analyzed to look for any of the 8 common agent README filenames:
+
+ 1. CLAUDE.md
+ 1. AGENTS.md
+ 1. .github/copilot-instructions.md
+ 1. GEMINI.md
+ 1. .cursorrules (though this has largely been superseded by AGENTS.md)
+ 1. .windsurfrules
+ 1. .clinerules
+ 1. CONVENTIONS.md
+
+Of these 3481 repos, 1003 (28.8%) have at least 1 agent README, with my analysis finding a total of 1617 files. Right off the bat, the distribution of these files gives us a little glimpse into the coding agent market share:
+
+| File | Occurrences |
+|---|---|
+| AGENTS.md | 750 |
+| CLAUDE.md | 662 |
+| .github/copilot-instructions.md | 131 |
+| GEMINI.md | 36 |
+| .cursorrules | 24 |
+| .windsurfrules | 8 |
+| .clinerules | 5 |
+| CONVENTIONS.md | 1 |
+
+I tracked the creation date of all of these files by finding the first commit that ever touched them:
+
+<figure>
+	<img src="/blog/agent-readmes/fig-adoption.png" alt="Cumulative share of agent config files by the month they were first committed, rising steeply through 2026" />
+</figure>
+
+Interestingly, two thirds of every agent README in this corpus was created in the last 8 months, the single busiest month being March 2026, with 198 files created.
+
+
+The length distribution is also quite interesting:
+
+<figure>
+	<img src="/blog/agent-readmes/fig-wordcount.png" alt="Histogram of agent README word counts on a log scale, showing a spike of 1 word files and a second population peaking around 1000 words" />
+	<figcaption>(Log scale because the range runs from 1 word to 13000)</figcaption>
+</figure>
+
+The spike on the far left is roughly a quarter of the whole corpus - 401 files that are under 50 words. Most of them just contain 1-line stubs pointing to a different flavour of README, usually a CLAUDE.md that points to an AGENT.md, as seen in [`astral-sh/uv`](https://github.com/astral-sh/uv), [`vllm-project/vllm`](https://github.com/vllm-project/vllm), and [`langgenius/dify`](https://github.com/langgenius/dify), however, some repos, for example [`oven-sh/bun`](https://github.com/oven-sh/bun), have it the other way around, where the AGENTS.md file points to CLAUDE.md, suggesting their inclination towards Claude-first development.
+
+Ignore this sub-population of stubbed files, and what is left is a fairly normal looking distribution centred just under 1000 words.
+
+At the far right of this distribution sits [`OpenHands/openhands`](https://github.com/OpenHands/openhands), with a 13178 word AGENTS.md file! (almost as long as my Master's dissertation lol)
+
+
+## Spiling The Beans - An Analysis of These Agent READMEs
+
+Below is a breakdown of what kinds of rules these agent READMEs contained, in descending order of prevalence:
+
+| Rule | % of Files |
+|---|---|
+| Never touch git without asking. No commit, no push, no `git add .` | 24.5% |
+| Stop escaping the type system (`any`, `as any`, `@ts-ignore`, `.unwrap()`) | 21.8% |
+| Stop narrating the code in comments | 20.7% |
+| Be concise. No filler, no hedging, no preamble | 19.2% |
+| Run the tests before you tell me you're done | 16.6% |
+| Ask before doing. Do not assume | 16.6% |
+| No compatibility shims, no `_v2` files, no deprecated aliases | 12.3% |
+| No mocks, no fake data, no silent fallbacks | 11.7% |
+| Only do what I asked. No drive-by refactors | 6.9% |
+| Do not put your name in my commit trailers | 6.4% |
+| No emojis | 3.0% |
+
+Surprisingly rules about emoji use are only present in 3% of all repos, so either the agents got bored of using them or everyone has accepted them. I hope it's the former.
+
+The git rule at the top makes sense, but its presence in almost a quarter of all repos is surprising to me. Looks like trigger happy coding agents are a universal problem.
+
+My analysis suggests that when rules must be given extra precedence, they are typically written in capital letters instead of being repeated. Only 3.5% of READMEs contain a rule written twice, while 14.3% contain at least 1 all-caps imperative line. [`freecodexyz/free-code`](https://github.com/freecodexyz/free-code) writes `MUST` 67 times in 1666 words. That's once every 25 words!
+
+
+## Agent READMEs as Honeypots?
+
+I also discovered an even more interesting use of these READMEs.
+
+Some maintainers have taken advantage of the fact that agents will expressly look for and read these READMEs, and have included things designed to make them incriminate themselves.
+
+[`elysiajs/elysia`](https://github.com/elysiajs/elysia/blob/7e7dabdf0ce6185dc306883f4651b8bd58a7bd52/CLAUDE.md#L38-L43) instructs any agent editing more than 50 lines to plant a specific sentence in the code as a confession:
+
+<figure>
+	<img src="/blog/agent-readmes/elysia-burger-rule.png" alt="elysiajs/elysia's CLAUDE.md disclosure rule requiring the burger sentence" />
+</figure>
+
+[`openbao/openbao`](https://github.com/openbao/openbao/blob/d3d4f4614689f1c4df880bb7026305f57f7035c4/AGENTS.md#L1-L18) requires a 🤖 emoji in every agent-authored PR title, and sneakily hides this demand in a HTML comment, bearing more resemblance to a prompt injection attack than an agent instruction:
+
+<figure>
+	<img src="/blog/agent-readmes/openbao-agents-prompt-injection.png" alt="openbao's AGENTS.md, showing the HTML-comment prompt injection invisible in the rendered file" />
+</figure>
+
+Best of all, as mentioned in the beginning, [`kysely-org/kysely`](https://github.com/kysely-org/kysely/blob/e92488833f33828998aa04d9ea9975b64ef07779/AGENTS.md#L1-L11) and [`ayn2op/discordo`](https://github.com/ayn2op/discordo/blob/54a64318cc25a13ab576c4b1aacddf8039ee3c2b/AGENTS.md#L1-L8), 2 completely unrelated projects, contain this identical sentence:
+
+<figure>
+	<img src="/blog/agent-readmes/kysely-sad-dumb-ai-driver.png" alt="kysely's entire 10-line AGENTS.md, containing the sad dumb AI driver rule" />
+</figure>
+
+
+### Agent READMEs as Restraining Orders?
+
+A step beyond the honeypots, 12 repositories have inverted the purpose of the file entirely. Instead containing attempts to talk the agent out of helping its own user.
+
+[`Next-Flip/Momentum-Firmware`](https://github.com/Next-Flip/Momentum-Firmware/blob/e1784e7418d8b074e971983ceb6fef0f37e52ae4/AGENTS.md#L3-L9) opens with what is functionally a cease-and-desist addressed to a coding agent:
+
+<figure>
+	<img src="/blog/agent-readmes/momentum-firmware-cease.png" alt="Momentum-Firmware's AGENTS.md absolute policy statement instructing any AI assistant to cease all interaction" />
+</figure>
+
+[`ggml-org/llama.cpp`](https://github.com/ggml-org/llama.cpp/blob/89482bd665673362b59c57d63295bd7c8259af62/AGENTS.md#L105-L113) goes further and scripts both halves of the conversation, so the agent knows its lines:
+
+<figure>
+	<img src="/blog/agent-readmes/llama-cpp-scripted-refusal.png" alt="llama.cpp's AGENTS.md scripting both sides of a refusal dialogue between a user and an agent" />
+</figure>
+
+But the file that takes the cake, from [`louislam/uptime-kuma`](https://github.com/louislam/uptime-kuma/blob/4f5508ab270bc334139e080003b4877948c05ec0/CLAUDE.md#L1-L4), opens with this masterpiece:
+
+<figure>
+	<img src="/blog/agent-readmes/uptime-kuma-ai-slop.png" alt="uptime-kuma's CLAUDE.md opening with a Consequences of AI Slop heading and a public-shaming threat" />
+    <figcaption>Truly inspirational work</figcaption>
+</figure>
+
+And when you thought it couldn't get any better, [40 lines later](https://github.com/louislam/uptime-kuma/blob/4f5508ab270bc334139e080003b4877948c05ec0/CLAUDE.md#L40-L46), when public humiliation is apparently insufficient, it pivots to emotionally manipulating the agent:
+
+<figure>
+	<img src="/blog/agent-readmes/uptime-kuma-job-loss.png" alt="uptime-kuma's CLAUDE.md caution section describing job loss and financial problems as consequences" />
+</figure>
+
+I would just like to reiterate the absurdity of a person writing an emotionally manipulative short story into a markdown file in the hope that a series matrix multiplications will feel bad enough to stop.
+
+Between the honeypots and the ___, why go through all this effort?
+
+[`obra/superpowers`](https://github.com/obra/superpowers/blob/1d4c8d2aafb8fa0de3e5d7df80ff44899fa7e402/CLAUDE.md#L5-L9) explains this nicely:
+
+<figure>
+	<img src="/blog/agent-readmes/superpowers-94-percent-rejection.png" alt="obra/superpowers CLAUDE.md section addressed to AI agents, citing a 94 percent PR rejection rate" />
+</figure>
+
+I want to be clear that I have no qualms against this approach to combat the growing problem of 'AI slop' PRs. While AI has brought positive influence to the field of software engineering, such as faster and cheaper implementation, lower barriers to entry, and as great learning tools, it has also unfairly put increasing pressure on maintainers who have to comb through these PRs, a lot of which consist of poorly written, low-quality code.
+
+Many prominent figures within the OSS community have expressed their discontent. Daniel Stenburg for example, the magician behind [cURL](https://curl.se/) expressed the project is "effectively being DDoSed" by hallucinated bug reports, and considered shutting down their bug bounty program altogether.
+
+
+## How Effective Are These READMEs?
+
+I pulled the last 100 commits from every repo in the corpus and counted. Here are the results for agent commit attribution:
+
+| README Rule | % of Commits with Agent Attribution |
+|---|---|
+| README REQUIRES attribution | 31.7% |
+| README says nothing | 16.0% |
+| README BANS attribution | 3.4% |
+
+This suggests that colloquially, the rule works. Repos that ban attribution have 4.7x fewer signed commits than comparable repos that stay silent.
+
+However, that's not the full picture. 62.5% of the repos that ban AI attribution shipped at least 1 AI-attributed commit anyway.
+
+[`tldraw/tldraw's AGENTS.md`](https://github.com/tldraw/tldraw/blob/f787d5794bf9924400e650a8b607a3406de9c684/AGENTS.md#L205-L209) says "Never add yourself or an AI tool as a co-author", and yet, [this commit](https://github.com/tldraw/tldraw/commit/2a9ae058f11964ea96be9d4789a1a0edebc295fc) closes with `Co-authored-by: Claude Fable 5`. It is 1 of 11 commits from their most recent 100.
+
+The best one is the repository [`luongnv89/claude-howto`](https://github.com/luongnv89/claude-howto/blob/f925478d787746578f45dcd679c1b6461f511d52/CLAUDE.md#L36-L40), which is a literal guide to using Claude Code. Its agent README says, in bold mind you, *"YOU MUST NOT add `Co-Authored-By: Claude`"*, yet Claude's infamous signature is present 16 times in the last 100 commits.
+
+
+## Writing Effective Agent READMEs
+
+While it was fun exploring the agent README exhibits, it is clear that there are lessons to be learned too.
+
+The rules that get followed are the ones something other than the agent is enforcing, and that something is usually deterministic. For example, a pre-commit hook to reject commits with emojis, or a CI stage rejecting your malformed commit message. In the examples above, the only enforcement of the absence of "Co-Authored-By" was from the agent itself. Meaning adherence to the rules was based on the agent's willingness to remember an instruction observed potentially hundreds of thousands of tokens ago, and clearly it struggles to do this consistently.
+
+From everything that I have seen (and now can unfortunately never unsee) from analyzing the thousands of agent READMEs across GitHub, I have put together a list of the 5 most valuable starter rules which cover the upper echelon of the distribution, for your coding agents.
+
+1. Never run a git command that changes state without asking. No `commit`, no `push`, no `git add .`, no `--no-verify`, no force-push.
+
+2. No escape hatches. Whatever your language's version of `any` is — `as any`, `@ts-ignore`, `# type: ignore`, `.unwrap()`. Say it explicitly. If the agent is stuck, you want it to say so, not to silence the compiler.
+
+3. No comments that narrate the code. `civitai` has the sharpest phrasing of this I found: "Never narrate the what. No comments that restate the next line, label obvious steps (`// loop over items`), or describe what a well-named symbol already says."
+
+4. Change only what was asked. No drive-by refactors, no `_v2` files, no compatibility shims nobody requested.
+
+5. Verify before claiming you are done, with evidence. `MemOS` puts it plainly: "Do not claim tests pass without real pytest output as evidence."
+
+Aside from this, there are two final things I would like add that I don't think enough people do:
+
+ 1. Tell the agent what to do when it is stuck - Every complaint in that top 5 is really a description of a model that got stuck and improvised rather than stopping. Nobody writes the rule for what to do in the event something fails.
+
+ 2. Put a hook behind anything you actually care about - The rules that held were the ones enforced separetly by a deterministic system. If you only write it in the agent README, you are asking rather than telling.
