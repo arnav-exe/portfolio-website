@@ -146,10 +146,17 @@
 		line-height: inherit;
 	}
 
-	:global(.blog-content li::marker) {
+	:global(.blog-content ul li::marker) {
 		color: rgb(47 47 47);
 		font-weight: 700;
 		font-size: 1.08em;
+	}
+
+	:global(.blog-content ol li::marker) {
+		color: rgb(47 47 47);
+		font-weight: 400;
+		font-size: 1em;
+		font-variant-numeric: tabular-nums;
 	}
 
 	:global(.blog-content hr) {
@@ -220,7 +227,9 @@
 	}
 
 	:global(.blog-content figure) {
-		margin: 1.25rem 0;
+		width: 80%;
+		max-width: 100%;
+		margin: 1.5rem auto;
 		border-radius: 0.75rem;
 		overflow: hidden;
 		border: 1px solid rgb(var(--color-secondary-700) / 0.45);
@@ -230,6 +239,7 @@
 	:global(.blog-content figure img) {
 		display: block;
 		width: 100%;
+		height: auto;
 		margin: 0;
 		border-radius: 0;
 	}
@@ -246,10 +256,11 @@
 	}
 
 	:global(.blog-content table) {
-		display: block;
-		width: 100%;
-		overflow-x: auto;
-		margin: 1.25rem 0;
+		display: table;
+		width: 80%;
+		max-width: 100%;
+		table-layout: auto;
+		margin: 1.5rem auto;
 		border: 1px solid rgb(var(--color-secondary-700) / 0.45);
 		border-radius: 0.75rem;
 		background-color: rgb(var(--color-surface-500) / 0.9);
@@ -265,9 +276,10 @@
 	:global(.blog-content td) {
 		padding: 0.75rem 0.9rem;
 		text-align: left;
+		vertical-align: top;
 		white-space: normal;
-		word-break: break-word;
-		overflow-wrap: anywhere;
+		word-break: normal;
+		overflow-wrap: break-word;
 	}
 
 	:global(.blog-content th) {
@@ -289,9 +301,29 @@
 		border-bottom: 0;
 	}
 
+	:global(.blog-content thead tr:first-child th:first-child) {
+		border-top-left-radius: 0.75rem;
+	}
+
+	:global(.blog-content thead tr:first-child th:last-child) {
+		border-top-right-radius: 0.75rem;
+	}
+
+	:global(.blog-content tbody tr:last-child td:first-child) {
+		border-bottom-left-radius: 0.75rem;
+	}
+
+	:global(.blog-content tbody tr:last-child td:last-child) {
+		border-bottom-right-radius: 0.75rem;
+	}
+
 	:global(.blog-content img) {
+		display: block;
+		width: 80%;
+		max-width: 100%;
+		height: auto;
 		border-radius: 0.5rem;
-		margin: 1rem 0;
+		margin: 1.5rem auto;
 	}
 
 	/* Dark mode styles */
@@ -365,12 +397,15 @@
 	}
 
 	@media (max-width: 767px) {
+		:global(.blog-content figure),
+		:global(.blog-content img),
+		:global(.blog-content table) {
+			width: 100%;
+		}
+
 		:global(.blog-content th),
 		:global(.blog-content td) {
 			padding: 0.6rem 0.7rem;
-			white-space: normal;
-			word-break: break-word;
-			overflow-wrap: anywhere;
 			font-size: 0.9rem;
 			line-height: 1.45;
 		}
