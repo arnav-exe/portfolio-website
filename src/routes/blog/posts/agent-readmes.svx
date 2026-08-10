@@ -1,22 +1,9 @@
 ---
 title: "The Wild West of Agent READMEs on GitHub"
-description: "I read every CLAUDE.md and AGENTS.md file I could find across GitHub's most popular repositories. They are not documentation. They are a support ticket."
+description: "Honeypots, prompt injections, and emotional manipulation? A tour of 1617 agent READMEs across GitHub's most popular repositories."
 date: 2026-08-04
-tags: ['ai agents', 'claude code', 'github', 'data analysis']
+tags: ['ai agents', 'claude code', 'github']
 ---
-
----
-
-## TODO
- - re-read section titles, maybe they need renaming
- - re-read blog, see if it needs restructuring
- - think of good blog title
- - think of good blog description
- - think of good blog tags
- - update markdown blog renderer:
-    - make images 0.8x the text container width
-    - fix markdown table widgets (center align and NOT fixed width)
-    - fix style of numbered list (numbers look bolded)
 
 ---
 
@@ -128,7 +115,7 @@ Best of all, as mentioned in the beginning, [`kysely-org/kysely`](https://github
 </figure>
 
 
-### Agent READMEs For Disabling Agents? (TODO: THINK OF A BETTER TITLE)
+### Agent READMEs as Restraining Orders?
 
 A step beyond the honeypots, 12 repositories have inverted the purpose of the file entirely. Instead containing attempts to talk the agent out of helping its own user.
 
