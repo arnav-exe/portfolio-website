@@ -146,9 +146,7 @@ And when you thought it couldn't get any better, [40 lines later](https://github
 
 I would just like to reiterate the absurdity of a person writing an emotionally manipulative short story into a markdown file in the hope that a series matrix multiplications will feel bad enough to stop.
 
-Between the honeypots and the ___, why go through all this effort?
-
-[`obra/superpowers`](https://github.com/obra/superpowers/blob/1d4c8d2aafb8fa0de3e5d7df80ff44899fa7e402/CLAUDE.md#L5-L9) explains this nicely:
+But from the honeypots to the restraining orders, why go through all this effort? [`obra/superpowers`](https://github.com/obra/superpowers/blob/1d4c8d2aafb8fa0de3e5d7df80ff44899fa7e402/CLAUDE.md#L5-L9) explains this nicely:
 
 <figure>
 	<img src="/blog/agent-readmes/superpowers-94-percent-rejection.png" alt="obra/superpowers CLAUDE.md section addressed to AI agents, citing a 94 percent PR rejection rate" />
@@ -156,7 +154,7 @@ Between the honeypots and the ___, why go through all this effort?
 
 I want to be clear that I have no qualms against this approach to combat the growing problem of 'AI slop' PRs. While AI has brought positive influence to the field of software engineering, such as faster and cheaper implementation, lower barriers to entry, and as great learning tools, it has also unfairly put increasing pressure on maintainers who have to comb through these PRs, a lot of which consist of poorly written, low-quality code.
 
-Many prominent figures within the OSS community have expressed their discontent. Daniel Stenburg for example, the magician behind [cURL](https://curl.se/) expressed the project is "effectively being DDoSed" by hallucinated bug reports, and considered shutting down their bug bounty program altogether.
+Many prominent figures within the OSS community have expressed their discontent. Daniel Stenburg for example, the magician behind [cURL](https://curl.se/), expressed the project is "effectively being DDoSed" by hallucinated bug reports, and considered shutting down their bug bounty program altogether. So I don't find it unreasonable if maintainers wish to gate or restrict contributions to their repos, even if some of them are unconventional to say the least.
 
 
 ## How Effective Are These READMEs?
