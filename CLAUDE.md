@@ -21,7 +21,18 @@ No test suite is configured in this project.
 **Routing:** SvelteKit file-based routing under `src/routes/`
 - `+page.svelte` — Single-page portfolio (Hero → About → Skills → Projects → Timeline → Contact)
 - `blog/` — Blog listing with search/filter/pagination; posts are `.svx` files in `blog/posts/`
+- `chat/` — AI chatbot page ("Chat" tab): transcript-style conversation streamed
+  over SSE from the arnav-ai agent (`src/lib/utils/chat.js` is the hand-rolled
+  SSE-over-fetch client; EventSource can't POST). API base defaults to
+  `https://chat.arnavjagetia.com`, overridable with `VITE_CHAT_API_BASE` for dev
+  (e.g. the agent's tailnet address). The SSE envelope (meta/receipt/delta/
+  done/error) is defined by the arnav-ai repo — changes must stay in sync.
+  Session id lives in `sessionStorage`; conversations are per-tab.
 - `+layout.svelte` — Root layout: imports global styles, sets up SkeletonUI popup system, fires analytics on navigation
+
+**Nav:** the Portfolio/Blog/Chat switch is the shared
+`src/lib/components/NavSwitch.svelte` (`active={0|1|2}`) — no longer duplicated
+inline per page.
 
 **Components** (`src/lib/components/`):
 - `Timeline.svelte` — Two-column education/experience timeline with staggered GSAP animations
