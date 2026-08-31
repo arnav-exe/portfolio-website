@@ -1,7 +1,7 @@
 <script>
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 
-	// which tab the current page is: 0 = portfolio, 1 = blog
+	// which tab the current page is: 0 = portfolio, 1 = blog, 2 = chat
 	export let active = 0;
 
 	let group = active;
@@ -21,5 +21,10 @@
 		<RadioItem bind:group value={1}>Blog</RadioItem>
 	{:else}
 		<a href="/blog"><RadioItem bind:group value={1}>Blog</RadioItem></a>
+	{/if}
+	{#if active === 2}
+		<RadioItem bind:group value={2}>Chat</RadioItem>
+	{:else}
+		<a href="/chat"><RadioItem bind:group value={2}>Chat</RadioItem></a>
 	{/if}
 </RadioGroup>
