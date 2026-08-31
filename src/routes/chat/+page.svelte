@@ -79,7 +79,9 @@
 					messages = messages;
 				},
 				onDelta: (chunk) => {
-					reply.text += chunk;
+					// the model tends to open with blank lines; drop them so the
+					// answer starts flush under its eyebrow
+					reply.text = reply.text ? reply.text + chunk : chunk.replace(/^\s+/, '');
 					messages = messages;
 				},
 				onError: (message) => {
