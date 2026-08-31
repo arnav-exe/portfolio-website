@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 
-	import { popup, RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
+	import { popup } from '@skeletonlabs/skeleton';
 
 	// gsap
 	import { gsap } from 'gsap';
@@ -10,6 +10,7 @@
 
 	// components
 	import Cursor from '../lib/components/Cursor.svelte';
+	import NavSwitch from '../lib/components/NavSwitch.svelte';
 	import Timeline from '../lib/components/Timeline.svelte';
 	import Skills from '../lib/components/Skills.svelte';
 	import Contact from '../lib/components/Contact.svelte';
@@ -36,8 +37,6 @@
 	// gsap plugin registering
 	gsap.registerPlugin(TextPlugin);
 	gsap.registerPlugin(ScrollTrigger);
-
-	let page = 0;
 
 	const project_imgs = [
 		JewelryFinder,
@@ -192,15 +191,7 @@
 
 <div class="p-8 space-y-8 w-full overflow-x-hidden">
 	<div class="relative z-40 flex justify-end items-center h-full mx-auto">
-		<RadioGroup
-			class="justify-end"
-			background="bg-secondary-500 dark:bg-surface-900"
-			active="bg-surface-900 dark:bg-primary-500"
-			color="text-primary-500 dark:text-surface-900"
-		>
-			<RadioItem bind:group={page} name="justify" value={0}>Portfolio</RadioItem>
-			<a href="/blog"><RadioItem bind:group={page} name="justify" value={1}>Blog</RadioItem></a>
-		</RadioGroup>
+		<NavSwitch active={0} />
 	</div>
 
 	<!-- LANDING PAGE -->
