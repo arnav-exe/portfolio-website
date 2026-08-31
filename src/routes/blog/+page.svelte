@@ -1,10 +1,9 @@
 <script>
-	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 	import Cursor from '../../lib/components/Cursor.svelte';
+	import NavSwitch from '../../lib/components/NavSwitch.svelte';
 
 	export let data;
 
-	let page = 1;
 	let searchQuery = '';
 	let selectedTag = 'all';
 	let currentPage = 1;
@@ -85,14 +84,7 @@
 			>
 		</a>
 		<div class="absolute right-0">
-			<RadioGroup
-				background="bg-secondary-500 dark:bg-surface-900"
-				active="bg-surface-900 dark:bg-primary-500"
-				color="text-primary-500 dark:text-surface-900"
-			>
-				<a href="/"><RadioItem bind:group={page} value={0}>Portfolio</RadioItem></a>
-				<RadioItem bind:group={page} value={1}>Blog</RadioItem>
-			</RadioGroup>
+			<NavSwitch active={1} />
 		</div>
 	</div>
 
