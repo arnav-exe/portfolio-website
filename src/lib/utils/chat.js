@@ -4,9 +4,17 @@
 // so frames are parsed by hand from the response body:
 //   event: meta     data: {"session_id": "..."}
 //   event: receipt  data: {"query": "...", "chunks": 6, "seconds": 2.1}
+//                   (+ "items": [{path, content}] from the dev agent only)
 //   event: delta    data: {"text": "..."}
 //   event: done     data: {}
 //   event: error    data: {"message": "..."}
+// Dev-mode telemetry (agent-dev only; never sent by the production agent):
+//   event: step     data: {"kind": "guardrail"|"decide"|"search"|"answer",
+//                          "seconds", "tokens_in", "tokens_out", "cost",
+//                          "estimated", "model"}
+//   event: turn     data: {"seconds", "ttft_server", "context_used",
+//                          "context_limit", "reply_tokens", "tokens_in",
+//                          "tokens_out", "cost"}
 
 const CHAT_API_BASE = import.meta.env.VITE_CHAT_API_BASE || 'https://chat.arnavjagetia.com';
 
@@ -20,10 +28,21 @@ const CHAT_API_BASE = import.meta.env.VITE_CHAT_API_BASE || 'https://chat.arnavj
  * @param {(meta: {session_id: string}) => void} [opts.onMeta]
  * @param {(receipt: {query: string, chunks: number, seconds: number}) => void} [opts.onReceipt]
  * @param {(text: string) => void} [opts.onDelta]
+ * @param {(step: Object) => void} [opts.onStep]
+ * @param {(turn: Object) => void} [opts.onTurn]
  * @param {(message: string) => void} [opts.onError]
  * @returns {Promise<boolean>}
  */
-export async function streamChat({ message, sessionId, onMeta, onReceipt, onDelta, onError }) {
+export async function streamChat({
+	message,
+	sessionId,
+	onMeta,
+	onReceipt,
+	onDelta,
+	onStep,
+	onTurn,
+	onError
+}) {
 	const res = await fetch(`${CHAT_API_BASE}/chat`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
@@ -60,6 +79,8 @@ export async function streamChat({ message, sessionId, onMeta, onReceipt, onDelt
 			if (event === 'meta') onMeta?.(payload);
 			else if (event === 'receipt') onReceipt?.(payload);
 			else if (event === 'delta') onDelta?.(payload.text);
+			else if (event === 'step') onStep?.(payload);
+			else if (event === 'turn') onTurn?.(payload);
 			else if (event === 'error') onError?.(payload.message);
 			else if (event === 'done') done = true;
 		}
