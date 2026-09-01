@@ -458,7 +458,9 @@
 
 		<!-- input -->
 		<form
-			class="chat-reveal flex items-center gap-5 mt-8 w-full {DEV_MODE ? 'lg:max-w-[42rem]' : ''}"
+			class="chat-reveal flex items-center gap-5 mt-8 w-full {DEV_MODE && messages.length
+				? 'lg:max-w-[42rem]'
+				: 'mx-auto max-w-3xl'}"
 			on:submit|preventDefault={() => send()}
 		>
 			<input
@@ -483,9 +485,10 @@
 
 		<!-- disclaimer -->
 		<div
-			class="chat-reveal mt-10 pt-4 border-t border-primary-500/10 text-center w-full {DEV_MODE
+			class="chat-reveal mt-10 pt-4 border-t border-primary-500/10 text-center w-full {DEV_MODE &&
+			messages.length
 				? 'lg:max-w-[42rem]'
-				: ''}"
+				: 'mx-auto max-w-3xl'}"
 		>
 			<p class="text-xs dark:text-primary-900">
 				You're talking to an AI trained on my documents. It does its best, but check anything that
