@@ -158,6 +158,8 @@
 							class="chat-body max-w-[66ch] whitespace-pre-wrap
 							{m.role === 'visitor' ? 'dark:text-primary-700' : ''}"
 						>
+							<!-- renderInline html-escapes before adding its own tags, so this is not raw user html -->
+							<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 							{@html renderInline(m.text)}{#if streaming && i === messages.length - 1}<span
 									class="caret"
 									aria-hidden="true"
