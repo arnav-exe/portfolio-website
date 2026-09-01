@@ -34,6 +34,13 @@ No test suite is configured in this project.
 `src/lib/components/NavSwitch.svelte` (`active={0|1|2}`) — no longer duplicated
 inline per page.
 
+**Dev mode:** `DEV_MODE` from `src/lib/utils/env.js` (`VITE_DEV_MODE === 'true'`)
+is the single switch for dev-only behaviour. It is set only by the arnav-ai
+compose stack's `site-dev` service, which runs this repo's Vite dev server over a
+bind-mount of the local checkout, reachable on the tailnet only, pointed at its
+own `agent-dev` API. Currently it disables Goatcounter; dev panels/metrics mount
+behind the same flag. See `.env.example` for the two variables.
+
 **Components** (`src/lib/components/`):
 - `Timeline.svelte` — Two-column education/experience timeline with staggered GSAP animations
 - `Cursor.svelte` — Custom SVG cursor using Svelte spring physics, morphs on hover
