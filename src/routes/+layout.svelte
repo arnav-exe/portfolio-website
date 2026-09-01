@@ -3,8 +3,11 @@
 	// import 'prism-themes/themes/prism-coldark-dark.css';
 	import 'prism-themes/themes/prism-one-dark.css';
 	import { afterNavigate } from '$app/navigation';
+	import { DEV_MODE } from '$lib/utils/env.js';
 
 	afterNavigate(() => {
+		// the dev replica must not pollute production analytics
+		if (DEV_MODE) return;
 		if (typeof window?.goatcounter?.count === 'function') {
 			window.goatcounter.count({
 				path: location.pathname + location.search + location.hash
