@@ -1,5 +1,11 @@
 <script>
+	import { onMount } from 'svelte';
+
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
+
+	// gsap
+	import { gsap } from 'gsap';
+
 	import Cursor from '../../lib/components/Cursor.svelte';
 
 	export let data;
@@ -51,6 +57,14 @@
 	$: if (searchQuery || selectedTag) {
 		currentPage = 1;
 	}
+
+	onMount(() => {
+		gsap.fromTo(
+			'.blog-reveal',
+			{ opacity: 0, y: 24 },
+			{ opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.12 }
+		);
+	});
 </script>
 
 <svelte:head>
@@ -97,7 +111,7 @@
 	</div>
 
 	<div class="flex justify-center items-center h-full flex-col mx-auto w-[90%]">
-		<h1 class="h1 font-bold mt-8 mb-8 uppercase">Welcome To My Dev Blog</h1>
+		<h1 class="blog-reveal h1 font-bold mt-8 mb-8 uppercase">Welcome To My Dev Blog</h1>
 
 		<!-- Search and Filter Section -->
 		<div class="w-full mb-8 space-y-4">
@@ -106,11 +120,11 @@
 				type="text"
 				placeholder="Search posts..."
 				bind:value={searchQuery}
-				class="search-input w-full p-4 rounded-lg bg-secondary-500 dark:bg-surface-900 text-surface-500 dark:text-primary-500 placeholder-surface-400 dark:placeholder-secondary-700 outline-none"
+				class="blog-reveal search-input w-full p-4 rounded-lg bg-secondary-500 dark:bg-surface-900 text-surface-500 dark:text-primary-500 placeholder-surface-400 dark:placeholder-secondary-700 outline-none"
 			/>
 
 			<!-- Tag Filter -->
-			<div class="flex flex-wrap gap-2">
+			<div class="blog-reveal flex flex-wrap gap-2">
 				<button
 					on:click={() => (selectedTag = 'all')}
 					class="px-4 py-2 rounded-lg transition-all {selectedTag === 'all'
@@ -138,7 +152,7 @@
 				{#each paginatedPosts as post}
 					<a
 						href="/blog/{post.slug}"
-						class="block group rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-surface-500 dark:focus-visible:ring-primary-500"
+						class="blog-reveal block group rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-surface-500 dark:focus-visible:ring-primary-500"
 					>
 						<div
 							class="post-card h-full p-6 rounded-lg bg-secondary-500 dark:bg-surface-800 transition-all"
@@ -179,7 +193,7 @@
 
 			<!-- Pagination -->
 			{#if totalPages > 1}
-				<div class="flex justify-center items-center gap-2 mt-8">
+				<div class="blog-reveal flex justify-center items-center gap-2 mt-8">
 					<button
 						on:click={() => (currentPage = Math.max(1, currentPage - 1))}
 						disabled={currentPage === 1}
@@ -209,7 +223,7 @@
 				</div>
 			{/if}
 		{:else}
-			<div class="text-center py-16">
+			<div class="blog-reveal text-center py-16">
 				<p class="text-xl text-surface-400 dark:text-secondary-700">
 					No posts found matching your criteria.
 				</p>
