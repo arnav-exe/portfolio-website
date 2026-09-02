@@ -1,4 +1,6 @@
 <script>
+    import { MoveRight } from 'lucide-svelte';
+
 	import { onMount, afterUpdate } from 'svelte';
 	import { gsap } from 'gsap';
 
@@ -495,10 +497,11 @@
 			</p>
 			<a
 				href="/graph"
-				class="inline-block mt-1.5 text-xs dark:text-primary-700 underline underline-offset-[3px]
-				hover:dark:text-primary-500 transition-colors duration-150"
+				class="inline-flex items-center gap-1.5 mt-1.5 text-xs dark:text-primary-700 hover:underline
+				hover:underline-offset-[3px] hover:dark:text-primary-500 transition-colors duration-150"
 			>
 				View the knowledge graph powering this
+				<MoveRight size={13} strokeWidth={1.5} />
 			</a>
 		</div>
 	</div>
