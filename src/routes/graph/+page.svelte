@@ -5,8 +5,6 @@
 	import Cursor from '../../lib/components/Cursor.svelte';
 	import { CHAT_API_BASE } from '$lib/utils/chat.js';
 
-	// person is always bone (it's the star of the graph); the rest of the
-	// palette is handed out to the corpus's most common entity types at runtime
 	const PERSON_COLOR = '#e8e7e2';
 	const RAMP = ['#d4c9ae', '#b8895a', '#aeaeaa', '#8b8b87', '#9f9783'];
 	const OTHER_COLOR = '#72716e';
@@ -24,7 +22,7 @@
 	let resizeObserver = null;
 
 	const colorByType = new Map();
-	const neighbours = new Map(); // id -> Set(id)
+	const neighbours = new Map();
 	let hovered = null;
 	let hoverSet = new Set();
 
@@ -205,13 +203,7 @@
 		</h1>
 
 		<p class="graph-reveal mt-5 text-center text-sm dark:text-primary-700 max-w-2xl mx-auto">
-			Every answer the chatbot gives is grounded here.
-			{#if meta}
-				These are the {meta.shown} most connected entities LightRAG extracted from my documents, joined
-				by {meta.edges} relationships{meta.truncated ? ' - the full graph is larger' : ''}.
-			{:else}
-				The entities LightRAG extracted from my documents, and how they connect.
-			{/if}
+			 These are the entities and relationships extracted from my documents, neatly visualised as a knowledge graph. Every answer the chatbot gives is grounded here.
 		</p>
 
 		{#if state === 'ready' && legend.length}
