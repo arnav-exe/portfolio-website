@@ -25,7 +25,7 @@ No test suite is configured in this project.
   over SSE from the arnav-ai agent (`src/lib/utils/chat.js` is the hand-rolled
   SSE-over-fetch client; EventSource can't POST). API base defaults to
   `https://chat.arnavjagetia.com`, overridable with `VITE_CHAT_API_BASE` for dev
-  (e.g. the agent's tailnet address). The SSE envelope (meta/receipt/delta/
+  (e.g. the agent's tailnet address). The SSE envelope (meta/status/receipt/delta/
   done/error) is defined by the arnav-ai repo — changes must stay in sync.
   Session id lives in `sessionStorage`; conversations are per-tab.
 - `+layout.svelte` — Root layout: imports global styles, sets up SkeletonUI popup system, fires analytics on navigation
