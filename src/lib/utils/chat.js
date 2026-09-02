@@ -5,6 +5,9 @@
 //   event: meta     data: {"session_id": "..."}
 //   event: receipt  data: {"query": "...", "chunks": 6, "seconds": 2.1}
 //                   (+ "items": [{path, content}] from the dev agent only)
+//   event: status   data: {"stage": "searching", "query": "..."} before each
+//                   search, {"stage": "composing"} once it returns; the client
+//                   shows these only until the first token arrives
 //   event: delta    data: {"text": "..."}
 //   event: done     data: {}
 //   event: error    data: {"message": "..."}
@@ -27,6 +30,7 @@ export const CHAT_API_BASE = import.meta.env.VITE_CHAT_API_BASE || 'https://chat
  * @param {string|null} opts.sessionId
  * @param {(meta: {session_id: string}) => void} [opts.onMeta]
  * @param {(receipt: {query: string, chunks: number, seconds: number}) => void} [opts.onReceipt]
+ * @param {(status: {stage: string, query?: string}) => void} [opts.onStatus]
  * @param {(text: string) => void} [opts.onDelta]
  * @param {(step: Object) => void} [opts.onStep]
  * @param {(turn: Object) => void} [opts.onTurn]
@@ -38,6 +42,7 @@ export async function streamChat({
 	sessionId,
 	onMeta,
 	onReceipt,
+	onStatus,
 	onDelta,
 	onStep,
 	onTurn,
@@ -78,6 +83,7 @@ export async function streamChat({
 			const payload = JSON.parse(data);
 			if (event === 'meta') onMeta?.(payload);
 			else if (event === 'receipt') onReceipt?.(payload);
+			else if (event === 'status') onStatus?.(payload);
 			else if (event === 'delta') onDelta?.(payload.text);
 			else if (event === 'step') onStep?.(payload);
 			else if (event === 'turn') onTurn?.(payload);
