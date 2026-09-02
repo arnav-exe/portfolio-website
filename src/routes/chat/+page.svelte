@@ -9,10 +9,36 @@
 	import { streamChat } from '$lib/utils/chat.js';
 	import { DEV_MODE } from '$lib/utils/env.js';
 
+	const questionBanks = {
+		projects: [
+			'What have you built recently?',
+			'How does this chatbot actually work?',
+			'Why does your server live 4000 miles away?',
+			'Ever contributed to open source?',
+			'What do you run on your Raspberry Pi?',
+			'What do you write about on your blog?'
+		],
+		work: [
+			'Any experience with AWS?',
+			'What do you do at Viavi?',
+			'What was your dissertation about?',
+			'Do you have experience with traditional ML?',
+			'How do you keep LLM apps safe?',
+			'What did you study at St Andrews?'
+		],
+		personal: [
+			'What do you do outside of work?',
+			'What is your Vim setup?',
+			'Do you play any sports?',
+			'What is your favourite ice cream flavour?',
+			'What are you reading right now?'
+		]
+	};
+	const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 	const suggestions = [
-		'What have you built recently?',
-		'Any experience with AWS?',
-		'Do you actually enjoy using Vim?'
+		pick(questionBanks.projects),
+		pick(questionBanks.work),
+		pick(questionBanks.personal)
 	];
 
 	const OFFLINE_MESSAGE =
