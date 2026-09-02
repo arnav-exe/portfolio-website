@@ -16,7 +16,7 @@
 //                          "context_limit", "reply_tokens", "tokens_in",
 //                          "tokens_out", "cost"}
 
-const CHAT_API_BASE = import.meta.env.VITE_CHAT_API_BASE || 'https://chat.arnavjagetia.com';
+export const CHAT_API_BASE = import.meta.env.VITE_CHAT_API_BASE || 'https://chat.arnavjagetia.com';
 
 /**
  * Stream one chat exchange. Callbacks fire as frames arrive.

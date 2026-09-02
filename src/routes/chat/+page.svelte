@@ -43,7 +43,7 @@
 			.replace(/`([^`\n]+)`/g, '<code class="chat-code">$1</code>')
 			.replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>');
 
-	// ---- dev-mode formatting helpers ----
+	//  dev-mode formatting helpers
 	const stepSub = (step) => {
 		if (step.kind === 'guardrail') return 'Haiku, for injection and abuse';
 		if (step.kind === 'search') return 'embedding + keywords local · rerank Cohere';
@@ -149,7 +149,7 @@
 					try {
 						sessionStorage.setItem('chat-session-id', sessionId);
 					} catch {
-						/* private windows etc. - a fresh session per message is fine */
+						// private windows etc - a fresh session per message is fine
 					}
 				},
 				onReceipt: (receipt) => {
@@ -491,9 +491,15 @@
 				: 'mx-auto max-w-3xl'}"
 		>
 			<p class="text-xs dark:text-primary-900">
-				You're talking to an AI trained on my documents. It does its best, but check anything that
-				matters.
+				AI-generated responses may contain errors. Please verify important information.
 			</p>
+			<a
+				href="/graph"
+				class="inline-block mt-1.5 text-xs dark:text-primary-700 underline underline-offset-[3px]
+				hover:dark:text-primary-500 transition-colors duration-150"
+			>
+				View the knowledge graph powering this
+			</a>
 		</div>
 	</div>
 </div>
@@ -533,7 +539,7 @@
 		}
 	}
 
-	/* ---- dev mode instrumentation (renders only when DEV_MODE) ---- */
+	/* dev mode instrumentation */
 
 	.dev-grid {
 		display: block;
