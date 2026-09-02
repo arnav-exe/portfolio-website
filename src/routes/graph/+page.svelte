@@ -3,6 +3,8 @@
 	import { gsap } from 'gsap';
 
 	import Cursor from '../../lib/components/Cursor.svelte';
+	import HomeLogo from '../../lib/components/HomeLogo.svelte';
+	import PageLink from '../../lib/components/PageLink.svelte';
 	import { CHAT_API_BASE } from '$lib/utils/chat.js';
 
 	const PERSON_COLOR = '#e8e7e2';
@@ -184,13 +186,9 @@
 <Cursor />
 
 <div class="p-8 space-y-8">
-	<div class="relative z-40 flex justify-between items-center h-full mx-auto">
-		<a
-			href="/chat"
-			class="text-sm dark:text-primary-700 hover:dark:text-primary-500 transition-colors duration-150"
-		>
-			&larr; Back to chat
-		</a>
+	<div class="relative z-40 flex justify-center items-center h-full mx-auto">
+		<PageLink href="/chat" class="absolute left-0">Back to Chat</PageLink>
+		<HomeLogo />
 	</div>
 
 	<div class="mx-auto w-[90%] max-w-6xl">
