@@ -57,15 +57,22 @@
 	// what the visitor sees while the agent works, before the first token.
 	// `thinking` is set client-side at send; the other stages arrive as SSE
 	// status frames from the agent (searching also carries the tool query).
+	// the trailing ellipsis is rendered separately so its dots can animate.
 	const STATUS_LABELS = {
-		thinking: 'thinking…',
-		searching: 'searching the knowledge base…',
-		composing: 'composing…'
+		thinking: 'thinking',
+		searching: 'searching the knowledge base',
+		composing: 'composing'
 	};
+	const STATUS_QUERY_MAX = 48;
 
 	function statusLabel(status) {
-		if (status.stage === 'searching' && status.query) return `searching “${status.query}”…`;
-		return STATUS_LABELS[status.stage] ?? 'working…';
+		if (status.stage === 'searching' && status.query) {
+			const q = status.query;
+			const shown =
+				q.length > STATUS_QUERY_MAX ? q.slice(0, STATUS_QUERY_MAX - 1).trimEnd() + '…' : q;
+			return `searching “${shown}”`;
+		}
+		return STATUS_LABELS[status.stage] ?? 'working';
 	}
 
 	let messages = [];
@@ -336,10 +343,11 @@
 								<div class="chat-body chat-status max-w-[66ch]" role="status" aria-live="polite">
 									<span class="caret" aria-hidden="true" />
 									{#key m.status.stage}
-										<span
-											class="chat-status-label font-mono text-[11px] dark:text-primary-900 truncate max-w-[40ch]"
-										>
-											{statusLabel(m.status)}
+										<span class="chat-status-label font-mono text-[11px] dark:text-primary-900">
+											<span>{statusLabel(m.status)}</span>
+											<span class="chat-dots" aria-hidden="true"
+												><span>.</span><span>.</span><span>.</span></span
+											>
 										</span>
 									{/key}
 								</div>
@@ -603,6 +611,13 @@
 		min-height: 1.55em;
 	}
 
+	/* inline-flex so the label text and its dots sit flush with no template whitespace between them */
+	.chat-status-label,
+	.chat-dots {
+		display: inline-flex;
+		align-items: baseline;
+	}
+
 	@media (prefers-reduced-motion: no-preference) {
 		.caret {
 			animation: blink 1.06s steps(1) infinite;
@@ -615,6 +630,18 @@
 
 		.chat-status-label {
 			animation: status-in 0.32s ease-out;
+		}
+
+		.chat-dots span {
+			animation: dot 1.2s ease-in-out infinite;
+		}
+
+		.chat-dots span:nth-child(2) {
+			animation-delay: 0.2s;
+		}
+
+		.chat-dots span:nth-child(3) {
+			animation-delay: 0.4s;
 		}
 
 		@keyframes blink {
@@ -633,6 +660,18 @@
 			from {
 				opacity: 0;
 				transform: translateY(3px);
+			}
+		}
+
+		@keyframes dot {
+			0%,
+			60%,
+			100% {
+				opacity: 0.2;
+			}
+
+			30% {
+				opacity: 1;
 			}
 		}
 	}
