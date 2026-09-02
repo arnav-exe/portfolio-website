@@ -17,6 +17,8 @@
 
 	const OFFLINE_MESSAGE =
 		'The chatbot seems to be unreachable right now. Give it a minute and try again.';
+	// the stream ended cleanly but carried no answer text (a finish-only turn)
+	const EMPTY_MESSAGE = "I couldn't put an answer together. Try rephrasing the question?";
 
 	// dev-mode display names for the telemetry steps (kinds come from agent-dev)
 	const STEP_TITLES = {
@@ -183,7 +185,7 @@
 					if (!reply.text) reply.text = message;
 				}
 			});
-			if (!finished && !reply.text) reply.text = OFFLINE_MESSAGE;
+			if (!reply.text) reply.text = finished ? EMPTY_MESSAGE : OFFLINE_MESSAGE;
 		} catch {
 			if (!reply.text) reply.text = OFFLINE_MESSAGE;
 		}
