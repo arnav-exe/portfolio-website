@@ -623,11 +623,6 @@
 			animation: blink 1.06s steps(1) infinite;
 		}
 
-		/* in the status row the caret is a heartbeat, not a cursor: breathe instead of blinking off */
-		.chat-status .caret {
-			animation: pulse 1.4s ease-in-out infinite;
-		}
-
 		.chat-status-label {
 			animation: status-in 0.32s ease-out;
 		}
@@ -647,12 +642,6 @@
 		@keyframes blink {
 			50% {
 				opacity: 0;
-			}
-		}
-
-		@keyframes pulse {
-			50% {
-				opacity: 0.25;
 			}
 		}
 
