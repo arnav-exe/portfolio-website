@@ -1,5 +1,5 @@
 <script>
-	import { MoveLeft } from 'lucide-svelte';
+	import PageLink from './PageLink.svelte';
 
 	export let title = 'Blog Post';
 	export let description = '';
@@ -7,7 +7,7 @@
 	export let tags = [];
 	export let readingTime = 0;
 
-	// Format date
+	// format date
 	const formatDate = (dateString) => {
 		const raw =
 			typeof dateString === 'string'
@@ -36,16 +36,10 @@
 
 <main class="p-8 w-full overflow-x-hidden">
 	<div class="max-w-4xl mx-auto">
-		<!-- Back button -->
-		<a
-			href="/blog"
-			class="inline-flex items-center mb-8 pb-0.5 border-b border-transparent text-surface-500 hover:text-surface-400 dark:text-primary-500 dark:hover:text-primary-400 underline-offset-4 hover:border-current transition-colors"
-		>
-			<MoveLeft class="w-5 h-5 mr-2" />
-			Back to Blog
-		</a>
+		<!-- back button -->
+		<PageLink href="/blog" class="mb-8">Back to Blog</PageLink>
 
-		<!-- Article header -->
+		<!-- article header -->
 		<article class="max-w-none">
 			<header class="mb-8">
 				<h1 class="h1 font-bold mb-4">{title}</h1>

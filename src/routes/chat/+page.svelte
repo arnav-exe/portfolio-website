@@ -1,11 +1,11 @@
 <script>
-    import { MoveRight } from 'lucide-svelte';
-
 	import { onMount, afterUpdate } from 'svelte';
 	import { gsap } from 'gsap';
 
 	import Cursor from '../../lib/components/Cursor.svelte';
 	import NavSwitch from '../../lib/components/NavSwitch.svelte';
+	import HomeLogo from '../../lib/components/HomeLogo.svelte';
+	import PageLink from '../../lib/components/PageLink.svelte';
 	import { streamChat } from '$lib/utils/chat.js';
 	import { DEV_MODE } from '$lib/utils/env.js';
 
@@ -205,8 +205,11 @@
 <Cursor />
 
 <div class="p-8 space-y-8">
-	<div class="relative z-40 flex justify-end items-center h-full mx-auto">
-		<NavSwitch active={2} />
+	<div class="relative z-40 flex justify-center items-center h-full mx-auto">
+		<HomeLogo />
+		<div class="absolute right-0">
+			<NavSwitch active={2} />
+		</div>
 	</div>
 
 	<div class="mx-auto w-[90%] {DEV_MODE ? 'max-w-6xl' : 'max-w-3xl'} min-h-[70vh] flex flex-col">
@@ -495,14 +498,9 @@
 			<p class="text-xs dark:text-primary-900">
 				AI-generated responses may contain errors. Please verify important information.
 			</p>
-			<a
-				href="/graph"
-				class="inline-flex items-center gap-1.5 mt-1.5 text-xs dark:text-primary-700 hover:underline
-				hover:underline-offset-[3px] hover:dark:text-primary-500 transition-colors duration-150"
-			>
+			<PageLink href="/graph" direction="forward" class="mt-3">
 				View the knowledge graph powering this
-				<MoveRight size={13} strokeWidth={1.5} />
-			</a>
+			</PageLink>
 		</div>
 	</div>
 </div>
