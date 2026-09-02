@@ -23,8 +23,10 @@
 		<a href="/blog"><RadioItem bind:group value={1}>Blog</RadioItem></a>
 	{/if}
 	{#if active === 2}
-		<RadioItem bind:group value={2}>Chat</RadioItem>
+		<RadioItem bind:group value={2}>Chat ✨</RadioItem>
 	{:else}
-		<a href="/chat"><RadioItem bind:group value={2}>Chat</RadioItem></a>
+		<a href="/chat">
+			<RadioItem bind:group value={2}>Chat ✨</RadioItem>
+		</a>
 	{/if}
 </RadioGroup>
