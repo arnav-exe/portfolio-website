@@ -33,6 +33,7 @@
 	"type": "module",
 	"dependencies": {
 		"@floating-ui/dom": "^1.6.5",
+		"force-graph": "^1.51.4",
 		"gsap": "^3.12.5",
 		"lru-cache": "^10.2.2",
 		"lucide-svelte": "^1.0.1",
