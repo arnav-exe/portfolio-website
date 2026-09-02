@@ -28,6 +28,20 @@
 		answer: 'Wrote the answer'
 	};
 
+	// what the visitor sees while the agent works, before the first token.
+	// `thinking` is set client-side at send; the other stages arrive as SSE
+	// status frames from the agent (searching also carries the tool query).
+	const STATUS_LABELS = {
+		thinking: 'thinking…',
+		searching: 'searching the knowledge base…',
+		composing: 'composing…'
+	};
+
+	function statusLabel(status) {
+		if (status.stage === 'searching' && status.query) return `searching “${status.query}”…`;
+		return STATUS_LABELS[status.stage] ?? 'working…';
+	}
+
 	let messages = [];
 	let draft = '';
 	let streaming = false;
@@ -139,6 +153,8 @@
 			text: '',
 			time: now(),
 			receipts: [],
+			// shown in place of the empty answer until the first token; see STATUS_LABELS
+			status: { stage: 'thinking' },
 			dev: DEV_MODE ? { steps: [], turn: null, ttftBrowser: null, open: false } : null
 		};
 		messages = [...messages, reply];
@@ -158,6 +174,13 @@
 				},
 				onReceipt: (receipt) => {
 					reply.receipts = [...reply.receipts, receipt];
+					// a receipt means the search is over, so advance the label even
+					// if the agent is an older build that sends no status frames
+					reply.status = { stage: 'composing' };
+					messages = messages;
+				},
+				onStatus: (status) => {
+					reply.status = status;
 					messages = messages;
 				},
 				onDelta: (chunk) => {
@@ -190,6 +213,8 @@
 			if (!reply.text) reply.text = OFFLINE_MESSAGE;
 		}
 
+		// whatever ended the stream, the status line goes with it
+		reply.status = null;
 		messages = messages;
 		streaming = false;
 	}
@@ -280,17 +305,31 @@
 								</span>
 								<span class="font-mono text-[10px] dark:text-primary-900">{m.time}</span>
 							</div>
-							<p
-								class="chat-body max-w-[66ch] whitespace-pre-wrap
-								{m.role === 'visitor' ? 'dark:text-primary-700' : ''}"
-							>
-								<!-- renderInline html-escapes before adding its own tags, so this is not raw user html -->
-								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-								{@html renderInline(m.text)}{#if streaming && i === messages.length - 1}<span
-										class="caret"
-										aria-hidden="true"
-									/>{/if}
-							</p>
+							{#if m.status && !m.text}
+								<!-- pre-token status line. the live region is the stable wrapper; only the label re-keys -->
+								<div class="chat-body chat-status max-w-[66ch]" role="status" aria-live="polite">
+									<span class="caret" aria-hidden="true" />
+									{#key m.status.stage}
+										<span
+											class="chat-status-label font-mono text-[11px] dark:text-primary-900 truncate max-w-[40ch]"
+										>
+											{statusLabel(m.status)}
+										</span>
+									{/key}
+								</div>
+							{:else}
+								<p
+									class="chat-body max-w-[66ch] whitespace-pre-wrap
+									{m.role === 'visitor' ? 'dark:text-primary-700' : ''}"
+								>
+									<!-- renderInline html-escapes before adding its own tags, so this is not raw user html -->
+									<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+									{@html renderInline(m.text)}{#if streaming && i === messages.length - 1}<span
+											class="caret"
+											aria-hidden="true"
+										/>{/if}
+								</p>
+							{/if}
 							{#each m.receipts as receipt}
 								{#if DEV_MODE && receipt.items?.length}
 									<!-- dev mode: the receipt line is the chunk dropdown -->
@@ -530,14 +569,33 @@
 		background: rgb(var(--color-tertiary-500));
 	}
 
+	/* same line box as the answer paragraph that replaces it, so the first token lands without a hop */
+	.chat-status {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		min-height: 1.55em;
+	}
+
 	@media (prefers-reduced-motion: no-preference) {
 		.caret {
 			animation: blink 1.06s steps(1) infinite;
 		}
 
+		.chat-status-label {
+			animation: status-in 0.32s ease-out;
+		}
+
 		@keyframes blink {
 			50% {
 				opacity: 0;
+			}
+		}
+
+		@keyframes status-in {
+			from {
+				opacity: 0;
+				transform: translateY(3px);
 			}
 		}
 	}
