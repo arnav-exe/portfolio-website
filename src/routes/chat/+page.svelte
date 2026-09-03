@@ -283,9 +283,6 @@
 				>
 					ASK ME ANYTHING
 				</h1>
-				<p class="chat-reveal mt-5 text-sm dark:text-primary-900">
-					An AI with my voice, my projects, and my opinions on tab width.
-				</p>
 				<div class="chat-reveal mt-10 flex flex-wrap justify-center gap-3">
 					{#each suggestions as suggestion}
 						<button
@@ -573,7 +570,7 @@
 			<p class="text-xs dark:text-primary-900">
 				AI-generated responses may contain errors. Please verify important information.
 			</p>
-			<PageLink href="/graph" direction="forward" class="mt-3">
+			<PageLink href="/graph" direction="forward" class="my-4">
 				View the knowledge graph powering this
 			</PageLink>
 		</div>
