@@ -9,6 +9,7 @@
 	import Svelte from '../icons/skills/Svelte.svelte';
 	import Aws from '../icons/skills/AWS.svelte';
 	import Docker from '../icons/skills/Docker.svelte';
+	import Kubernetes from '../icons/skills/Kubernetes.svelte';
 	import Git from '../icons/skills/Git.svelte';
     import Langgraph from '../icons/skills/Langgraph.svelte';
     import Langfuse from '../icons/skills/Langfuse.svelte';
@@ -55,6 +56,7 @@
 			skills: [
 				{ name: 'AWS', icon: Aws, url: 'https://aws.amazon.com/' },
 				{ name: 'Docker', icon: Docker, url: 'https://www.docker.com/' },
+				{ name: 'Kubernetes', icon: Kubernetes, url: 'https://kubernetes.io/' },
 				{ name: 'Git', icon: Git, url: 'https://git-scm.com/' }
 			]
 		}
