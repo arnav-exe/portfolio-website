@@ -10,6 +10,12 @@
 	import Aws from '../icons/skills/AWS.svelte';
 	import Docker from '../icons/skills/Docker.svelte';
 	import Git from '../icons/skills/Git.svelte';
+    import Langgraph from '../icons/skills/Langgraph.svelte';
+    import Langfuse from '../icons/skills/Langfuse.svelte';
+    import Weaviate from '../icons/skills/Weaviate.svelte';
+    import Googleadk from '../icons/skills/Googleadk.svelte';
+    import Litellm from '../icons/skills/Litellm.svelte';
+    import Ragflow from '../icons/skills/Ragflow.svelte';
 	import Temporal from '../icons/skills/Temporal.svelte';
 
 	const SKILL_GROUPS = [
@@ -27,13 +33,14 @@
 				{ name: 'PyTorch', icon: Pytorch, url: 'https://pytorch.org/' },
 				{ name: 'TensorFlow', icon: Tensorflow, url: 'https://www.tensorflow.org/' },
 				{ name: 'LangChain', icon: Langchain, url: 'https://www.langchain.com/' },
-				{ name: 'LangGraph', url: 'https://www.langchain.com/langgraph' },
-				{ name: 'Google ADK', url: 'https://google.github.io/adk-docs/' },
-				{ name: 'LiteLLM', url: 'https://www.litellm.ai/' },
-				{ name: 'Weaviate', url: 'https://weaviate.io/' },
-				{ name: 'LangFuse', url: 'https://langfuse.com/' },
-				{ name: 'RAGFlow', url: 'https://ragflow.io/' },
+				{ name: 'LangGraph', icon: Langgraph, url: 'https://www.langchain.com/langgraph' },
+				{ name: 'Google ADK', icon: Googleadk, url: 'https://google.github.io/adk-docs/' },
+				{ name: 'LiteLLM', icon: Litellm, url: 'https://www.litellm.ai/' },
+				{ name: 'Weaviate', icon: Weaviate, url: 'https://weaviate.io/' },
+				{ name: 'LangFuse', icon: Langfuse, url: 'https://langfuse.com/' },
+				{ name: 'RAGFlow', icon: Ragflow,  url: 'https://ragflow.io/' },
 				{ name: 'Temporal', icon: Temporal, url: 'https://temporal.io/' },
+				{ name: 'LightRAG', url: 'https://github.com/hkuds/lightrag' },
 			]
 		},
 		{
