@@ -41,12 +41,11 @@
 		pick(questionBanks.personal)
 	];
 
-	const OFFLINE_MESSAGE =
-		'The chatbot seems to be unreachable right now. Give it a minute and try again.';
-	// the stream ended cleanly but carried no answer text (a finish-only turn)
+	const OFFLINE_MESSAGE = 'The chatbot seems to be unreachable right now. Give it a minute and try again.';
+	// if stream ended cleanly but carried no answer text (a finish-only turn)
 	const EMPTY_MESSAGE = "I couldn't put an answer together. Try rephrasing the question?";
 
-	// dev-mode display names for the telemetry steps (kinds come from agent-dev)
+	// dev mode display names for telemetry steps
 	const STEP_TITLES = {
 		guardrail: 'Checked the message',
 		decide: 'Decided to search',
@@ -54,10 +53,6 @@
 		answer: 'Wrote the answer'
 	};
 
-	// what the visitor sees while the agent works, before the first token.
-	// `thinking` is set client-side at send; the other stages arrive as SSE
-	// status frames from the agent (searching also carries the tool query).
-	// the trailing ellipsis is rendered separately so its dots can animate.
 	const STATUS_LABELS = {
 		thinking: 'thinking',
 		searching: 'searching the knowledge base',
@@ -84,8 +79,6 @@
 	const now = () =>
 		new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
 
-	// minimal inline rendering for the two marks the bot actually uses:
-	// `code` and **bold**. Everything is HTML-escaped first, so {@html} is safe.
 	const renderInline = (text) =>
 		text
 			.replaceAll('&', '&amp;')
@@ -94,7 +87,7 @@
 			.replace(/`([^`\n]+)`/g, '<code class="chat-code">$1</code>')
 			.replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>');
 
-	//  dev-mode formatting helpers
+	//  dev mode formatting helpers
 	const stepSub = (step) => {
 		if (step.kind === 'guardrail') return 'Haiku, for injection and abuse';
 		if (step.kind === 'search') return 'embedding + keywords local · rerank Cohere';
@@ -142,6 +135,14 @@
 
 	const turnChunks = (m) => m.receipts.reduce((sum, r) => sum + (r.chunks ?? 0), 0);
 
+	// detailed errors in dev mode
+	const devError = (detail, source = 'browser', traceback = null) => ({
+		source,
+		detail,
+		traceback,
+		open: false
+	});
+
 	$: convoTotals = DEV_MODE
 		? messages.reduce(
 				(acc, m) => {
@@ -186,9 +187,9 @@
 			text: '',
 			time: now(),
 			receipts: [],
-			// shown in place of the empty answer until the first token; see STATUS_LABELS
+			// shown in place of empty answer until first token arrives
 			status: { stage: 'thinking' },
-			dev: DEV_MODE ? { steps: [], turn: null, ttftBrowser: null, open: false } : null
+			dev: DEV_MODE ? { steps: [], turn: null, ttftBrowser: null, open: false, error: null } : null
 		};
 		messages = [...messages, reply];
 		const sentAt = performance.now();
@@ -202,13 +203,12 @@
 					try {
 						sessionStorage.setItem('chat-session-id', sessionId);
 					} catch {
-						// private windows etc - a fresh session per message is fine
+						// private windows etc (fresh session per message is fine)
 					}
 				},
 				onReceipt: (receipt) => {
 					reply.receipts = [...reply.receipts, receipt];
-					// a receipt means the search is over, so advance the label even
-					// if the agent is an older build that sends no status frames
+					// receipt means search is over, so advance label
 					reply.status = { stage: 'composing' };
 					messages = messages;
 				},
@@ -220,8 +220,7 @@
 					if (reply.dev && reply.dev.ttftBrowser == null) {
 						reply.dev.ttftBrowser = (performance.now() - sentAt) / 1000;
 					}
-					// the model tends to open with blank lines; drop them so the
-					// answer starts flush under its eyebrow
+					// drop blank lines (idk why qwen keeps outputting thes)
 					reply.text = reply.text ? reply.text + chunk : chunk.replace(/^\s+/, '');
 					messages = messages;
 				},
@@ -237,16 +236,27 @@
 						messages = messages;
 					}
 				},
-				onError: (message) => {
+				onError: (message, payload) => {
 					if (!reply.text) reply.text = message;
+					if (reply.dev) {
+						reply.dev.error = devError(
+							payload?.detail ?? `no detail on the error frame (message: ${message})`,
+							'agent',
+							payload?.traceback ?? null
+						);
+						messages = messages;
+					}
 				}
 			});
 			if (!reply.text) reply.text = finished ? EMPTY_MESSAGE : OFFLINE_MESSAGE;
-		} catch {
+			if (reply.dev && !finished && !reply.dev.error) {
+				reply.dev.error = devError('stream ended without a done or error frame');
+			}
+		} catch (err) {
 			if (!reply.text) reply.text = OFFLINE_MESSAGE;
+			if (reply.dev) reply.dev.error = devError(err?.message ?? String(err));
 		}
 
-		// whatever ended the stream, the status line goes with it
 		reply.status = null;
 		messages = messages;
 		streaming = false;
@@ -362,7 +372,16 @@
 								</p>
 							{/if}
 							{#each m.receipts as receipt}
-								{#if DEV_MODE && receipt.items?.length}
+								{#if DEV_MODE && receipt.error}
+									<!-- dev mode: the search failed; the model only got a canned instruction -->
+									<div class="font-mono text-[11px] dark:text-primary-900 mt-2">
+										&#8627; searched knowledge base:
+										<span class="text-tertiary-500">"{receipt.query}"</span>
+										&middot; <span class="dev-err">failed</span>{#if receipt.seconds != null}
+											&middot; {receipt.seconds}s{/if}
+									</div>
+									<pre class="dev-err-detail pl-4">{receipt.error}</pre>
+								{:else if DEV_MODE && receipt.items?.length}
 									<!-- dev mode: the receipt line is the chunk dropdown -->
 									<button
 										class="dev-receipt font-mono text-[11px] dark:text-primary-900 mt-2 block"
@@ -409,6 +428,37 @@
 						{#if DEV_MODE && m.role === 'arnav' && m.dev}
 							<aside class="dev-margin lg:pt-1">
 								<div class="dev-head">This turn &middot; {m.time}</div>
+								{#if m.dev.error}
+									<div class="dev-error">
+										<div>
+											<span class="dev-lbl">error</span><span class="dev-err"
+												>{m.dev.error.source === 'agent'
+													? 'raised in the agent'
+													: 'caught in the browser'}</span
+											>
+										</div>
+										<pre class="dev-err-detail">{m.dev.error.detail}</pre>
+										{#if m.dev.error.traceback}
+											<button
+												class="dev-expand"
+												aria-expanded={m.dev.error.open}
+												on:click={() => {
+													m.dev.error.open = !m.dev.error.open;
+													messages = messages;
+												}}
+											>
+												<span
+													class="dev-tri"
+													class:open={m.dev.error.open}
+													aria-hidden="true"
+												/>show traceback
+											</button>
+											{#if m.dev.error.open}
+												<pre class="dev-err-trace">{m.dev.error.traceback}</pre>
+											{/if}
+										{/if}
+									</div>
+								{/if}
 								<div>
 									<span class="dev-lbl">first token</span><span class="dev-v"
 										>{fmtSecs(m.dev.ttftBrowser)}</span
@@ -493,7 +543,7 @@
 												<div class="dev-row">
 													<span class="dev-step"
 														>{STEP_TITLES[step.kind] ?? step.kind}<small>{stepSub(step)}</small
-														></span
+														>{#if step.error}<small class="dev-err">{step.error}</small>{/if}</span
 													>
 													<span class="dev-n">{fmtSecs(step.seconds)}</span>
 													<span class="dev-n">
@@ -861,5 +911,29 @@
 
 	.dev-total .dev-n.dev-paid {
 		color: rgb(var(--color-secondary-500));
+	}
+	.dev-error {
+		margin: 4px 0 8px;
+	}
+	.dev-err {
+		color: rgb(var(--color-error-500));
+	}
+	.dev-err-detail,
+	.dev-err-trace {
+		font-family: ui-monospace, monospace;
+		font-size: 10.5px;
+		line-height: 1.5;
+		white-space: pre-wrap;
+		word-break: break-word;
+		margin: 2px 0 0;
+	}
+	.dev-err-detail {
+		color: rgb(var(--color-error-500));
+	}
+	.dev-err-trace {
+		color: rgb(var(--color-primary-700));
+		max-height: 16rem;
+		overflow-y: auto;
+		margin-top: 4px;
 	}
 </style>
