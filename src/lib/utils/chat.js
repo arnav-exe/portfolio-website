@@ -18,6 +18,9 @@
 //   event: turn     data: {"seconds", "ttft_server", "context_used",
 //                          "context_limit", "reply_tokens", "tokens_in",
 //                          "tokens_out", "cost"}
+// Dev-mode failure detail (agent-dev only): the `error` frame additionally
+// carries "detail" (exception type + message) and "traceback"; a `step` or
+// `receipt` may carry "error" when that step failed but the turn carried on.
 
 export const CHAT_API_BASE = import.meta.env.VITE_CHAT_API_BASE || 'https://chat.arnavjagetia.com';
 
@@ -34,7 +37,9 @@ export const CHAT_API_BASE = import.meta.env.VITE_CHAT_API_BASE || 'https://chat
  * @param {(text: string) => void} [opts.onDelta]
  * @param {(step: Object) => void} [opts.onStep]
  * @param {(turn: Object) => void} [opts.onTurn]
- * @param {(message: string) => void} [opts.onError]
+ * @param {(message: string, payload: Object) => void} [opts.onError]
+ *   payload is the whole error frame: {message, detail?, traceback?} (the last two
+ *   only ever come from agent-dev)
  * @returns {Promise<boolean>}
  */
 export async function streamChat({
@@ -48,13 +53,25 @@ export async function streamChat({
 	onTurn,
 	onError
 }) {
-	const res = await fetch(`${CHAT_API_BASE}/chat`, {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ message, session_id: sessionId })
-	});
+	const url = `${CHAT_API_BASE}/chat`;
+	let res;
+	try {
+		res = await fetch(url, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ message, session_id: sessionId })
+		});
+	} catch (err) {
+		// network-level failure (offline, dns, cors): the browser only says "failed to
+		// fetch", so name the endpoint it was trying to reach for the dev UI
+		throw new Error(`chat request to ${url} failed: ${err?.message ?? err}`);
+	}
 	if (!res.ok || !res.body) {
-		throw new Error(`chat request failed with status ${res.status}`);
+		// the body is the server's own explanation (e.g. a 422 detail); the dev UI shows it
+		const body = res.body ? (await res.text().catch(() => '')).slice(0, 500) : '';
+		throw new Error(
+			`chat request to ${url} failed with status ${res.status}${body ? `: ${body}` : ''}`
+		);
 	}
 
 	const reader = res.body.getReader();
@@ -87,7 +104,7 @@ export async function streamChat({
 			else if (event === 'delta') onDelta?.(payload.text);
 			else if (event === 'step') onStep?.(payload);
 			else if (event === 'turn') onTurn?.(payload);
-			else if (event === 'error') onError?.(payload.message);
+			else if (event === 'error') onError?.(payload.message, payload);
 			else if (event === 'done') done = true;
 		}
 	}
