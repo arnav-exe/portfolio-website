@@ -3,64 +3,63 @@
 	import InstantContextMCP from '../icons/projects/InstantContextMCP.svelte';
 	import ProductNotifier from '../icons/projects/ProductNotifier.svelte';
 	import AthenaRevision from '../icons/projects/AthenaRevision.svelte';
-	import AiNewsPlatform from '../icons/projects/AiNewsPlatform.svelte';
-	import CssbattleMinifier from '../icons/projects/CssbattleMinifier.svelte';
-	import Polyboard from '../icons/projects/Polyboard.svelte';
+    import Dfinsta from '../icons/projects/Dfinsta.svelte';
+    import Arnavai from '../icons/projects/Arnavai.svelte';
+    import Carteblanchechat from '../icons/projects/Carteblanchechat.svelte';
 
 	// `stack` renders as a `tech / tech / tech` line under the description, in the same
 	// idiom as the skills manifest. Left empty until the real tags are filled in.
 	const PROJECTS = [
+        {
+            title: "DFInsta Redux",
+            description: "Automated pipeline that re-ports a distraction-free Instagram mod onto every new release, re-resolving version independent smali hooks onto freshly obfuscated code",
+            stack: ["Python", "Smali", "Claude Agents SDK", "Temporal"],
+            icon: Dfinsta,
+            link: "https://github.com/arnav-exe/dfinsta-redux"
+        },
+        {
+            title: "Arnav-ai",
+            description: "Self-hosted agentic RAG chatbot gateway routed through LiteLLM, powered by vector search over a knowledge graph, deployed as a containerized stack behind a Cloudflare tunnel",
+            stack: ["Python", "vLLM", "LightRAG", "Litellm", "Qwen3.8-27b", "google-adk", "Docker"],
+            icon: Arnavai,
+            link: "https://github.com/arnav-exe/arnav-ai"
+        },
+        {
+            title: "Carte Blanche Chat",
+            description: "A chat app where every reply is a layer-streamed HTML document",
+            stack: ["Python", "Anthropic SDK", "FastAPI", "Uvicorn", "httpx"],
+            icon: Carteblanchechat,
+            link: "https://github.com/arnav-exe/carte-blanche-chat"
+        },
 		{
-			title: 'AI Jewelry Finder',
-			description: 'Turns a sketch and a few design details into a ranked product search.',
-			stack: [],
+			title: "AI Jewelry Finder",
+			description: "Turns a sketch and a few design details into a ranked product search.",
+			stack: [, "", "", "", ""],
 			icon: JewelryFinder,
-			link: '',
+			link: "",
 			incomplete: true
 		},
 		{
-			title: 'Instant Context MCP Server',
-			description: 'Indexes llms*.txt docs so an LLM can pull grounded context mid-task.',
-			stack: [],
+			title: "Instant Context MCP Server",
+			description: "Indexes llms*.txt docs so an LLM can pull grounded context mid-task.",
+			stack: ["Python", "FastMCP", "SQLite", "BM25", "httpx"],
 			icon: InstantContextMCP,
-			link: 'https://github.com/arnav-exe/instant-context-mcp'
+			link: "https://github.com/arnav-exe/instant-context-mcp"
 		},
 		{
-			title: 'Product Notifier',
-			description:
-				'Watches retailers for stock and price, then pings ntfy when your conditions are met.',
-			stack: [],
+			title: "Product Notifier",
+			description: "Watches retailers for stock and price, then pings ntfy when your conditions are met.",
+			stack: ["Python", "Node.js", "Requests", "Crawl4ai", "asyncio"],
 			icon: ProductNotifier,
-			link: 'https://github.com/arnav-exe/product-notifier'
+			link: "https://github.com/arnav-exe/product-notifier"
 		},
 		{
-			title: 'Athena - AI Revision Assistant',
-			description: 'Answers revision questions from a resource library, with source citations.',
-			stack: [],
+			title: "Athena - AI Revision Assistant",
+			description: "Answers revision questions from a resource library, with source citations.",
+			stack: ["Python", "RAG", "Weaviate", "Ollama", "Streamlit", "Hybrid search", "Gemma3-12b", "mxbai-embed-large"],
 			icon: AthenaRevision,
-			link: 'https://github.com/arnav-exe/athena-revision-assistant'
+			link: "https://github.com/arnav-exe/athena-revision-assistant"
 		},
-		{
-			title: 'AI News Platform',
-			description: "Summarises the day's articles so catching up takes a fraction of the time.",
-			stack: [],
-			icon: AiNewsPlatform,
-			link: 'https://github.com/arnav-exe/ai-news-platform'
-		},
-		{
-			title: 'CSSBattle Minifier',
-			description: 'Minifies your code for the online code-golfing game CSSBattle.dev.',
-			stack: [],
-			icon: CssbattleMinifier,
-			link: 'https://github.com/arnav-exe/cssbattle-minifier'
-		},
-		{
-			title: 'Polyboard - Multiple Clipboards',
-			description: 'Ten extra clipboards to stash and retrieve text from, one keystroke each.',
-			stack: [],
-			icon: Polyboard,
-			link: 'https://github.com/arnav-exe/polyboard'
-		}
 	];
 
 	const GITHUB_PROFILE = 'https://github.com/arnav-exe/';
