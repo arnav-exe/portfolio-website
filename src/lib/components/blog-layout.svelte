@@ -315,6 +315,81 @@
 		margin: 1.5rem auto;
 	}
 
+	/* footnotes (remark-footnotes) */
+	:global(.blog-content sup[id^='fnref-']) {
+		line-height: 0;
+		scroll-margin-block: 30vh;
+	}
+
+	:global(.blog-content a.footnote-ref) {
+		padding: 0 0.1em 0 0.05em;
+		font-weight: 600;
+		font-variant-numeric: tabular-nums;
+		text-decoration: none;
+		color: rgb(47 47 47);
+	}
+
+	:global(.blog-content a.footnote-ref::before) {
+		content: '[';
+	}
+
+	:global(.blog-content a.footnote-ref::after) {
+		content: ']';
+	}
+
+	:global(.blog-content a.footnote-ref:hover) {
+		text-decoration: underline;
+	}
+
+	:global(.blog-content .footnotes) {
+		margin-top: 3rem;
+		font-size: 0.9rem;
+		line-height: 1.6;
+	}
+
+	:global(.blog-content .footnotes hr) {
+		width: 6rem;
+		margin: 0 0 1.25rem;
+	}
+
+	:global(.blog-content .footnotes ol) {
+		margin-top: 0;
+		margin-left: 1.5rem;
+	}
+
+	:global(.blog-content .footnotes li) {
+		margin-bottom: 0.4rem;
+		padding: 0.15rem 0.5rem;
+		margin-left: -0.5rem;
+		border-radius: 0.375rem;
+		scroll-margin-block: 30vh;
+		transition: background-color 0.3s ease;
+	}
+
+	:global(.blog-content .footnotes li p) {
+		margin-bottom: 0.5rem;
+		line-height: inherit;
+	}
+
+	:global(.blog-content .footnotes li p:last-child) {
+		margin-bottom: 0;
+	}
+
+	:global(.blog-content .footnotes li:target) {
+		background-color: rgb(212 201 174 / 0.35);
+	}
+
+	:global(.blog-content a.footnote-backref) {
+		margin-left: 0.35em;
+		text-decoration: none;
+		opacity: 0.6;
+		transition: opacity 0.2s ease;
+	}
+
+	:global(.blog-content a.footnote-backref:hover) {
+		opacity: 1;
+	}
+
 	/* Dark mode styles */
 	:global([data-theme='minimalist'].dark) .blog-header-muted {
 		color: rgb(183 176 157);
@@ -419,5 +494,13 @@
 	:global([data-theme='minimalist'].dark .blog-content q::before),
 	:global([data-theme='minimalist'].dark .blog-content q::after) {
 		color: rgb(225 217 198);
+	}
+
+	:global([data-theme='minimalist'].dark .blog-content a.footnote-ref) {
+		color: rgb(212 201 174);
+	}
+
+	:global([data-theme='minimalist'].dark .blog-content .footnotes li:target) {
+		background-color: rgb(var(--color-surface-400) / 0.25);
 	}
 </style>
