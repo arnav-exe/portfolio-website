@@ -1,0 +1,149 @@
+---
+title: "Why Frontier LLMs Cap Out at 1M Tokens"
+description: "Why all frontier LLMs all share the same 1M token context limit, and what happened to the handful that attempted to raise it."
+date: 2026-09-12
+tags: ['llm', 'long context', 'benchmarks', 'ai research']
+---
+
+---
+
+Take a look at this scatter plot:
+
+<figure>
+	<img src="/blog/1m-context-llms/pareto-frontier.png" alt="Log-scale scatter plot of LLM context windows from 2020 to 2026" />
+	<figcaption>Context window size of notable LLMs since 2020</figcaption>
+</figure>
+
+Between 2020 and 2024, rapid advancements were being made to LLMs, resulting in seemingly exponential growth in the size of their context windows. From a mere 4,000 tokens in 2022 with GPT-3.5 to 2,000,000 tokens in mid-2024, with Gemini 1.5 Pro, a 500x increase!
+
+But suddenly, labs stopped pushing the envelope. That cluster of dots on the 1M line shows all the major releases of the last 2 years, and not one of them matches Google's number. All the latest and greatest: [GPT-6 Astra](https://developers.openai.com/api/docs/models/gpt-6-astra), [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Kimi K3](https://www.kimi.ai/blog/kimi-k3) and [Qwen 3.8 Max](https://qwen.ai/blog?id=qwen3.8), just to name a few, ship with a 1M context window[^1].
+
+Not for lack of trying, though. Gemini's 2M was actually the first of five claims that broke past this 1M token boundary, with the other 4 pushing the envelope further. Magic claimed a whopping [100M token context window](https://magic.dev/blog/100m-token-context-windows) in August 2024 with their LTM-2 Mini model. MiniMax claimed [4M tokens](https://arxiv.org/abs/2501.08313) in January 2025 with MiniMax-01. Meta claimed [10M tokens](https://ai.meta.com/blog/llama-4-multimodal-intelligence/) in April 2025 with Llama 4 Scout. And just 6 weeks ago, a startup called Pokee AI, founded by Zheqing Zhu, the former head of Meta's applied RL team, claimed [10M tokens from their 28B parameter model](https://console.pokee.ai/model). However, each one of these models has an asterisk attached.
+
+<figure>
+	<img src="/blog/1m-context-llms/fig-context-claims.png" alt="Log-scale timeline of advertised context windows from 2024 to 2026." />
+	<figcaption>Every model that advertised more than 1M tokens</figcaption>
+</figure>
+
+This post is the result of considerable research, and my attempt to explain why, five announcements later, 1M is still where the ceiling sits, as well as what happened to each of the models that tried to break past it.
+
+
+## Advertised Context vs Usable Context
+
+Before getting into the mechanics, there is an important distinction I need to explain.
+
+Technically, the context window is just a number in a config file. It tells you how many tokens the model will accept before the API returns an error. Model providers can change this number at will[^2], however this says nothing about how effectively the model can make use of its context. As such, the industry has slowly built a ladder of benchmarks to measure the latter, with each rung being harder than the one before:
+
+ - [Needle-in-a-haystack (NIAH)](https://github.com/gkamradt/needle-in-a-haystack): This is the most trivial of the lot. It tests a model's ability to retrieve a random fact (needle) from a pile of filler content (haystack). Nearly every model passes this at every length now, which is exactly why vendors love to report it.
+ - [RULER](https://arxiv.org/abs/2404.06654): This is a suite of 13 synthetic tasks including multi-needle retrieval, variable tracking, multi-hop tracing and aggregation, run at fixed difficulty across increasing lengths.
+ - [MRCR](https://arxiv.org/abs/2409.12640): Here, several near-identical needles are scattered through a long conversation, and the model must return a specific one, meaning  interference is penalised rather than just depth.
+ - [NoLiMa](https://arxiv.org/abs/2502.05167): In this, needles are rewritten so they share almost no words with the question, forcing the model to reason about the association instead of just pattern matching.
+ - [Fiction.liveBench](https://fiction.live/stories/Fiction-liveBench-Mar-25-2025/oQdzQvKHw8JyXbN87): The hardest of the lot. It contains questions about long stories that require tracking characters, chronology and implied information across the whole text.
+
+The gap between the first rung and the last is enormous. NoLiMa evaluated [13 models that claimed context windows of at least 128K tokens, yet at 32K tokens, 11 of them dropped below 50% of their short-context score](https://proceedings.mlr.press/v267/modarressi25a.html). GPT-4.1 advertised 1M tokens, but its effective length on that benchmark [came out at around 16K](https://arxiv.org/pdf/2502.05167)!
+
+
+## The Million Dollar (Token) Question
+
+Why haven't these frontier labs, with seemingly unlimited capital, pushed beyond 1M?
+
+There is no specific roadblock that appears at the 1M token mark. What exists instead is a set of cost curves that all happen to get steeper around this point.
+
+**Memory.** Every token a user sends occupies KV cache for the entire request. For a standard transformer that cost is 2 × layers × KV heads × head dimension × bytes per value, per token. Magic put a memorable number on the extreme case: [running Llama 3.1 405B at 100M tokens would need 638 H100s **per user** just to hold the KV cache](https://magic.dev/blog/100m-token-context-windows). At 1M tokens, you are already in the territory where the cache for a single request can outweigh the model.
+
+**Compute.** Prefill attention is quadratic in sequence length. Doubling the context roughly quadruples the attention work for the first token. OpenAI, as an example, kindly passes this cost onto the consumer, as [prompts over 272K input tokens are billed at 2x the input rate and 1.5x the output rate](https://developers.openai.com/api/docs/models/gpt-6-astra). 
+
+**Quality.** Evidenced by the benchmark numbers, it is very difficult to preserve model performance as its context utilisation increases, so a rated context window of 2M tokens doesn't make much sense if model performance fall off is noticed at 512K.
+
+**Data.** As mentioned, there is scarcely any natural data beyond the few hundred thousand token mark. Beyond this, you are almost entirely training on concatenations and synthetic tasks, and the further you push, the more the model learns the shape of your synthetic data rather than anything general.
+
+All those put together paint a picture as to why 1M tokens is not a boundary, but rather a conscious design decision made by providers to balance performance and cost.
+
+The 3 case studies below are examples of what happens when you try to go beyond it.
+
+
+## Llama 4 Scout: The Extrapolation Failure
+
+Llama 4's Scout is a vivid example of the performance fall-off when attempting to scale.
+
+Meta's launch post says Scout was [pre-trained and post-trained at a 256K context length](https://ai.meta.com/blog/llama-4-multimodal-intelligence/), and that the 10M figure comes from length generalisation, implemented by an architecture they call iRoPE, which interleaves attention layers without positional embeddings and applies temperature scaling to attention at inference time. The evidence offered for the 10M window was [NIAH retrieval for text and cumulative negative log-likelihood over 10M tokens of code](https://ai.meta.com/blog/llama-4-multimodal-intelligence/). That is rung 1 of the benchmark ladder plus a perplexity curve.
+
+Independently, Scout was benchmarked on rung 5. On Fiction.liveBench, [Scout scored 15.6% at only 128K tokens, against 90.6% for Gemini 2.5 Pro](https://fiction.live/stories/Fiction-liveBench-Mar-25-2025/oQdzQvKHw8JyXbN87), only 1.28% utilisation of its advertised 10M context. The model collapsed on comprehension at half the length it was trained on, before the extrapolated region even started.
+
+This clearly demonstrates that although Scout could still find a fact buried amongst 10M filler tokens, what it could not do was hold a mental model of 128K tokens of narrative, which is the far more realistic use case.
+
+
+## Gemini 1.5 Pro and MiniMax-01: No Takesies-Backsies
+
+Gemini and MiniMax are the more interesting cases, because both of them released with a >1M token context window, which they both promptly retracted in the next generation of models they released.
+
+Gemini 1.5 Pro launched at 1M in February 2024, and by June the API was [serving 2M to every developer](https://developers.googleblog.com/en/new-features-for-the-gemini-api-and-google-ai-studio/). The evidence for the extra million sits on the bottom rung of the ladder: the technical report shows [99.2% needle recall out to 10M tokens](https://arxiv.org/abs/2403.05530), while the harder tasks in the same report, multiple needles and MRCR, stop at 1M. Past 1M, the only evidence is the needle.
+
+Then suddenly, in their next release, the 2M token context window was nowhere to be seen. Gemini 2.5 Pro came and went at 1M tokens, and [Gemini 3 Pro](https://deepmind.google/models/model-cards/gemini-3-pro/) and [3.1 Pro](https://deepmind.google/models/model-cards/gemini-3-1-pro/) both sit at 1M today. My best guess is that this was a deliberate design decision given the higher inference costs and shaky performance at higher token counts, as MiniMax tells a similar story.
+
+MiniMax-01 (January 2025) showed up a year later with an advertised 4M context window. They achieved this by replacing 7 out of every 8 attention layers with 'lightning attention', a linear variant with constant-size state. That let them [train at 1M tokens and extrapolate to 4M at inference](https://arxiv.org/abs/2501.08313). The 4M figure was validated with [100% accuracy on vanilla NIAH](https://www.minimax.io/news/minimax-01-series-2). Rather tellingly, their RULER results stop at 1M, past that, as with Gemini, the only evidence is the rung 1 NIAH benchmark.
+
+Then, much like Gemini, the next few models never came close to 4M tokens. [MiniMax-M1](https://arxiv.org/abs/2506.13585) in June 2025 kept the architecture but only claimed a native 1M. [MiniMax-M2](https://arxiv.org/html/2605.26494v1) in October 2025 dropped lightning attention altogether, and shipped with a 192K token window. From 4M to 192K in 9 months!
+
+In the M2 technical report they write that during MiniMax-01 development, [their hybrid attention models appeared to match full attention on standard benchmarks like MMLU, BBH, MATH and LongBench, but at a larger scale, clear deficits emerged in complex multi-hop reasoning](https://arxiv.org/html/2605.26494v1).
+
+The ablation they published is an interesting insight into where and how efficient attention fails. At 32K, their full-attention and sliding-window M2 variants both [scored 99 on RULER's common-word extraction task. At 128K, full attention scored 90.0 and the sliding-window variant 72.0](https://arxiv.org/html/2605.26494v1). On in-context translation (MTOB), the gaps were [15 and 17.6 points](https://arxiv.org/html/2605.26494v1) respectively. Their sliding-window experiments, in their own words, "[degraded noticeably as context length grew - which is unacceptable in agentic scenarios](https://www.minimax.io/news/why-did-m2-end-up-as-a-full-attention-model)".
+
+It took an entirely new attention mechanism for them to get back to 1M tokens. [MiniMax M3](https://www.minimax.io/blog/minimax-m3) (June 2026) introduced MiniMax Sparse Attention, a block-selection scheme that they say cuts per-token compute at 1M to 1/20th of the previous generation. And even with that, the product page says the API supports [up to 1M tokens with a guaranteed minimum of 512K](https://www.minimax.io/models/text/m3). Also, like OpenAI, [requests to M3 above 512K are billed at a separate, higher long-context rate](https://www.minimax.io/blog/minimax-m3).
+
+Hence, the lack of benchmarks and discontinuation of these larger context models both strongly point towards their infeasibility and unsustainability in real-world deployments.
+
+
+## Pokee-Isaac 28B: 10M Tokens on a Single GPU?
+
+This brings me to the newest entry on the chart, and the one I spent the most time on.
+
+[Pokee-Isaac 28B v0](https://console.pokee.ai/pokee-isaac-28b-v0-technical-report.pdf) was released on 3 August 2026 by Pokee AI. The headline claims are a 10M token context window, a 28B parameter dense model, and serving on a single NVIDIA B200 with prefill of 137,200 tokens per second and decode of 335 tokens per second at 10M context. It is text-only, priced at [$0.15 / $1.00 per million tokens](https://console.pokee.ai/model) flat across the whole window, oh, and the weights are proprietary.
+
+Their long-context results are on rungs 2 and 3 of the ladder, which is already more than Meta showed. On RULER the report gives [96.9 / 96.7 / 95.0 / 95.8 / 96.7 / 93.3 at 256K / 512K / 1M / 2M / 4M / 10M](https://console.pokee.ai/pokee-isaac-28b-v0-technical-report.pdf), and on MRCR v2 with 8 needles, [0.607 / 0.743 / 0.500 at 256K / 512K / 1M](https://console.pokee.ai/pokee-isaac-28b-v0-technical-report.pdf). So off the bat this is looking quite promising.
+
+Unfortunately, their technical report discloses little else.
+
+It says next to nothing about Isaac's architecture, describing it as a 'non-decoder-only foundation model', with no follow-up as to what 'non-decoder-only' even means. It does not disclose layer configuration, attention mechanisms, training data, ablations, or whether the 10M was trained or extrapolated.
+
+The benchmarks tell (or rather don't tell) a similar story. Both long-context benchmarks are synthetic, and the RULER runs only used 10 samples per task configuration while the standard suite uses hundreds, which produces noisy results, and is likely the explanation for the curve being non-monotonic (4M scoring higher than 1M). The common-word extraction task, where MiniMax found their biggest efficient-attention gap, was dropped from 1M onward. There was no Fiction.liveBench, no NoLiMa, or long-document QA.
+
+However, they did unveil a critical piece of information, which is that some of Isaac's weights are fine-tuned from [Qwen3.6-27B](https://huggingface.co/Qwen/Qwen3.6-27B). This is where things get interesting. Qwen3.6-27B is not a standard transformer. Its 64 layers are laid out as 16 blocks of 3 Gated DeltaNet layers followed by 1 gated attention layer, and the attention layers use 24 query heads and only 4 KV heads at head dimension 256. Meaning 48 of the 64 layers are linear attention with a constant-size state, and only 16 layers keep a KV cache at all. If Pokee kept that configuration, then with some napkin math, we can start to pull back the curtains and shed some light on its architecture.
+
+Starting with memory, recall that it could be run on a single B200 GPU. 16 attention layers × 4 KV heads × 256 dimensions × 2 (keys and values) is 32,768 values per token, or 64 KB per token at bf16. At 10M tokens that is about 640 GB of KV cache. Which comes out to 160GB at 4-bit quantization. NVIDIA's DGX B200 spec works out to [180 GB of HBM per GPU](https://www.nvidia.com/en-us/data-center/dgx-b200/), and the model weights are another 28 GB at FP8 or 14 GB at 4-bit. So 10M tokens on one B200 is possible, but only if both the cache and the weights are quantized to 4-bit, with a few gigabytes left for everything else.
+
+Moving onto compute, which is where there are some discrepancies. Dense causal attention over 10M tokens in those 16 layers costs roughly 2 × n² × d × heads × layers, which comes to about 2 × 10¹⁹ FLOPs. A B200 does about 4.5 PFLOPS of dense FP8, so that is over **an hour** of attention compute for a single prompt. Pokee reports a [time-to-first-token of 72.9 seconds](https://console.pokee.ai/pokee-isaac-28b-v0-technical-report.pdf). The two numbers are off by a factor of about 60.
+
+It gets stranger. Ignore attention entirely and just push 10M tokens through 28B parameters of feed-forward compute: that is 2 × 28B × 10M, around 5.6 × 10¹⁷ FLOPs, which is about 2 minutes at peak FP8 on a B200. Still longer than the 73 seconds reported. Even at FP4, which the B200 does at roughly double the FP8 rate (assuming activations are also 4-bit quantized), you'd need near-perfect utilisation to hit that number with no attention cost at all.
+
+So whatever Isaac is doing at 10M, it is certainly not running every token through the full 28B model with dense attention. The attention layers must be windowed, sparse, or replaced, and the prefill path for most of the context probably has to be lighter than the decoder for this to line up with their purported benchmarks. The report treats the fact that "prefill throughput rises with context length" (42,400 tok/s at 1M, 137,200 at 10M) as a feature, but it also is the biggest clue that something other than standard attention is happening[^3].
+
+That being said, this doesn't mean this model doesn't work. What it means is that the physics rules out the naive explanation, the report doesn't offer a non-naive one, and unfortunately there are no 3rd-party benchmarks we can look at either. So as of right now, Isaac is a 28B Qwen derivative with some very impressive but unverifiable numbers attached.
+
+
+## What the Labs Are Doing Instead
+
+So bigger context windows are clearly very expensive, so expensive that these frontier labs have directly and indirectly demonstrated it is not worth pursuing. So what are they doing instead?
+
+The first is bending the cost curve rather than extending the window. Kimi K3's 1M window is built on [Kimi Delta Attention, a hybrid linear attention mechanism](https://www.kimi.ai/blog/kimi-k3), the same family of ideas MiniMax walked away from after M1. MiniMax themselves got back to 1M by a different route, with [MSA, which they position against DeepSeek's DSA and MoBA](https://www.minimax.io/blog/minimax-m3) as a cleaner sparse-attention scheme. The goal in every case is to make 1M cheap enough to serve at scale, not to make 10M possible.
+
+The second is moving the problem out of the model and into the harness. OpenAI's GPT-6 Astra launch post describes a new mode for Codex where the model [keeps notes across context windows and earlier context remains searchable, so it can find requirements or test results from previous messages even if that information wasn't captured in its notes](https://openai.com/index/gpt-6-astra/). Read that carefully: the model has a 1.05M window, and the solution to running out of it is not a bigger window, it's retrieval over the history. Moonshot's own K3 evaluation footnotes say the same thing in a different way, noting that their BrowseComp result [used context compaction triggered at 300K tokens](https://www.kimi.ai/blog/kimi-k3). With a 1M window available, they chose to compact at 300K.
+
+Don't get me wrong, these are sensible engineering decisions. But they are also a quiet consensus: past roughly 1M, and in practice well before it, retrieval and compaction beat raw context on both cost and quality. The labs with the most compute in the world have looked at the curves in this post and decided the ceiling is fine where it is.
+
+
+## Closing Thoughts
+
+There is no mathematical ceiling that caps us at 1M. However, what lies ahead is the combination of a KV cache that grows boundlessly, an attention cost that grows quadratically, a distinct scarcity of natural training data, and a quality curve that was already plateauing well before the advertised limit.
+
+Every attempt to go past it so far has failed in a way that fit onto one of those constraints, except one. Scout extended without training and lost comprehension while keeping retrieval. Google delivered a 2M model once and never again. MiniMax ventured down the same path, and 2 generations later, realised that it had cost them the reasoning they needed most. 
+
+Pokee's Isaac remains to be the only model standing, with a lot of unknowns surrounding its performance and architecture. Hopefully in due time we will get some more descriptive benchmarks and insights into this model.
+
+It will be interesting to see whether these pitfalls still hold in the near future, but for now, most seem to have answered the million dollar (or rather, million token) question: rather than pushing beyond 1M, the focus is on maximizing performance and utilisation within it.
+
+[^1]: Technically GPT-6 Astra ships with a 1.05M token context window, but the point still stands
+
+[^2]: Almost at will; nearly every frontier model encodes position with rotary embeddings, and if you only raise the length, positions past the trained range produce [attention scores so large they break the mechanism outright](https://arxiv.org/abs/2306.15595). So the provider changes a second number next to it, a positional scaling factor such as YaRN, that squeezes the new positions back into the range the model was trained on.
+
+[^3]: One more oddity: the [console page](https://console.pokee.ai/model) presents different numbers from the report it cites (BFCL 74.81 vs 70.94, Terminal-Bench 77.9% vs 65.1%, MRCR at 1M of 0.368 vs 0.500), with footnotes attributing the higher agentic scores to a 'v0.1 (preview)'.
