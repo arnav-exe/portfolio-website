@@ -1,5 +1,5 @@
 ---
-title: "Why Frontier LLMs Cap Out at 1M Tokens"
+title: "Why Do Frontier LLMs All Share The Same 1M Token Context Window?"
 description: "Why all frontier LLMs all share the same 1M token context limit, and what happened to the handful that attempted to raise it."
 date: 2026-09-12
 tags: ['llm', 'long context', 'benchmarks', 'ai research']
