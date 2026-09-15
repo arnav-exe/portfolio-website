@@ -3,11 +3,13 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import path from "node:path";
 import { fileURLToPath } from 'node:url';
 import { mdsvex, code_highlighter } from "mdsvex";
+import footnotes from "remark-footnotes";
 
 const dir = path.resolve(fileURLToPath(import.meta.url), "../");
 
 const mdsvexOptions = {
 	extensions: [".md", ".svx"],
+	remarkPlugins: [[footnotes, { inlineNotes: true }]],
 	highlight: {
 		// mdsvex only escapes \t \r \n in template literal, other backslash (like \b \d \w) get reinterpreted. fix by escape all remaining backslashes
 		highlighter: (code, lang, meta) => code_highlighter(code, lang, meta).replace(/\\/g, '&#92;')
