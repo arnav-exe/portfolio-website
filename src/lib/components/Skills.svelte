@@ -18,6 +18,7 @@
     import Litellm from '../icons/skills/Litellm.svelte';
     import Ragflow from '../icons/skills/Ragflow.svelte';
 	import Temporal from '../icons/skills/Temporal.svelte';
+	import Lightrag from '../icons/skills/Lightrag.svelte';
 
 	const SKILL_GROUPS = [
 		{
@@ -41,7 +42,7 @@
 				{ name: 'LangFuse', icon: Langfuse, url: 'https://langfuse.com/' },
 				{ name: 'RAGFlow', icon: Ragflow,  url: 'https://ragflow.io/' },
 				{ name: 'Temporal', icon: Temporal, url: 'https://temporal.io/' },
-				{ name: 'LightRAG', url: 'https://github.com/hkuds/lightrag' },
+				{ name: 'LightRAG', icon: Lightrag, url: 'https://github.com/hkuds/lightrag' },
 			]
 		},
 		{
