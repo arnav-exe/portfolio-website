@@ -19,6 +19,9 @@
     import Ragflow from '../icons/skills/Ragflow.svelte';
 	import Temporal from '../icons/skills/Temporal.svelte';
 	import Lightrag from '../icons/skills/Lightrag.svelte';
+	import Mcp from '../icons/skills/Mcp.svelte';
+	import A2a from '../icons/skills/A2a.svelte';
+	import Kagent from '../icons/skills/Kagent.svelte';
 
 	const SKILL_GROUPS = [
 		{
@@ -34,9 +37,12 @@
 			skills: [
 				{ name: 'PyTorch', icon: Pytorch, url: 'https://pytorch.org/' },
 				{ name: 'TensorFlow', icon: Tensorflow, url: 'https://www.tensorflow.org/' },
+				{ name: 'MCP', icon: Mcp, url: 'https://modelcontextprotocol.io/' },
+				{ name: 'A2A', icon: A2a, url: 'https://a2a-protocol.org/' },
 				{ name: 'LangChain', icon: Langchain, url: 'https://www.langchain.com/' },
 				{ name: 'LangGraph', icon: Langgraph, url: 'https://www.langchain.com/langgraph' },
 				{ name: 'Google ADK', icon: Googleadk, url: 'https://google.github.io/adk-docs/' },
+				{ name: 'Kagent', icon: Kagent, url: 'https://kagent.dev/' },
 				{ name: 'LiteLLM', icon: Litellm, url: 'https://www.litellm.ai/' },
 				{ name: 'Weaviate', icon: Weaviate, url: 'https://weaviate.io/' },
 				{ name: 'LangFuse', icon: Langfuse, url: 'https://langfuse.com/' },
